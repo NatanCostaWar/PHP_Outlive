@@ -6,15 +6,20 @@ include('login_veryfy.php')
 <?php include("basepage.php"); ?>
 
 <body>
-	<h1>
-		Ola, <?php echo $_SESSION['username']; ?>
-	</h1>
-
-	<form action="logout.php">
-		<button type="submit">
-			Logout
-		</button>
-	</form>
+		<div class='row' style="width: 100%;">
+			<div class='col'>
+				<h1>
+					Hello, <?php echo $_SESSION['username']; ?>
+				</h1>
+			</div>
+			<div class='col'>
+					<form action="logout.php" style="float: right;">
+						<button class="btn border" style="color:#f1f0ea;" type="submit">
+							Logout
+						</button>
+					</form>
+			</div>
+		</div>
 
 	<?php
 		include("connect.php");
@@ -23,7 +28,7 @@ include('login_veryfy.php')
 		while($row = mysqli_fetch_array($result)) {
             
             echo "<div class='container'>
-				<div class='row' style='background-color:#381d2a'>
+				<div class='row' style='border-style: solid; border-width: 2px; border-color:white;  border-radius: 20px;'>
 					<div class='col'>
 						<form action='gamepage.php' method='post'>
 							 <input type='hidden' name='game' value=" . $row['id'] . ">

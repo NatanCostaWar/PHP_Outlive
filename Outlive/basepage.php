@@ -23,9 +23,27 @@
 
         <style type="text/css">
             p, a{
-                font-size:3vh;
                 margin:0px;
                 padding:0px;
+            }
+            body{
+                color: #f1f0ea;
+            }
+            html {
+                font-size: 3vh;
+            }
+
+            @font-face{
+                font-family: 'pixel';
+                src: url('font/pixel1.ttf');
+            }
+
+            a, h1, h2, h3, p, li, button, label
+            {
+                font-family: 'pixel', Arial;
+                font-style: normal;
+                font-weight: 100;
+                text-decoration: none;
             }
         </style>
 
@@ -34,22 +52,20 @@
 
     <!-- 
     #f1f0ea - base white
-    #381d2a - kinda wood color
+    #11121a - base black
+    #0b1428 - blue black
     #f2cd5d - carton yellow
-    #cd5c5c - red
-    #000080 - blue
-    #ff7f50 - orange
      -->
 
      <!-- 
     32 by 32 pixel art
     scale to 1920x1024
      -->
-    <body class="background" style="background-color:#f1f0ea">
+    <body class="background" style="background-color:#11121a">
 
 
         <div id = "header">
-            <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#381d2a;">
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#080d1b;">
                 <a href="#" style="color:#f1f0ea;font-size:4vh;margin-right:15px;text-decoration:none;" id="LogoName">Outlive</a>
 
                 <button class="navbar-toggler" style="background-color:#e7ecef;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="SpanButton">

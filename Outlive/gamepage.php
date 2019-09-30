@@ -25,19 +25,37 @@ include('login_veryfy.php')
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
         <style type="text/css">
-            body, p, a{
-                font-size:3vh;
+             p, a{
                 margin:0px;
                 padding:0px;
+            }
+            body{
                 color: #f1f0ea;
             }
+            html {
+                font-size: 3vh;
+            }
+
+            @font-face{
+                font-family: 'pixel';
+                src: url('font/pixel1.ttf');
+            }
+
+            body, a, h1, h2, h3, p, li, button, label, table
+            {
+                font-family: 'pixel', Arial;
+                font-style: normal;
+                font-weight: 100;
+                text-decoration: none;
+            }
+        </style>
         </style>
 
 
     </head>
 
 
-<body style="background-color:black;">
+<body style="background-color:#11121a;">
 	<div class='row' style="width:100%;">
 		<?php
 			include("connect.php");

@@ -2,24 +2,24 @@
 <html>
     <?php include("basepage.php"); ?>
 
-    <body class="background" style="background-color:#160f29">
+    <body class="background">
 
         <div id="main">
-            <div id="main-login_form-div" style="color:#f4f7f5;">
+            <div id="main-login_form-div">
 
                     <form action="register.php" method="post">
                         <center>
-                            <h2 style="color: #381d2a">Username</h2>
+                            <h2 >Username</h2>
                             <input type="text" placeholder="Username" name="username">
                         </center>
                         
                         <center>
-                            <h2 style="color: #381d2a">Password</h2>
+                            <h2>Password</h2>
                             <input type="password" placeholder="Password" name="password">
                         </center>
                         
                         <center>
-                            <button class="btn border" type="submit" style="color:#381d2a;margin-top:20px;">
+                            <button class="btn border" type="submit" style="color:#f1f0ea;margin-top:20px;">
                                 Register
                             </button>
                         </center>
