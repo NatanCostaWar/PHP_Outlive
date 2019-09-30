@@ -41,6 +41,10 @@
     #ff7f50 - orange
      -->
 
+     <!-- 
+    32 by 32 pixel art
+    scale to 1920x1024
+     -->
     <body class="background" style="background-color:#f1f0ea">
 
 

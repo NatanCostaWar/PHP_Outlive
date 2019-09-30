@@ -23,12 +23,13 @@ include('login_veryfy.php')
 		while($row = mysqli_fetch_array($result)) {
             
             echo "<div class='container'>
-				<div class='row' style='background-color:#f2cd5d'>
+				<div class='row' style='background-color:#381d2a'>
 					<div class='col'>
-						<form action='pizzaedit.php' method='post'>
-		                    <p>" . $row['id'] . "º Game</p>    
+						<form action='gamepage.php' method='post'>
+							 <input type='hidden' name='game' value=" . $row['id'] . ">
+		                    <p style='color:#f1f0ea;'>" . $row['id'] . "º Game</p>    
 		                    <center>
-		                        <button class='btn border' type='submit' style='color:#381d2a;margin-top:20px;'>
+		                        <button class='btn border' type='submit' style='color:#f1f0ea;margin-top:20px;'>
 		                            Play
 		                        </button>
 		                    </center>
@@ -36,7 +37,7 @@ include('login_veryfy.php')
 
 		                <form action='pizzaedit.php' method='post'>   
 		                    <center>
-		                        <button class='btn border' type='submit' style='color:#381d2a;margin-top:20px;float:right;'>
+		                        <button class='btn border' type='submit' style='color:#f1f0ea;margin-top:20px;float:right;margin:5px;'>
 		                            Delete
 		                        </button>
 		                    </center>
