@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 30-Set-2019 às 14:17
+-- Data de Criação: 30-Set-2019 às 22:23
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -31,9 +31,10 @@ USE `db_outlive`;
 CREATE TABLE IF NOT EXISTS `game` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` int(11) NOT NULL,
+  `day` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 -- --------------------------------------------------------
 
@@ -45,11 +46,15 @@ CREATE TABLE IF NOT EXISTS `house` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` int(11) NOT NULL,
   `game` int(11) NOT NULL,
-  `biuld_spot_1` varchar(100) DEFAULT NULL,
+  `biuld_spot_1` varchar(100) NOT NULL DEFAULT 'empty',
+  `biuld_spot_2` varchar(100) NOT NULL DEFAULT 'empty',
+  `biuld_spot_3` varchar(100) NOT NULL DEFAULT 'empty',
+  `biuld_spot_4` varchar(100) NOT NULL DEFAULT 'empty',
+  `biuld_spot_5` varchar(100) NOT NULL DEFAULT 'empty',
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -85,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -100,10 +105,11 @@ CREATE TABLE IF NOT EXISTS `player` (
   `life` int(100) NOT NULL DEFAULT '100',
   `hunger` int(100) NOT NULL DEFAULT '100',
   `thirst` int(100) NOT NULL DEFAULT '100',
+  `rest` int(11) NOT NULL DEFAULT '100',
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -118,14 +124,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Extraindo dados da tabela `user`
---
-
-INSERT INTO `user` (`id`, `name`, `password`) VALUES
-(3, 'natan', '21232f297a57a5a743894a0e4a801fc3'),
-(4, 'davison', '21232f297a57a5a743894a0e4a801fc3');
 
 --
 -- Constraints for dumped tables

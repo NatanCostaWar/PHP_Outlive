@@ -39,7 +39,7 @@ include('login_veryfy.php')
 					<div class='col'>
 						<form action='gamepage.php' method='get'>
 							<input type='hidden' name='game' value=" . $row['id'] . ">
-		                    <p style='color:#f1f0ea;'>" . $row['id'] . "º Game</p>
+		                    <p style='color:#f1f0ea;'>Game Id - " . $row['id'] . "</p>
 		                    <p style='color:#f1f0ea;'>Day: " . $row['day'] . "</p>    
 		                    <center>
 		                        <button class='btn border' type='submit' style='color:#f1f0ea;margin-top:20px;'>
@@ -48,7 +48,9 @@ include('login_veryfy.php')
 		                    </center>
 		                </form>
 
-		                <form action='pizzaedit.php' method='post'>   
+		                <form action='gamedelete.php' method='post'>
+		                	<input type='hidden' name='user' value=" . $user['id'] . ">  
+							<input type='hidden' name='game' value=" . $row['id'] . ">
 		                    <center>
 		                        <button class='btn border' type='submit' style='color:#f1f0ea;margin-top:20px;float:right;margin:5px;'>
 		                            Delete
@@ -64,7 +66,7 @@ include('login_veryfy.php')
 	
 
 
-	<form action="newgame.php" method="post">
+	<form action="gamenew.php" method="post">
 	    <center>
 	        <button class="btn border" type="submit" style="color:#f1f0ea;margin-top:20px;">
 	            New Game

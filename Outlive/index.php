@@ -19,9 +19,17 @@
 
             <div style="margin-top:80px;">
                 <center>
-                    <p>How to play</p>
-                    <p></p>
+                    <p>How to play</p>   
                 </center>
+
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <p><i>1. Game Interface</i></p>
+                    </div>
+                    <div class="row">
+                        <p><i>The game interface is kinda simple actully...</i></p>
+                    </div>
+                </div>
                 
             </div>
         </div>

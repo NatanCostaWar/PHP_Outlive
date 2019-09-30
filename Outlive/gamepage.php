@@ -68,21 +68,27 @@ include('login_veryfy.php')
 			$user = mysqli_fetch_array($result);
 			$game = $_GET["game"];
 		?>
-		<div class='col-lg-10 col-md-8'>
+		<div class='col-lg-8 col-md-8'>
 			<?php
 				echo "<p>House:</p>";
 				$query = "SELECT * FROM db_outlive.house where game = $game and user = $user[id]";
 				$result = mysqli_query($connection, $query);
-				while($inventory = mysqli_fetch_array($result)){
-					echo"Biuld Space 1: " . $inventory["biuld_spot_1"];
+				while($house = mysqli_fetch_array($result)){
+					echo"Biuld Space 1: " . $house["biuld_spot_1"] . " ";
 					echo'<button type="button" class="btn border" style="color:#f1f0ea; padding:2px;">
 							Biuld
 						</button>';
 				}
 			?>
 		</div>
-		<div class='col-lg-2 col-md-4' style="margin:0; padding: 0;">
+		<div class='col-lg-4 col-md-4' style="margin:0; padding: 0;">
 			<?php
+
+				$query = "SELECT * FROM db_outlive.game where id = '$game'";
+				$result = mysqli_query($connection, $query);
+				$game_day = mysqli_fetch_array($result);
+
+				echo "Day: " . $game_day["day"];
 
 
 				echo "<center><p>Player:</p></center>";
@@ -92,6 +98,7 @@ include('login_veryfy.php')
 						  <th scope="col">Life</th>
 						  <th scope="col">Hunger</th>
 						  <th scope="col">Thirst</th>
+						  <th scope="col">Rest</th>
 						</tr>
 					</thead>';
 				$query = "SELECT * FROM db_outlive.player where game = $game and user = $user[id]";
@@ -102,15 +109,18 @@ include('login_veryfy.php')
 						  <th scope="row">'. $player["life"] .'</th>
 						  <td>'. $player["hunger"] .'</td>
 						  <td>'. $player["thirst"] .'</td>
+						  <td>'. $player["rest"] .'</td>
 						</tr>
 					</tbody>';
 				}
 
 				echo '</table>';
 
-				echo'<button type="button" class="btn border" data-toggle="modal" data-target="#inventory" style="color:#f1f0ea;">
-					Open Inventory
-				</button>
+				echo'<div class="row">
+					<button type="button" class="btn border" data-toggle="modal" data-target="#inventory" style="color:#f1f0ea;">
+						Open Inventory
+					</button>
+				</div>
 
 				<div class="modal fade" id="inventory" tabindex="-1" role="dialog" aria-labelledby="inventorylabel" aria-hidden="true">
 				    <div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 80%;width: auto;">
@@ -234,14 +244,27 @@ include('login_veryfy.php')
 				</div>';
 			?>
 			<?php
-				echo "<div class='row' style='float:right;padding:25px;'>
-					<form action='endday.php' method='post'>
+				echo "<div class='row'>
+					<form action='endday.php' method='post' style='margin:0;margin-top:5px;'>
 
 						<input type='hidden' name='game' value=" . $game .">
 						<input type='hidden' name='user' value=" . $user["id"] . ">
 
 						<button type='submit' class='btn border' style='color:#f1f0ea;'>
-							End Day
+							End Day (Sleep)
+						</button>
+					</form>
+				</div>";
+			?>
+			<?php
+				echo "<div class='row'>
+					<form action='explore.php' method='post' style='margin:0;margin-top:5px;'>
+
+						<input type='hidden' name='game' value=" . $game .">
+						<input type='hidden' name='user' value=" . $user["id"] . ">
+
+						<button type='submit' class='btn border' style='color:#f1f0ea;'>
+							End Day (Explore)
 						</button>
 					</form>
 				</div>";
