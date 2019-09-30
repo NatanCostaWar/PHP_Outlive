@@ -74,7 +74,10 @@ include('login_veryfy.php')
 				$query = "SELECT * FROM db_outlive.house where game = $game and user = $user[id]";
 				$result = mysqli_query($connection, $query);
 				while($inventory = mysqli_fetch_array($result)){
-					echo"B1: " . $inventory["biuld_spot_1"];
+					echo"Biuld Space 1: " . $inventory["biuld_spot_1"];
+					echo'<button type="button" class="btn border" style="color:#f1f0ea; padding:2px;">
+							Biuld
+						</button>';
 				}
 			?>
 		</div>
@@ -141,6 +144,82 @@ include('login_veryfy.php')
 										<tr>
 										  <th scope="row">Nails</th>
 										  <td>' . $inventory["nails"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Cigarettes</th>
+										  <td>' . $inventory["cigarettes"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Wood</th>
+										  <td>' . $inventory["woods"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Metal Scrap</th>
+										  <td>' . $inventory["scraps"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Pipes</th>
+										  <td>' . $inventory["pipes"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Herbal seeds</th>
+										  <td>' . $inventory["herbal_seeds"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Vegetable seeds</th>
+										  <td>' . $inventory["vegetable_seeds"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Melee weapons</th>
+										  <td>' . $inventory["melee_weapons"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Beer</th>
+										  <td>' . $inventory["beers"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Bottles of water</th>
+										  <td>' . $inventory["bottles_of_water"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Beer</th>
+										  <td>' . $inventory["beers"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Vegetables</th>
+										  <td>' . $inventory["vegetables"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Meat</th>
+										  <td>' . $inventory["meats"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Canned food</th>
+										  <td>' . $inventory["canned_foods"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Medicines</th>
+										  <td>' . $inventory["medicines"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Tools</th>
+										  <td>' . $inventory["tools"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Coffee</th>
+										  <td>' . $inventory["coffees"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Herbs</th>
+										  <td>' . $inventory["herbs"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Gun parts</th>
+										  <td>' . $inventory["gun_parts"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Gears</th>
+										  <td>' . $inventory["gears"] . '</td>
 										</tr>
 									</tbody>';
 								}
