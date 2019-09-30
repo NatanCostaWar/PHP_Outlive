@@ -4,8 +4,6 @@
     <?php include("basepage.php"); ?>
 
     <body class="background">
-
-
        
 
         <div id="main">

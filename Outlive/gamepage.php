@@ -32,7 +32,7 @@ include('login_veryfy.php')
             body{
                 color: #f1f0ea;
             }
-            html {
+            html, table {
                 font-size: 3vh;
             }
 
@@ -56,6 +56,8 @@ include('login_veryfy.php')
 
 
 <body style="background-color:#11121a;">
+
+
 	<div class='row' style="width:100%;">
 		<?php
 			include("connect.php");
@@ -66,7 +68,7 @@ include('login_veryfy.php')
 			$user = mysqli_fetch_array($result);
 			$game = $_POST["game"];
 		?>
-		<div class='col-8'>
+		<div class='col-lg-10 col-md-8'>
 			<?php
 				echo "<p>House:</p>";
 				$query = "SELECT * FROM db_outlive.house where game = $game and user = $user[id]";
@@ -76,7 +78,7 @@ include('login_veryfy.php')
 				}
 			?>
 		</div>
-		<div class='col-4' style="margin:0; padding: 0;">
+		<div class='col-lg-2 col-md-4' style="margin:0; padding: 0;">
 			<?php
 
 
@@ -103,34 +105,55 @@ include('login_veryfy.php')
 
 				echo '</table>';
 
-				echo "<center><p>Inventory:</p></center>";
-				echo'<table class="table" style="color: #f1f0ea;">
-					<thead>
-						<tr>
-						  <th scope="col">Item</th>
-						  <th scope="col">amount</th>
-						</tr>
-					</thead>';
-				$query = "SELECT * FROM db_outlive.inventory where game = $game and user = $user[id]";
-				$result = mysqli_query($connection, $query);
-				while($inventory = mysqli_fetch_array($result)){
-					echo '<tbody>
-						<tr>
-						  <th scope="row">Guns</th>
-						  <td>' . $inventory["guns"] . '</td>
-						</tr>
-						<tr>
-						  <th scope="row">Bullets</th>
-						  <td>' . $inventory["bullets"] . '</td>
-						</tr>
-						<tr>
-						  <th scope="row">Nails</th>
-						  <td>' . $inventory["nails"] . '</td>
-						</tr>
-					</tbody>';
-				}
+				echo'<button type="button" class="btn border" data-toggle="modal" data-target="#inventory" style="color:#f1f0ea;">
+					Open Inventory
+				</button>
 
-				echo '</table>';
+				<div class="modal fade" id="inventory" tabindex="-1" role="dialog" aria-labelledby="inventorylabel" aria-hidden="true">
+				    <div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 80%;width: auto;">
+				        <div class="modal-content" style="color: #11121a;background-color: #f1f0ea;">
+				            <div class="modal-header">
+				                <h5 class="modal-title" id="inventorylabel">Inventory</h5>
+				                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				                    <span aria-hidden="true">X</span>
+				                </button>
+				            </div>
+				            <div class="modal-body">';
+								echo'<table class="table">
+									<thead>
+										<tr>
+										  <th scope="col">Item</th>
+										  <th scope="col">amount</th>
+										</tr>
+									</thead>';
+					            $query = "SELECT * FROM db_outlive.inventory where game = $game and user = $user[id]";
+								$result = mysqli_query($connection, $query);
+								while($inventory = mysqli_fetch_array($result)){
+									echo '<tbody>
+										<tr>
+										  <th scope="row">Guns</th>
+										  <td>' . $inventory["guns"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Bullets</th>
+										  <td>' . $inventory["bullets"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Nails</th>
+										  <td>' . $inventory["nails"] . '</td>
+										</tr>
+									</tbody>';
+								}
+
+								echo '</table>';
+				            echo '</div>
+				            <div class="modal-footer">
+				                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				            </div>
+				        </div>
+				    </div>
+				</div>';
+				
 
 			?>
 			

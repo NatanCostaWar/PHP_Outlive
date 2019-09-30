@@ -58,7 +58,7 @@ include('login_veryfy.php')
 
 	<form action="newgame.php" method="post">
 	    <center>
-	        <button class="btn border" type="submit" style="color:#381d2a;margin-top:20px;">
+	        <button class="btn border" type="submit" style="color:#f1f0ea;margin-top:20px;">
 	            New Game
 	        </button>
 	    </center>
