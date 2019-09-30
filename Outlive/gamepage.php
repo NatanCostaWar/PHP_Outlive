@@ -66,7 +66,7 @@ include('login_veryfy.php')
 			$result = mysqli_query($connection, $query);
 
 			$user = mysqli_fetch_array($result);
-			$game = $_POST["game"];
+			$game = $_GET["game"];
 		?>
 		<div class='col-lg-10 col-md-8'>
 			<?php
@@ -232,10 +232,21 @@ include('login_veryfy.php')
 				        </div>
 				    </div>
 				</div>';
-				
-
 			?>
-			
+			<?php
+				echo "<div class='row' style='float:right;padding:25px;'>
+					<form action='endday.php' method='post'>
+
+						<input type='hidden' name='game' value=" . $game .">
+						<input type='hidden' name='user' value=" . $user["id"] . ">
+
+						<button type='submit' class='btn border' style='color:#f1f0ea;'>
+							End Day
+						</button>
+					</form>
+				</div>";
+			?>
+
 		</div>
 	</div>
 	

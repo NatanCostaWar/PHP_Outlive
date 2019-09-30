@@ -37,9 +37,10 @@ include('login_veryfy.php')
             echo "<div class='container'>
 				<div class='row' style='border-style: solid; border-width: 2px; border-color:white;  border-radius: 20px;'>
 					<div class='col'>
-						<form action='gamepage.php' method='post'>
-							 <input type='hidden' name='game' value=" . $row['id'] . ">
-		                    <p style='color:#f1f0ea;'>" . $row['id'] . "º Game</p>    
+						<form action='gamepage.php' method='get'>
+							<input type='hidden' name='game' value=" . $row['id'] . ">
+		                    <p style='color:#f1f0ea;'>" . $row['id'] . "º Game</p>
+		                    <p style='color:#f1f0ea;'>Day: " . $row['day'] . "</p>    
 		                    <center>
 		                        <button class='btn border' type='submit' style='color:#f1f0ea;margin-top:20px;'>
 		                            Play
