@@ -22,8 +22,15 @@ include('login_veryfy.php')
 		</div>
 
 	<?php
+
 		include("connect.php");
-		$query = "SELECT * FROM db_outlive.game";
+		$username = $_SESSION['username'];
+		$query = "SELECT * FROM db_outlive.user where name = '$username'";
+		$result = mysqli_query($connection, $query);
+
+		$user = mysqli_fetch_array($result);
+
+		$query = "SELECT * FROM db_outlive.game where user = $user[id]";
 		$result = mysqli_query($connection, $query);
 		while($row = mysqli_fetch_array($result)) {
             
