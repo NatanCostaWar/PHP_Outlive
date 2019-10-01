@@ -19,11 +19,27 @@ if($row["day"] == NULL){
 	exit();
 #IF User is Right:
 }else{
+	#Updating Day value
 	$day = $row["day"]+1;
-	echo $day;
-
 	$query = "UPDATE db_outlive.game SET day = $day WHERE user = $user and id = $game";
 	$result = mysqli_query($connection, $query);
+
+	#If Explore Option Call Explore Page
+	if ($_POST["explore"] == 'true') {
+		include("explore.php");
+	}else{
+		#Updating player rest value
+		$query = "SELECT * FROM db_outlive.player WHERE game = $game";
+		$result = mysqli_query($connection, $query);
+		$player = mysqli_fetch_array($result);
+		$new_rest = ($player["rest"])+40;
+
+		$query = "UPDATE db_outlive.player SET rest = $new_rest WHERE game = $game";
+		$result = mysqli_query($connection, $query);
+
+	}
+
+
 
 	if($result){
 	    header("Location: gamepage.php?game=$game");

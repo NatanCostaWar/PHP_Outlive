@@ -85,6 +85,9 @@ include('login_veryfy.php')
 						   
 						}
 					}
+
+					echo $_SESSION['msg'];
+					$_SESSION['msg'] = "";
 				?>
 			</div>
 			<div class='col-lg-4 col-md-4' style="margin:0; padding: 0;">
@@ -255,6 +258,7 @@ include('login_veryfy.php')
 
 							<input type='hidden' name='game' value=" . $game .">
 							<input type='hidden' name='user' value=" . $user["id"] . ">
+							<input type='hidden' name='explore' value='false'>
 
 							<button type='submit' class='btn border' style='color:#f1f0ea;'>
 								End Day (Sleep)
@@ -264,10 +268,11 @@ include('login_veryfy.php')
 				?>
 				<?php
 					echo "<div class='row'>
-						<form action='explore.php' method='post' style='margin:0;margin-top:5px;'>
+						<form action='endday.php' method='post' style='margin:0;margin-top:5px;'>
 
 							<input type='hidden' name='game' value=" . $game .">
 							<input type='hidden' name='user' value=" . $user["id"] . ">
+							<input type='hidden' name='explore' value='true'>
 
 							<button type='submit' class='btn border' style='color:#f1f0ea;'>
 								End Day (Explore)
@@ -317,11 +322,12 @@ include('login_veryfy.php')
 		    		</div>';
 				?>
 
+				
+
 			</div>
 		</div>
 	</div>
 	
-
 </body>
 
 

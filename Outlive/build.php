@@ -23,7 +23,7 @@ if($row["day"] == NULL){
 #IF User is Right:
 }else{
 
-	$query = "UPDATE db_outlive.house SET build_spot_$space = '$build' WHERE user = $user";
+	$query = "UPDATE db_outlive.house SET build_spot_$space = '$build' WHERE game = $game and user = $user";
 	$result = mysqli_query($connection, $query);
 
 	if($result){
