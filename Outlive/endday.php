@@ -33,6 +33,9 @@ if($row["day"] == NULL){
 		$result = mysqli_query($connection, $query);
 		$player = mysqli_fetch_array($result);
 		$new_rest = ($player["rest"])+40;
+		if ($new_rest > 100){
+			$new_rest = 100;
+		}
 
 		$query = "UPDATE db_outlive.player SET rest = $new_rest WHERE game = $game";
 		$result = mysqli_query($connection, $query);

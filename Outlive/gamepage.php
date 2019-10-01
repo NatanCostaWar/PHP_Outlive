@@ -57,47 +57,72 @@ include('login_veryfy.php')
 
 <body style="background-color:#11121a;">
 
+
+	<?php
+		#USER INFORMATION
+		include("connect.php");
+		$username = $_SESSION['username'];
+		$query = "SELECT * FROM db_outlive.user where name = '$username'";
+		$result = mysqli_query($connection, $query);
+		$user = mysqli_fetch_array($result);
+
+		#GAME INFORMATION
+		$game = $_GET["game"];
+		$query = "SELECT * FROM db_outlive.game where id = '$game'";
+		$result = mysqli_query($connection, $query);
+		$game = mysqli_fetch_array($result);
+
+		#PLAYER INFORMATION
+		$query = "SELECT * FROM db_outlive.player WHERE game = $game[id] and user = $user[id]";
+		$result = mysqli_query($connection, $query);
+		$player = mysqli_fetch_array($result);
+
+		#HOUSE INFORMATION
+		$query = "SELECT * FROM db_outlive.house where game = $game[id] and user = $user[id]";
+		$result = mysqli_query($connection, $query);
+		$house = mysqli_fetch_array($result);
+
+		#INVENTORY INFORMATION
+		$query = "SELECT * FROM db_outlive.inventory where game = $game[id] and user = $user[id]";
+		$result = mysqli_query($connection, $query);
+		$inventory = mysqli_fetch_array($result);
+
+	?>
+
+	
+
 	<div class="container" style="min-width:100%;">
 		<div class='row' style="width:100%;">
-			<?php
-				include("connect.php");
-				$username = $_SESSION['username'];
-				$query = "SELECT * FROM db_outlive.user where name = '$username'";
-				$result = mysqli_query($connection, $query);
-
-				$user = mysqli_fetch_array($result);
-				$game = $_GET["game"];
-			?>
+			
 			<div class='col-lg-8 col-md-8'>
 				<?php
 					echo "<p>House:</p>";
-					$query = "SELECT * FROM db_outlive.house where game = $game and user = $user[id]";
-					$result = mysqli_query($connection, $query);
-					while($house = mysqli_fetch_array($result)){
-						for ($i = 1; $i <= 5; $i++) {
-							if ($house["build_spot_$i"] == 'empty'){
-								echo "<p>Build Space " . $i .":  ------</p>";
-							}else if($house["build_spot_$i"] == 'watercollector'){
-								echo "<p>Build Space " . $i .": water collector</p>";
-							}else{
-								echo "<p>Build Space " . $i .": " . $house["build_spot_$i"] . "</p>";
-							}
-						   
+
+					for ($i = 1; $i <= (3+$house["level"]); $i++) {
+						if ($house["build_spot_$i"] == 'empty'){
+							echo "<p>Build Space " . $i .":  ------</p>";
+						}else if($house["build_spot_$i"] == 'watercollector'){
+							echo "<p>Build Space " . $i .": water collector</p>";
+						}else{
+							echo "<p>Build Space " . $i .": " . $house["build_spot_$i"] . "</p>";
 						}
+					   
+					}
+					if(isset($_SESSION['msg'])) {
+						echo $_SESSION['msg'];
+						$_SESSION['msg'] = "";
+					}
+					if(isset($_SESSION["build_error"])) {
+						echo $_SESSION["build_error"];
+						$_SESSION['build_error'] = "";
 					}
 
-					echo $_SESSION['msg'];
-					$_SESSION['msg'] = "";
 				?>
 			</div>
 			<div class='col-lg-4 col-md-4' style="margin:0; padding: 0;">
 				<?php
 
-					$query = "SELECT * FROM db_outlive.game where id = '$game'";
-					$result = mysqli_query($connection, $query);
-					$game_day = mysqli_fetch_array($result);
-
-					echo "<p>Day: " . $game_day["day"] . "</p>";
+					echo "<p>Day: " . $game["day"] . "</p>";
 
 
 					echo "<center><p>Player:</p></center>";
@@ -110,18 +135,15 @@ include('login_veryfy.php')
 							  <th scope="col">Rest</th>
 							</tr>
 						</thead>';
-					$query = "SELECT * FROM db_outlive.player where game = $game and user = $user[id]";
-					$result = mysqli_query($connection, $query);
-					while($player = mysqli_fetch_array($result)){
-						echo '<tbody>
-							<tr>
-							  <th scope="row">'. $player["life"] .'</th>
-							  <td>'. $player["hunger"] .'</td>
-							  <td>'. $player["thirst"] .'</td>
-							  <td>'. $player["rest"] .'</td>
-							</tr>
-						</tbody>';
-					}
+
+					echo '<tbody>
+						<tr>
+						  <th scope="row">'. $player["life"] .'</th>
+						  <td>'. $player["hunger"] .'</td>
+						  <td>'. $player["thirst"] .'</td>
+						  <td>'. $player["rest"] .'</td>
+						</tr>
+					</tbody>';
 
 					echo '</table>';
 
@@ -148,100 +170,98 @@ include('login_veryfy.php')
 											  <th scope="col">amount</th>
 											</tr>
 										</thead>';
-						            $query = "SELECT * FROM db_outlive.inventory where game = $game and user = $user[id]";
-									$result = mysqli_query($connection, $query);
-									while($inventory = mysqli_fetch_array($result)){
-										echo '<tbody>
-											<tr>
-											  <th scope="row">Guns</th>
-											  <td>' . $inventory["guns"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Bullets</th>
-											  <td>' . $inventory["bullets"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Nails</th>
-											  <td>' . $inventory["nails"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Cigarettes</th>
-											  <td>' . $inventory["cigarettes"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Wood</th>
-											  <td>' . $inventory["woods"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Metal Scrap</th>
-											  <td>' . $inventory["scraps"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Pipes</th>
-											  <td>' . $inventory["pipes"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Herbal seeds</th>
-											  <td>' . $inventory["herbal_seeds"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Vegetable seeds</th>
-											  <td>' . $inventory["vegetable_seeds"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Melee weapons</th>
-											  <td>' . $inventory["melee_weapons"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Beer</th>
-											  <td>' . $inventory["beers"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Bottles of water</th>
-											  <td>' . $inventory["bottles_of_water"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Beer</th>
-											  <td>' . $inventory["beers"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Vegetables</th>
-											  <td>' . $inventory["vegetables"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Meat</th>
-											  <td>' . $inventory["meats"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Canned food</th>
-											  <td>' . $inventory["canned_foods"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Medicines</th>
-											  <td>' . $inventory["medicines"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Tools</th>
-											  <td>' . $inventory["tools"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Coffee</th>
-											  <td>' . $inventory["coffees"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Herbs</th>
-											  <td>' . $inventory["herbs"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Gun parts</th>
-											  <td>' . $inventory["gun_parts"] . '</td>
-											</tr>
-											<tr>
-											  <th scope="row">Gears</th>
-											  <td>' . $inventory["gears"] . '</td>
-											</tr>
-										</tbody>';
-									}
+
+									echo '<tbody>
+										<tr>
+										  <th scope="row">Guns</th>
+										  <td>' . $inventory["guns"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Bullets</th>
+										  <td>' . $inventory["bullets"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Nails</th>
+										  <td>' . $inventory["nails"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Cigarettes</th>
+										  <td>' . $inventory["cigarettes"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Wood</th>
+										  <td>' . $inventory["woods"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Metal Scrap</th>
+										  <td>' . $inventory["scraps"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Pipes</th>
+										  <td>' . $inventory["pipes"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Herbal seeds</th>
+										  <td>' . $inventory["herbal_seeds"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Vegetable seeds</th>
+										  <td>' . $inventory["vegetable_seeds"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Melee weapons</th>
+										  <td>' . $inventory["melee_weapons"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Beer</th>
+										  <td>' . $inventory["beers"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Bottles of water</th>
+										  <td>' . $inventory["bottles_of_water"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Vegetables</th>
+										  <td>' . $inventory["vegetables"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Meat</th>
+										  <td>' . $inventory["meats"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Canned food</th>
+										  <td>' . $inventory["canned_foods"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Medicines</th>
+										  <td>' . $inventory["medicines"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Tools</th>
+										  <td>' . $inventory["tools"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Coffee</th>
+										  <td>' . $inventory["coffees"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Herbs</th>
+										  <td>' . $inventory["herbs"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Gun parts</th>
+										  <td>' . $inventory["gun_parts"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Gears</th>
+										  <td>' . $inventory["gears"] . '</td>
+										</tr>
+										<tr>
+										  <th scope="row">Fertilizers</th>
+										  <td>' . $inventory["fertilizers"] . '</td>
+										</tr>
+									</tbody>';
+
 
 									echo '</table>';
 					            echo '</div>
@@ -256,7 +276,7 @@ include('login_veryfy.php')
 					echo "<div class='row'>
 						<form action='endday.php' method='post' style='margin:0;margin-top:5px;'>
 
-							<input type='hidden' name='game' value=" . $game .">
+							<input type='hidden' name='game' value=" . $game["id"] .">
 							<input type='hidden' name='user' value=" . $user["id"] . ">
 							<input type='hidden' name='explore' value='false'>
 
@@ -267,10 +287,12 @@ include('login_veryfy.php')
 					</div>";
 				?>
 				<?php
-					echo "<div class='row'>
+
+					if ($player["rest"] >= 30){
+						echo "<div class='row'>
 						<form action='endday.php' method='post' style='margin:0;margin-top:5px;'>
 
-							<input type='hidden' name='game' value=" . $game .">
+							<input type='hidden' name='game' value=" . $game["id"] .">
 							<input type='hidden' name='user' value=" . $user["id"] . ">
 							<input type='hidden' name='explore' value='true'>
 
@@ -279,10 +301,11 @@ include('login_veryfy.php')
 							</button>
 						</form>
 					</div>";
+					}
 				?>
 				<?php
 					echo '<div class="row">
-					        <button type="button" class="btn border" data-toggle="modal" data-target="#exampleModal" style="color:#f1f0ea;">
+					        <button type="button" class="btn border" data-toggle="modal" data-target="#exampleModal" style="color:#f1f0ea;margin-top:4px;">
 					            Biuld
 					        </button>
 					    </div>';
@@ -294,16 +317,17 @@ include('login_veryfy.php')
 				                <div class="modal-body">
 				                	<form id="buildform" action="build.php" method="post" style="margin:0;margin-top:5px;">
 
-										<input type="hidden" name="game" value=' . $game . '>
+										<input type="hidden" name="game" value=' . $game["id"] . '>
 										<input type="hidden" name="user" value=' . $user["id"] . '>
 
-										<select class="form-control" name="space" form="buildform">
-											<option value="1">Space 1</option>
-											<option value="2">Space 2</option>
-											<option value="3">Space 3</option>
-											<option value="4">Space 4</option>
-											<option value="5">Space 5</option>
-										</select>
+										<select class="form-control" name="space" form="buildform">';
+
+												for ($i = 1; $i <= (3+$house["level"]); $i++){
+													echo '<option value="' .$i .'">Space ' . $i .'</option>';
+												}
+										
+											
+										echo '</select> 
 
 										<select class="form-control" name="build" form="buildform">
 											<option value="stove">Stove</option>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 01-Out-2019 às 00:29
+-- Data de Criação: 01-Out-2019 às 20:32
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `game` (
   `day` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -46,15 +46,17 @@ CREATE TABLE IF NOT EXISTS `house` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` int(11) NOT NULL,
   `game` int(11) NOT NULL,
+  `level` int(3) NOT NULL DEFAULT '0',
   `build_spot_1` varchar(100) NOT NULL DEFAULT 'empty',
   `build_spot_2` varchar(100) NOT NULL DEFAULT 'empty',
   `build_spot_3` varchar(100) NOT NULL DEFAULT 'empty',
   `build_spot_4` varchar(100) NOT NULL DEFAULT 'empty',
   `build_spot_5` varchar(100) NOT NULL DEFAULT 'empty',
+  `build_spot_6` varchar(100) NOT NULL DEFAULT 'empty',
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -87,10 +89,11 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   `herbs` int(11) NOT NULL,
   `gun_parts` int(11) NOT NULL,
   `gears` int(11) NOT NULL,
+  `fertilizers` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -109,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `player` (
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -123,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(128) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Constraints for dumped tables
