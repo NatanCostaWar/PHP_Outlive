@@ -40,6 +40,18 @@ if($row["day"] == NULL){
 		$result = mysqli_query($connection, $query);
 	}
 
+	#Updating player Life
+	if ($player["hunger"] <= 0) {
+		$query = "UPDATE db_outlive.player SET life = life-10 WHERE game = $game";
+		$result = mysqli_query($connection, $query);
+	}
+	if ($player["thirst"] <= 0) {
+		$query = "UPDATE db_outlive.player SET life = life-25 WHERE game = $game";
+		$result = mysqli_query($connection, $query);
+	}
+	
+	include('playernormalize.php');
+
 	#Updating player Hunger
 	$query = "UPDATE db_outlive.player SET hunger = hunger-20 WHERE game = $game";
 	$result = mysqli_query($connection, $query);
