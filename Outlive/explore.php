@@ -237,4 +237,96 @@ if($find < $find_gun_parts) {
 	$query = "UPDATE db_outlive.inventory SET gun_parts = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
 }
+
+
+
+
+
+
+
+#exploration Danger:
+$danger = 'false';
+#Find a Creature
+$danger_chance = rand (0, 1000);
+if($danger_chance < 50){
+	$_SESSION["msg"] .= "<p>You found a Creature";
+	$danger = 'true';
+	$random = rand (0, 100);
+	#it see you chance
+	if ($random < 20){
+		$_SESSION["msg"] .=", but it didnt see you.</p>";
+		$danger = 'false';
+	}else{
+		$_SESSION["msg"] .=":</p>";
+		#If you have a melee weapon:
+		if (isset($_POST['melee']) and $danger == 'true'){
+			$random = rand (0, 100);
+			if ($random < 70){
+				$_SESSION["msg"] .="<p>You had a melee weapon, you manage to escape.</p>";
+				$danger = 'false';
+				$query = "UPDATE db_outlive.inventory SET melee_weapons = melee_weapons-1 WHERE game = $game";
+				$result = mysqli_query($connection, $query);
+			}else{
+				$_SESSION["msg"] .="<p>You had a melee weapon, but it was not enough.</p>";
+				$danger = 'true';
+				$query = "UPDATE db_outlive.inventory SET melee_weapons = melee_weapons-1 WHERE game = $game";
+				$result = mysqli_query($connection, $query);
+			}
+		}
+
+		#IF you have a gun
+		if(isset($_POST['gun']) and $danger == 'true'){
+			$_SESSION["msg"] .="<p>You pulled your gun, ";
+			for($i = 1; $i <= $inventory["bullets"]; $i++){
+
+				$random = rand (1, 2);
+				if ($random == 1){
+					$_SESSION["msg"] .="shot $i times and manage to escape.</p>";
+					$query = "UPDATE db_outlive.inventory SET bullets = bullets-$i WHERE game = $game";
+					$result = mysqli_query($connection, $query);
+					$danger = 'false';
+					break;
+				}
+			}
+			if($danger == 'true'){
+				$_SESSION["msg"] .="unloaded it, but it was not enough.</p>";
+				$query = "UPDATE db_outlive.inventory SET bullets = bullets-bullets WHERE game = $game";
+				$result = mysqli_query($connection, $query);
+
+			}
+		}
+	if($danger == 'true'){
+		$_SESSION["msg"] .="40 life Damage</p>";
+		$query = "UPDATE db_outlive.player SET life = life-40 WHERE game = $game";
+		$result = mysqli_query($connection, $query);
+	}
+	}
+}
+
+$danger = 'false';
+#Find people:
+$danger_chance = rand (0, 1000);
+if($danger_chance < 10){
+	$_SESSION["msg"] .= "<p>You meet ";
+	$random = rand (1, 2);
+	#Good pelople
+	if ($random == 1){
+		$_SESSION["msg"] .="friendly people</p>";
+	}
+	#Bad pelople
+	else{
+		$_SESSION["msg"] .="dangerous people";
+		#they see you chance
+		$random = rand (1, 2);
+		if ($random == 1){
+			$_SESSION["msg"] .=", but they didnt see you.</p>";
+		}else{
+			$_SESSION["msg"] .=":</p>";
+		}
+	}
+
+	
+}
+
+
 ?>

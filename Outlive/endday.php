@@ -29,8 +29,10 @@ if($row["day"] == NULL){
 	$result = mysqli_query($connection, $query);
 	$player = mysqli_fetch_array($result);
 
+
+
 	#If Explore Option Call Explore Page
-	if ($_POST["explore"] == 'true') {
+	if (isset($_POST['explore'])){
 		include("explore.php");
 		$query = "UPDATE db_outlive.player SET rest = rest-30 WHERE game = $game";
 		$result = mysqli_query($connection, $query);

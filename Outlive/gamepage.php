@@ -374,37 +374,67 @@ include('login_veryfy.php')
 					    </div>
 					</div>';
 				?>
+
+
 				<?php
-					echo "<div class='row'>
-						<form action='endday.php' method='post' style='margin:0;margin-top:5px;'>
+					echo '<div class="row">
+					        <button type="button" class="btn border" data-toggle="modal" data-target="#enddaymodal" style="color:#f1f0ea;margin-top:4px;">
+					            End Day
+					        </button>
+					    </div>';
 
-							<input type='hidden' name='game' value=" . $game["id"] .">
-							<input type='hidden' name='user' value=" . $user["id"] . ">
-							<input type='hidden' name='explore' value='false'>
 
-							<button type='submit' class='btn border' style='color:#f1f0ea;'>
-								End Day (Sleep)
-							</button>
-						</form>
-					</div>";
+					echo '<div class="modal left fade" id="enddaymodal" tabindex="-1" role="dialog" aria-labelledby="enddaymodalLabel" aria-hidden="true">
+				        <div class="modal-dialog" role="document" style="min-width: 80%;width: auto;">
+				            <div class="modal-content">
+					            <div class="modal-header" style="color:#11121a;background-color:#f1f0ea;">
+					                <h5 class="modal-title" id="inventorylabel">
+					                	End Day
+					                </h5>
+					                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					                    <span aria-hidden="true">X</span>
+					                </button>
+					            </div>
+				                <div class="modal-body" style="color:#11121a;background-color:#f1f0ea;">
+				                	<form id="enddayform" action="endday.php" method="post" style="margin:0;margin-top:5px;">
+
+										<input type="hidden" name="game" value=' . $game["id"] . '>
+										<input type="hidden" name="user" value=' . $user["id"] . '>';
+
+											if ($player["rest"] >= 30){
+
+												echo '<p><input type="checkbox" id="explore" name="explore">
+    												<label for="explore">Explore</label></p>';
+
+    											echo '<p>Explore Options:</p>';
+												
+
+												if ($inventory["guns"] >= 1 and $inventory["bullets"] >= 1) {
+													echo '<p><input type="checkbox" id="guncheck" name="gun">
+    												<label for="guncheck">Carry a gun</label></p>';
+												}
+												if ($inventory["melee_weapons"] >= 1) {
+													echo '<p><input type="checkbox" id="meleecheck" name="melee">
+    												<label for="meleecheck">carry a melee weapon</label></p>';
+												}
+												
+											}else{
+												echo "Too tired to explore";
+											}
+
+												
+											
+										echo '
+										<button type="submit" class="btn border" style="margin-top:5px;float:right;">End Day</button>
+				                	</form>
+		                		</div>
+
+		            		</div>
+		        		</div>
+		    		</div>';
 				?>
-				<?php
 
-					if ($player["rest"] >= 30){
-						echo "<div class='row'>
-						<form action='endday.php' method='post' style='margin:0;margin-top:5px;'>
 
-							<input type='hidden' name='game' value=" . $game["id"] .">
-							<input type='hidden' name='user' value=" . $user["id"] . ">
-							<input type='hidden' name='explore' value='true'>
-
-							<button type='submit' class='btn border' style='color:#f1f0ea;'>
-								End Day (Explore)
-							</button>
-						</form>
-					</div>";
-					}
-				?>
 				<?php
 					echo '<div class="row">
 					        <button type="button" class="btn border" data-toggle="modal" data-target="#exampleModal" style="color:#f1f0ea;margin-top:4px;">
