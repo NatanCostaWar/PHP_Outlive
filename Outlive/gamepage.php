@@ -108,6 +108,9 @@ include('login_veryfy.php')
 						}
 					   
 					}
+					if(isset($_SESSION['rain'])) {
+						echo $_SESSION['rain'];
+					}
 					if(isset($_SESSION['msg'])) {
 						echo $_SESSION['msg'];
 						$_SESSION['msg'] = "";
@@ -116,6 +119,7 @@ include('login_veryfy.php')
 						echo $_SESSION["build_error"];
 						$_SESSION['build_error'] = "";
 					}
+
 
 				?>
 			</div>

@@ -49,6 +49,15 @@ if($row["day"] == NULL){
 	$result = mysqli_query($connection, $query);
 
 	include('playernormalize.php');
+
+	#see if is raining
+	$rain = rand (0, 100);
+	if($rain < 20) {
+		$_SESSION["rain"] = "<p>Its Raining</p>";
+	}else{
+		$_SESSION["rain"] = "";
+	}
+
 	if($result){
 	    header("Location: gamepage.php?game=$game");
 	}else{
