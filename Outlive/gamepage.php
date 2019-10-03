@@ -306,15 +306,21 @@ include('login_veryfy.php')
 				<?php
 					echo '<div class="row">
 					        <button type="button" class="btn border" data-toggle="modal" data-target="#exampleModal" style="color:#f1f0ea;margin-top:4px;">
-					            Biuld
+					            Build
 					        </button>
 					    </div>';
 
 
 					echo '<div class="modal left fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				        <div class="modal-dialog" role="document">
+				        <div class="modal-dialog" role="document" style="min-width: 80%;width: auto;">
 				            <div class="modal-content">
-				                <div class="modal-body">
+					            <div class="modal-header" style="color:#11121a;background-color:#f1f0ea;">
+					                <h5 class="modal-title" id="inventorylabel">Choose The Building</h5>
+					                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					                    <span aria-hidden="true">X</span>
+					                </button>
+					            </div>
+				                <div class="modal-body" style="color:#11121a;background-color:#f1f0ea;">
 				                	<form id="buildform" action="build.php" method="post" style="margin:0;margin-top:5px;">
 
 										<input type="hidden" name="game" value=' . $game["id"] . '>
@@ -337,7 +343,7 @@ include('login_veryfy.php')
 											<option value="watercollector">Water Collector</option>
 											<option value="farm">Farm</option>
 										</select>
-										<button type="submit" class="btn border" style="margin-top:5px;">Biuld</button>
+										<button type="submit" class="btn border" style="margin-top:5px;">Build</button>
 				                	</form>
 		                		</div>
 

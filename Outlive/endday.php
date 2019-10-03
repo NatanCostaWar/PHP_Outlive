@@ -36,11 +36,31 @@ if($row["day"] == NULL){
 		if ($new_rest > 100){
 			$new_rest = 100;
 		}
-
 		$query = "UPDATE db_outlive.player SET rest = $new_rest WHERE game = $game";
 		$result = mysqli_query($connection, $query);
-
 	}
+
+	#Updating player Hunger
+	$query = "SELECT * FROM db_outlive.player WHERE game = $game";
+	$result = mysqli_query($connection, $query);
+	$player = mysqli_fetch_array($result);
+	$new_hunger = ($player["hunger"])-20;
+	if ($new_hunger < 0){
+		$new_hunger = 0;
+	}
+	$query = "UPDATE db_outlive.player SET hunger = $new_hunger WHERE game = $game";
+	$result = mysqli_query($connection, $query);
+
+	#Updating player thirst
+	$query = "SELECT * FROM db_outlive.player WHERE game = $game";
+	$result = mysqli_query($connection, $query);
+	$player = mysqli_fetch_array($result);
+	$new_thirst = ($player["thirst"])-25;
+	if ($new_thirst < 0){
+		$new_thirst = 0;
+	}
+	$query = "UPDATE db_outlive.player SET thirst = $new_thirst WHERE game = $game";
+	$result = mysqli_query($connection, $query);
 
 
 
