@@ -214,27 +214,111 @@ include('login_veryfy.php')
 										</tr>
 										<tr>
 										  <th scope="row">Beer</th>
-										  <td>' . $inventory["beers"] . '</td>
+										  <td>' . $inventory["beers"] . ' ';
+										   if ($inventory["beers"]>=1){
+										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+
+													<input type='hidden' name='game' value=" . $game["id"] .">
+													<input type='hidden' name='user' value=" . $user["id"] . ">
+													<input type='hidden' name='item' value='beers'>
+
+													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
+														Use Item
+													</button>
+												</form></td>";
+										   }
+										
+										echo '</td>
 										</tr>
 										<tr>
 										  <th scope="row">Bottles of water</th>
-										  <td>' . $inventory["bottles_of_water"] . '</td>
+										  <td>' . $inventory["bottles_of_water"] . ' ';
+										   if ($inventory["bottles_of_water"]>=1){
+										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+
+													<input type='hidden' name='game' value=" . $game["id"] .">
+													<input type='hidden' name='user' value=" . $user["id"] . ">
+													<input type='hidden' name='item' value='bottles_of_water'>
+
+													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
+														Use Item
+													</button>
+												</form></td>";
+										   }
+										
+										echo '</td>
 										</tr>
 										<tr>
 										  <th scope="row">Vegetables</th>
-										  <td>' . $inventory["vegetables"] . '</td>
+										  <td>' . $inventory["vegetables"] . ' ';
+										   if ($inventory["vegetables"]>=1){
+										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+
+													<input type='hidden' name='game' value=" . $game["id"] .">
+													<input type='hidden' name='user' value=" . $user["id"] . ">
+													<input type='hidden' name='item' value='vegetables'>
+
+													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
+														Use Item
+													</button>
+												</form></td>";
+										   }
+										
+										echo '</td>
 										</tr>
 										<tr>
 										  <th scope="row">Meat</th>
-										  <td>' . $inventory["meats"] . '</td>
+										  <td>' . $inventory["meats"] . ' ';
+										   if ($inventory["meats"]>=1){
+										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+
+													<input type='hidden' name='game' value=" . $game["id"] .">
+													<input type='hidden' name='user' value=" . $user["id"] . ">
+													<input type='hidden' name='item' value='meats'>
+
+													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
+														Use Item
+													</button>
+												</form></td>";
+										   }
+										
+										echo '</td>
 										</tr>
 										<tr>
 										  <th scope="row">Canned food</th>
-										  <td>' . $inventory["canned_foods"] . '</td>
+										  <td>' . $inventory["canned_foods"] . ' ';
+										   if ($inventory["canned_foods"]>=1){
+										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+
+													<input type='hidden' name='game' value=" . $game["id"] .">
+													<input type='hidden' name='user' value=" . $user["id"] . ">
+													<input type='hidden' name='item' value='canned_foods'>
+
+													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
+														Use Item
+													</button>
+												</form></td>";
+										   }
+										
+										echo '</td>
 										</tr>
 										<tr>
 										  <th scope="row">Medicines</th>
-										  <td>' . $inventory["medicines"] . '</td>
+										  <td>' . $inventory["medicines"] . ' ';
+										   if ($inventory["medicines"]>=1){
+										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+
+													<input type='hidden' name='game' value=" . $game["id"] .">
+													<input type='hidden' name='user' value=" . $user["id"] . ">
+													<input type='hidden' name='item' value='medicines'>
+
+													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
+														Use Item
+													</button>
+												</form></td>";
+										   }
+										
+										echo '</td>
 										</tr>
 										<tr>
 										  <th scope="row">Tools</th>
@@ -246,7 +330,21 @@ include('login_veryfy.php')
 										</tr>
 										<tr>
 										  <th scope="row">Herbs</th>
-										  <td>' . $inventory["herbs"] . '</td>
+										  <td>' . $inventory["herbs"] . ' ';
+										   if ($inventory["herbs"]>=1){
+										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+
+													<input type='hidden' name='game' value=" . $game["id"] .">
+													<input type='hidden' name='user' value=" . $user["id"] . ">
+													<input type='hidden' name='item' value='herbs'>
+
+													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
+														Use Item
+													</button>
+												</form></td>";
+										   }
+										
+										echo '</td>
 										</tr>
 										<tr>
 										  <th scope="row">Gun parts</th>

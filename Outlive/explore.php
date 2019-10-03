@@ -1,16 +1,6 @@
 <?php
 include("connect.php");
 
-#Updating player rest value
-$query = "SELECT * FROM db_outlive.player WHERE game = $game";
-$result = mysqli_query($connection, $query);
-$player = mysqli_fetch_array($result);
-$new_rest = ($player["rest"])-30;
-
-
-$query = "UPDATE db_outlive.player SET rest = $new_rest WHERE game = $game";
-$result = mysqli_query($connection, $query);
-
 #Search probability Values (100 aways find | 0 never find):
 #Basic Stuff:
 $find_woods = 800;

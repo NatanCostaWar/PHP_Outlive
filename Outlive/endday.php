@@ -24,46 +24,31 @@ if($row["day"] == NULL){
 	$query = "UPDATE db_outlive.game SET day = $day WHERE user = $user and id = $game";
 	$result = mysqli_query($connection, $query);
 
+	#PLAYER INFORMATION
+	$query = "SELECT * FROM db_outlive.player WHERE game = $game and user = $user";
+	$result = mysqli_query($connection, $query);
+	$player = mysqli_fetch_array($result);
+
 	#If Explore Option Call Explore Page
 	if ($_POST["explore"] == 'true') {
 		include("explore.php");
+		$query = "UPDATE db_outlive.player SET rest = rest-30 WHERE game = $game";
+		$result = mysqli_query($connection, $query);
 	}else{
 		#Updating player rest value
-		$query = "SELECT * FROM db_outlive.player WHERE game = $game";
-		$result = mysqli_query($connection, $query);
-		$player = mysqli_fetch_array($result);
-		$new_rest = ($player["rest"])+40;
-		if ($new_rest > 100){
-			$new_rest = 100;
-		}
-		$query = "UPDATE db_outlive.player SET rest = $new_rest WHERE game = $game";
+		$query = "UPDATE db_outlive.player SET rest = rest+40 WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 	}
 
 	#Updating player Hunger
-	$query = "SELECT * FROM db_outlive.player WHERE game = $game";
-	$result = mysqli_query($connection, $query);
-	$player = mysqli_fetch_array($result);
-	$new_hunger = ($player["hunger"])-20;
-	if ($new_hunger < 0){
-		$new_hunger = 0;
-	}
-	$query = "UPDATE db_outlive.player SET hunger = $new_hunger WHERE game = $game";
+	$query = "UPDATE db_outlive.player SET hunger = hunger-20 WHERE game = $game";
 	$result = mysqli_query($connection, $query);
 
 	#Updating player thirst
-	$query = "SELECT * FROM db_outlive.player WHERE game = $game";
-	$result = mysqli_query($connection, $query);
-	$player = mysqli_fetch_array($result);
-	$new_thirst = ($player["thirst"])-25;
-	if ($new_thirst < 0){
-		$new_thirst = 0;
-	}
-	$query = "UPDATE db_outlive.player SET thirst = $new_thirst WHERE game = $game";
+	$query = "UPDATE db_outlive.player SET thirst = thirst-25 WHERE game = $game";
 	$result = mysqli_query($connection, $query);
 
-
-
+	include('playernormalize.php');
 	if($result){
 	    header("Location: gamepage.php?game=$game");
 	}else{
