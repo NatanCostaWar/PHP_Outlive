@@ -82,10 +82,16 @@ include('login_veryfy.php')
 		$result = mysqli_query($connection, $query);
 		$house = mysqli_fetch_array($result);
 
+		#SETTING HOUSE BUILDING BONUS
+		include('housebonus.php');
+
 		#INVENTORY INFORMATION
 		$query = "SELECT * FROM db_outlive.inventory where game = $game[id] and user = $user[id]";
 		$result = mysqli_query($connection, $query);
 		$inventory = mysqli_fetch_array($result);
+
+
+
 
 	?>
 
@@ -403,11 +409,10 @@ include('login_veryfy.php')
 
 											if ($player["rest"] >= 30){
 
-												echo '<p><input type="checkbox" id="explore" name="explore">
+												echo '<p><input type="checkbox" id="explore" name="explore" style="min-height:3vh;min-width:3vh;">
     												<label for="explore">Explore</label></p>';
 
     											echo '<p>Explore Options:</p>';
-												
 
 												if ($inventory["guns"] >= 1 and $inventory["bullets"] >= 1) {
 													echo '<p><input type="checkbox" id="guncheck" name="gun">
@@ -425,7 +430,7 @@ include('login_veryfy.php')
 												
 											
 										echo '
-										<button type="submit" class="btn border" style="margin-top:5px;float:right;">End Day</button>
+										<button type="submit" class="btn btn-secondary" style="float:right;margin-top:5px;">End Day</button>
 				                	</form>
 		                		</div>
 
@@ -444,24 +449,70 @@ include('login_veryfy.php')
 
 
 					echo '<div class="modal left fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				        <div class="modal-dialog" role="document" style="min-width: 80%;width: auto;">
+				        <div class="modal-dialog" role="document" style="min-width: 90%;width: auto;">
 				            <div class="modal-content">
 					            <div class="modal-header" style="color:#11121a;background-color:#f1f0ea;">
-					                <h5 class="modal-title" id="inventorylabel">Choose The Building</h5>
+					                <h5 class="modal-title" id="inventorylabel">Building Prices:</h5>
 					                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					                    <span aria-hidden="true">X</span>
 					                </button>
 					            </div>
-				                <div class="modal-body" style="color:#11121a;background-color:#f1f0ea;">
-				                	<form id="buildform" action="build.php" method="post" style="margin:0;margin-top:5px;">
+				                <div class="modal-body" style="color:#11121a;background-color:#f1f0ea;">';
 
+				                echo '<table style="color:#11121a">
+									    <tr>
+									      <th scope="row">Stove</th>
+									      <td>1 tool</td>
+									      <td>15 woods</td>
+									      <td>30 Metal Scraps</td>
+									      <td>4 Pipes</td>
+									    </tr>
+									    <tr>
+									      <th scope="row">Bed</th>
+									      <td>1 tool</td>
+									      <td>40 woods</td>
+									      <td>20 Nails</td>
+									    </tr>
+									    <tr>
+									      <th scope="row">Workbench</th>
+									      <td>1 tool</td>
+									      <td>50 woods</td>
+									      <td>10 Metal Scraps</td>
+									      <td>15 Nails</td>
+									    </tr>
+									    <tr>
+									      <th scope="row">Chair</th>
+									      <td>1 tool</td>
+									      <td>20 woods</td>
+									      <td>10 Nails</td>
+									    </tr>
+									    <tr>
+									      <th scope="row">Water Collector</th>
+									      <td>1 tool</td>
+									      <td>12 woods</td>
+									      <td>15 Metal Scraps</td>
+									      <td>10 Pipes</td>
+									    </tr>
+									    <tr>
+									      <th scope="row">Farm</th>
+									      <td>1 tool</td>
+									      <td>40 woods</td>
+									      <td>15 Nails</td>
+									      <td>4 Pipes</td>
+									      <td>1 Fertilizers</td>
+									    </tr>
+								</table>';
+
+
+
+				                	echo '<form id="buildform" action="build.php" method="post" style="margin:0;margin-top:5px;">
 										<input type="hidden" name="game" value=' . $game["id"] . '>
 										<input type="hidden" name="user" value=' . $user["id"] . '>
 
 										<select class="form-control" name="space" form="buildform">';
 
 												for ($i = 1; $i <= (3+$house["level"]); $i++){
-													echo '<option value="' .$i .'">Space ' . $i .'</option>';
+													echo '<option value="' .$i .'">Build Space ' . $i .'</option>';
 												}
 										
 											
@@ -475,7 +526,7 @@ include('login_veryfy.php')
 											<option value="watercollector">Water Collector</option>
 											<option value="farm">Farm</option>
 										</select>
-										<button type="submit" class="btn border" style="margin-top:5px;">Build</button>
+										<button type="submit" class="btn btn-secondary" style="float:right;margin-top:5px;">Biuld</button>
 				                	</form>
 		                		</div>
 

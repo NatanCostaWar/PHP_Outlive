@@ -37,9 +37,18 @@ if($row["day"] == NULL){
 		$query = "UPDATE db_outlive.player SET rest = rest-30 WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 	}else{
-		#Updating player rest value
-		$query = "UPDATE db_outlive.player SET rest = rest+40 WHERE game = $game";
-		$result = mysqli_query($connection, $query);
+		$rest_bonus = rand(1, 2);
+		if($_SESSION["bed"] > 0 and $rest_bonus == 1){
+			$_SESSION["msg"] .= "<p>A bed is really comfortable, +20 rest bonus</p>";
+			#Updating player rest value
+			$query = "UPDATE db_outlive.player SET rest = rest+60 WHERE game = $game";
+			$result = mysqli_query($connection, $query);
+		}else{
+			#Updating player rest value
+			$query = "UPDATE db_outlive.player SET rest = rest+40 WHERE game = $game";
+			$result = mysqli_query($connection, $query);
+		}
+		
 	}
 
 	#Updating player Life
@@ -67,7 +76,15 @@ if($row["day"] == NULL){
 	#see if is raining
 	$rain = rand (0, 100);
 	if($rain < 20) {
-		$_SESSION["rain"] = "<p>Its Raining</p>";
+		$_SESSION["rain"] = "<p>Its Raining";
+		if ($_SESSION["watercollector"] > 0) {
+			$quant = rand(3, 6) * $_SESSION["watercollector"];
+			$_SESSION["rain"] .= ", You filled $quant bottles of water</p>";
+			$query = "UPDATE db_outlive.inventory SET bottles_of_water = bottles_of_water+$quant WHERE game = $game";
+			$result = mysqli_query($connection, $query);
+		}else{
+			$_SESSION["rain"] .= "</p>";
+		}
 	}else{
 		$_SESSION["rain"] = "";
 	}

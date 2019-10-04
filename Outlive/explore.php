@@ -26,7 +26,7 @@ $find_herbs = 80;
 $find_guns = 10;
 $find_bullets = 40;
 $find_melee_weapons = 60;
-$find_tools = 100;
+$find_tools = 150;
 $find_gun_parts = 50;
 
 
