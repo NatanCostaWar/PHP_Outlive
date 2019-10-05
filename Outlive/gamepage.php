@@ -82,15 +82,16 @@ include('login_veryfy.php')
 		$result = mysqli_query($connection, $query);
 		$house = mysqli_fetch_array($result);
 
-		#SETTING HOUSE BUILDING BONUS
-		include('housebonus.php');
+		#BUILDS INFORMATION
+		$query = "SELECT * FROM db_outlive.builds where game = $game[id] and user = $user[id]";
+		$builds_result = mysqli_query($connection, $query);
 
 		#INVENTORY INFORMATION
 		$query = "SELECT * FROM db_outlive.inventory where game = $game[id] and user = $user[id]";
 		$result = mysqli_query($connection, $query);
 		$inventory = mysqli_fetch_array($result);
 
-
+		
 
 
 	?>
@@ -518,14 +519,11 @@ include('login_veryfy.php')
 											
 										echo '</select> 
 
-										<select class="form-control" name="build" form="buildform">
-											<option value="stove">Stove</option>
-											<option value="bed">Bed</option>
-											<option value="workbench">Workbench</option>
-											<option value="chair">Chair</option>
-											<option value="watercollector">Water Collector</option>
-											<option value="farm">Farm</option>
-										</select>
+										<select class="form-control" name="build" form="buildform">';
+											while ($build_row = mysqli_fetch_assoc($builds_result)) {
+											    echo '<option value="' . $build_row[name] .'">' . $build_row[name] .'</option>';
+											}
+										echo '</select>
 										<button type="submit" class="btn btn-secondary" style="float:right;margin-top:5px;">Biuld</button>
 				                	</form>
 		                		</div>

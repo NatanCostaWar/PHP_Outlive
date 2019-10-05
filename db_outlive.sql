@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 01-Out-2019 às 20:32
+-- Data de Criação: 05-Out-2019 às 20:30
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -25,6 +25,24 @@ USE `db_outlive`;
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `builds`
+--
+
+CREATE TABLE IF NOT EXISTS `builds` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `game` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `time` int(11) DEFAULT NULL,
+  `amount` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `game` (`game`),
+  KEY `user` (`user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `game`
 --
 
@@ -34,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `game` (
   `day` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 -- --------------------------------------------------------
 
@@ -47,16 +65,16 @@ CREATE TABLE IF NOT EXISTS `house` (
   `user` int(11) NOT NULL,
   `game` int(11) NOT NULL,
   `level` int(3) NOT NULL DEFAULT '0',
-  `build_spot_1` varchar(100) NOT NULL DEFAULT 'empty',
-  `build_spot_2` varchar(100) NOT NULL DEFAULT 'empty',
-  `build_spot_3` varchar(100) NOT NULL DEFAULT 'empty',
-  `build_spot_4` varchar(100) NOT NULL DEFAULT 'empty',
-  `build_spot_5` varchar(100) NOT NULL DEFAULT 'empty',
-  `build_spot_6` varchar(100) NOT NULL DEFAULT 'empty',
+  `build_spot_1` varchar(110) NOT NULL DEFAULT 'empty',
+  `build_spot_2` varchar(110) NOT NULL DEFAULT 'empty',
+  `build_spot_3` varchar(110) NOT NULL DEFAULT 'empty',
+  `build_spot_4` varchar(110) NOT NULL DEFAULT 'empty',
+  `build_spot_5` varchar(110) NOT NULL DEFAULT 'empty',
+  `build_spot_6` varchar(110) NOT NULL DEFAULT 'empty',
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -93,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -112,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `player` (
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -126,11 +144,18 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(128) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Limitadores para a tabela `builds`
+--
+ALTER TABLE `builds`
+  ADD CONSTRAINT `builds_ibfk_1` FOREIGN KEY (`game`) REFERENCES `game` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `builds_ibfk_2` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `game`
