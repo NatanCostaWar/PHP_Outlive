@@ -103,10 +103,23 @@ include('login_veryfy.php')
 			
 			<div class='col-lg-8 col-md-8'>
 				<?php
-					echo "<p>House:</p>";
+					echo '<div class="row" style="float:left"><p>House [Level ' . $house["level"] . ']</p></div>';
+
+					echo '<div class="row justify-content-end">
+					    <form action="houseupgrade.php" method="post">
+
+					    	<input type="hidden" name="game" value=' . $game["id"] .'>
+							<input type="hidden" name="user" value=' . $user["id"] . '>
+								
+							<button type="submit" class="btn border" style="color:#f1f0ea;padding:1px;margin:2px;">
+					        	Upgrade House
+							</button>
+				        </form>
+					</div>';
+
 
 					for ($i = 1; $i <= $house["spots"]; $i++) {
-						echo "<div class='row'><p>Build Space:  ------</p></div>";
+						echo "<p><div class='row'>Build Space:  ------</div></p>";
 						
 					}
 
