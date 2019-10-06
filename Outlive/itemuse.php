@@ -21,7 +21,7 @@ $result = mysqli_query($connection, $query);
 
 #DRINK
 if($item == 'bottles_of_water'){
-	$query = "UPDATE db_outlive.player SET thirst = thirst+10  WHERE user = $user and game = $game";
+	$query = "UPDATE db_outlive.player SET thirst = thirst+27  WHERE user = $user and game = $game";
 	$result = mysqli_query($connection, $query);
 }
 if($item == 'beers'){

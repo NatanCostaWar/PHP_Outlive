@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 05-Out-2019 às 20:30
+-- Data de Criação: 06-Out-2019 às 19:57
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -34,11 +34,11 @@ CREATE TABLE IF NOT EXISTS `builds` (
   `user` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `time` int(11) DEFAULT NULL,
-  `amount` int(11) NOT NULL DEFAULT '0',
+  `hold` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `game` (`game`),
   KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=98 ;
 
 -- --------------------------------------------------------
 
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `game` (
   `day` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=52 ;
 
 -- --------------------------------------------------------
 
@@ -65,16 +65,11 @@ CREATE TABLE IF NOT EXISTS `house` (
   `user` int(11) NOT NULL,
   `game` int(11) NOT NULL,
   `level` int(3) NOT NULL DEFAULT '0',
-  `build_spot_1` varchar(110) NOT NULL DEFAULT 'empty',
-  `build_spot_2` varchar(110) NOT NULL DEFAULT 'empty',
-  `build_spot_3` varchar(110) NOT NULL DEFAULT 'empty',
-  `build_spot_4` varchar(110) NOT NULL DEFAULT 'empty',
-  `build_spot_5` varchar(110) NOT NULL DEFAULT 'empty',
-  `build_spot_6` varchar(110) NOT NULL DEFAULT 'empty',
+  `spots` int(11) NOT NULL DEFAULT '3',
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 -- --------------------------------------------------------
 
@@ -88,30 +83,30 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   `game` int(11) NOT NULL,
   `guns` int(11) NOT NULL DEFAULT '0',
   `bullets` int(11) NOT NULL DEFAULT '0',
-  `nails` int(11) NOT NULL DEFAULT '0',
+  `nails` int(11) NOT NULL DEFAULT '8',
   `cigarettes` int(11) NOT NULL,
-  `woods` int(11) NOT NULL,
-  `scraps` int(11) NOT NULL,
-  `pipes` int(11) NOT NULL,
+  `woods` int(11) NOT NULL DEFAULT '15',
+  `scraps` int(11) NOT NULL DEFAULT '8',
+  `pipes` int(11) NOT NULL DEFAULT '4',
   `herbal_seeds` int(11) NOT NULL,
   `vegetable_seeds` int(11) NOT NULL,
   `melee_weapons` int(11) NOT NULL,
-  `beers` int(11) NOT NULL,
-  `bottles_of_water` int(11) NOT NULL,
-  `vegetables` int(11) NOT NULL,
-  `meats` int(11) NOT NULL,
-  `canned_foods` int(11) NOT NULL,
+  `beers` int(11) NOT NULL DEFAULT '3',
+  `bottles_of_water` int(11) NOT NULL DEFAULT '5',
+  `vegetables` int(11) NOT NULL DEFAULT '1',
+  `meats` int(11) NOT NULL DEFAULT '2',
+  `canned_foods` int(11) NOT NULL DEFAULT '4',
   `medicines` int(11) NOT NULL,
-  `tools` int(11) NOT NULL,
+  `tools` int(11) NOT NULL DEFAULT '1',
   `coffees` int(11) NOT NULL,
-  `herbs` int(11) NOT NULL,
+  `herbs` int(11) NOT NULL DEFAULT '2',
   `gun_parts` int(11) NOT NULL,
   `gears` int(11) NOT NULL,
   `fertilizers` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 -- --------------------------------------------------------
 
@@ -130,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `player` (
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 -- --------------------------------------------------------
 
@@ -144,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(128) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Constraints for dumped tables

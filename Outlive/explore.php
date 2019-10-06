@@ -6,7 +6,7 @@ include("connect.php");
 $find_woods = 800;
 $find_scraps = 500;
 $find_nails = 600;
-$find_pipes = 180;
+$find_pipes = 220;
 $find_coffees = 120;
 $find_cigarettes = 100;
 $find_gears = 80;
@@ -19,7 +19,7 @@ $find_beers = 170;
 $find_bottles_of_water = 90;
 $fertilizers = 160;
 #Medicine Stuff
-$find_herbal_seeds = 70;
+$find_herbal_seeds = 90;
 $find_medicines = 20;
 $find_herbs = 80;
 #Combat Stuff:

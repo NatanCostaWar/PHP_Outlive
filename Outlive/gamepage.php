@@ -105,16 +105,80 @@ include('login_veryfy.php')
 				<?php
 					echo "<p>House:</p>";
 
-					for ($i = 1; $i <= (3+$house["level"]); $i++) {
-						if ($house["build_spot_$i"] == 'empty'){
-							echo "<p>Build Space " . $i .":  ------</p>";
-						}else if($house["build_spot_$i"] == 'watercollector'){
-							echo "<p>Build Space " . $i .": water collector</p>";
-						}else{
-							echo "<p>Build Space " . $i .": " . $house["build_spot_$i"] . "</p>";
-						}
-					   
+					for ($i = 1; $i <= $house["spots"]; $i++) {
+						echo "<div class='row'><p>Build Space:  ------</p></div>";
+						
 					}
+
+					#SHOW BUILDS:
+					while ($build_row = mysqli_fetch_assoc($builds_result)) {
+						echo "<div class='row'>
+							Build Space : " . $build_row["name"];
+						    echo '<form action="destroy.php" method="post">
+									<input type="hidden" name="game" value=' . $game["id"] . '>
+									<input type="hidden" name="user" value=' . $user["id"] . '>
+									<input type="hidden" name="build" value=' . $build_row["id"] . '>';
+
+							echo '<button type="submit" class="btn border" style="color:#f1f0ea;padding:1px;margin-left:4px;">
+					            Destroy
+					        </button></form>';
+
+					        if ($build_row["name"] == 'Farm') {
+					        	if ($build_row["time"] == NULL){
+					        		echo '<p><button type="button" class="btn border" data-toggle="modal" data-target="#grow" style="color:#f1f0ea;padding:1px;margin-left:4px;">
+						            Grow
+						        </button></p>';
+
+							        echo '<div class="modal fade" id="grow" tabindex="-1" role="dialog" aria-labelledby="Growlabel" aria-hidden="true">
+									    <div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 80%;width:auto;">
+									        <div class="modal-content" style="color: #11121a;background-color: #f1f0ea;">
+									            <div class="modal-header">
+									                <h5 class="modal-title" id="Growlabel">Choose a Seed</h5>
+									                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									                    <span aria-hidden="true">X</span>
+									                </button>
+									            </div>
+									            <div class="modal-body">
+										            <form id="growform" action="grow.php" method="post">';
+										            	echo '<input type="hidden" name="game" value=' . $game["id"] . '>
+														<input type="hidden" name="user" value=' . $user["id"] . '>
+
+														<input type="hidden" name="farm" value=' . $build_row["id"] . '>';
+														
+
+										            	if($inventory["herbal_seeds"] > 0){
+										            		echo '<p><input type="radio" NAME="seed" value="herbal_seeds">Herbal Seed</p>';
+										            	}
+										            	if($inventory["vegetable_seeds"] > 0){
+										            		echo '<p><input type="radio" NAME="seed" value="vegetable_seeds">Vegetable Seed</p>';
+										            	}
+										            	echo '<button type="submit" class="btn btn-secondary" style="margin:2px;float:right;">Grow</button>
+										            	</form>
+										            </div>
+									        </div>
+									    </div>
+									</div>';
+
+
+					        	}else{
+					        		echo '<p><a class="btn border" style="color:#f1f0ea;padding:1px;margin-left:4px;">
+						            Growing
+						        </a></p>';
+					        	}
+								
+						        
+
+
+					        }
+					        echo '</div>';
+
+
+					    /*echo $build_row["id"];
+					    echo $build_row["game"];
+					    echo $build_row["user"];*/
+
+					}
+
 					if(isset($_SESSION['rain'])) {
 						echo $_SESSION['rain'];
 					}
@@ -504,29 +568,34 @@ include('login_veryfy.php')
 									    </tr>
 								</table>';
 
+									if ($house["spots"]>0) {
 
+					                	echo '<form id="buildform" action="build.php" method="post" style="margin:0;margin-top:5px;">
+											<input type="hidden" name="game" value=' . $game["id"] . '>
+											<input type="hidden" name="user" value=' . $user["id"] . '>';
 
-				                	echo '<form id="buildform" action="build.php" method="post" style="margin:0;margin-top:5px;">
-										<input type="hidden" name="game" value=' . $game["id"] . '>
-										<input type="hidden" name="user" value=' . $user["id"] . '>
-
-										<select class="form-control" name="space" form="buildform">';
-
-												for ($i = 1; $i <= (3+$house["level"]); $i++){
-													echo '<option value="' .$i .'">Build Space ' . $i .'</option>';
-												}
 										
-											
-										echo '</select> 
+											echo "<br><p>Your house have " . $house["spots"] . " builds spaces left:</p>";
 
-										<select class="form-control" name="build" form="buildform">';
-											while ($build_row = mysqli_fetch_assoc($builds_result)) {
-											    echo '<option value="' . $build_row[name] .'">' . $build_row[name] .'</option>';
-											}
-										echo '</select>
-										<button type="submit" class="btn btn-secondary" style="float:right;margin-top:5px;">Biuld</button>
-				                	</form>
-		                		</div>
+											echo '<select class="form-control" name="build" form="buildform">
+													<option value="Stove">Stove</option>
+													<option value="Bed">Bed</option>
+													<option value="Workbench">Workbench</option>
+													<option value="Chair">Chair</option>
+													<option value="Water Collector">Water Collector</option>
+													<option value="Farm">Farm</option>
+											</select>';
+
+											echo '<button type="submit" class="btn btn-secondary" style="float:right;margin-top:5px;">Biuld</button>';
+
+											echo '</form>';
+											
+										}else{
+											echo "<br><p>All build spaces used, destroy something to build</p>";
+										}
+										
+				                	
+		                		echo '</div>
 
 		            		</div>
 		        		</div>

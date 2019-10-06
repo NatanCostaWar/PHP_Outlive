@@ -29,24 +29,6 @@ $result = mysqli_query($connection, $query) or die(mysql_error());
 #creating inventory
 $query = "INSERT INTO db_outlive.inventory (id, user, game) VALUES (NULL, '{$user['id']}', '{$game_id}')";
 $result = mysqli_query($connection, $query) or die(mysql_error());
-#creating builds
-$query = "INSERT INTO db_outlive.builds (id, user, game, name, time) VALUES (NULL, '{$user['id']}', '{$game_id}', 'Stove', NULL)";
-$result = mysqli_query($connection, $query) or die(mysql_error());
-$query = "INSERT INTO db_outlive.builds (id, user, game, name, time) VALUES (NULL, '{$user['id']}', '{$game_id}', 'Bed', NULL)";
-$result = mysqli_query($connection, $query) or die(mysql_error());
-$query = "INSERT INTO db_outlive.builds (id, user, game, name, time) VALUES (NULL, '{$user['id']}', '{$game_id}', 'Workbench', NULL)";
-$result = mysqli_query($connection, $query) or die(mysql_error());
-$query = "INSERT INTO db_outlive.builds (id, user, game, name, time) VALUES (NULL, '{$user['id']}', '{$game_id}', 'Chair', NULL)";
-$result = mysqli_query($connection, $query) or die(mysql_error());
-$query = "INSERT INTO db_outlive.builds (id, user, game, name, time) VALUES (NULL, '{$user['id']}', '{$game_id}', 'Water Collector', NULL)";
-$result = mysqli_query($connection, $query) or die(mysql_error());
-$query = "INSERT INTO db_outlive.builds (id, user, game, name, time) VALUES (NULL, '{$user['id']}', '{$game_id}', 'Farm', NULL)";
-$result = mysqli_query($connection, $query) or die(mysql_error());
-
-
-
-
-
 
 header("Location: userpage.php");
 ?>

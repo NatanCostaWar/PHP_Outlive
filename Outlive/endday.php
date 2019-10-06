@@ -43,7 +43,7 @@ if($row["day"] == NULL){
 		$result = mysqli_query($connection, $query);
 		$bed = mysqli_fetch_array($result);
 		$rest_bonus = rand(1, 2);
-		if($bed["amount"] > 0 and $rest_bonus == 1){
+		if(isset($bed) and $rest_bonus == 1){
 			$_SESSION["msg"] .= "<p>A bed is really comfortable, +20 rest bonus</p>";
 			#Updating player rest value
 			$query = "UPDATE db_outlive.player SET rest = rest+60 WHERE game = $game";
@@ -83,11 +83,11 @@ if($row["day"] == NULL){
 	if($rain < 20) {
 		$_SESSION["rain"] = "<p>Its Raining";
 			#Getting Water Collectors amount
-			$query = "SELECT amount FROM db_outlive.builds WHERE game = $game and user = $user and name = 'Water Collector'";
+			$query = "SELECT * FROM db_outlive.builds WHERE game = $game and user = $user and name = 'Water Collector'";
 			$result = mysqli_query($connection, $query);
-			$WC = mysqli_fetch_array($result);
-		if ($WC["amount"] > 0) {
-			$quant = rand(3, 6) * $WC["amount"];
+			$WC = mysqli_num_rows($result);
+		if ($WC > 0){
+			$quant = rand(3, 6) * $WC;
 			$_SESSION["rain"] .= ", You filled $quant bottles of water</p>";
 			$query = "UPDATE db_outlive.inventory SET bottles_of_water = bottles_of_water+$quant WHERE game = $game";
 			$result = mysqli_query($connection, $query);
@@ -98,6 +98,45 @@ if($row["day"] == NULL){
 		$_SESSION["rain"] = "";
 	}
 
+
+	#Farm Grow Update/ farm Harvest
+	$query = "SELECT * FROM db_outlive.builds WHERE game = $game and user = $user and name = 'Farm'" or die(mysqli_error());
+	$result = mysqli_query($connection, $query);
+	while($farm = mysqli_fetch_assoc($result)){
+		#Grow Update:
+		if ($farm["time"] > 1){
+			$query = "UPDATE db_outlive.builds SET time = time-1 WHERE game = $game and id = $farm[id]";
+			$update = mysqli_query($connection, $query);
+		#Harvest:
+		}else if($farm["time"] == 1){
+			$query = "UPDATE db_outlive.builds SET time = NULL WHERE game = $game and id = $farm[id]";
+			$update = mysqli_query($connection, $query);
+
+			#Herb Harvest
+			if($farm["hold"] == 'herbal_seeds'){
+				$query = "UPDATE db_outlive.builds SET hold = NULL WHERE game = $game and id = $farm[id]";
+				$update = mysqli_query($connection, $query);
+
+				$quant = rand(2, 4);
+				$query = "UPDATE db_outlive.inventory SET herbs = herbs+$quant WHERE game = $game";
+				$update = mysqli_query($connection, $query);
+
+				$_SESSION["msg"] .= "<p>Farm Harvested: $quant Herbs</p>";
+			}
+			#Vegetable Harvest
+			else if($farm["hold"] == 'vegetable_seeds'){
+				$query = "UPDATE db_outlive.builds SET hold = NULL WHERE game = $game and id = $farm[id]";
+				$update = mysqli_query($connection, $query);
+
+				$quant = rand(2, 4);
+				$query = "UPDATE db_outlive.inventory SET vegetables = vegetables+$quant WHERE game = $game";
+				$update = mysqli_query($connection, $query);
+
+				$_SESSION["msg"] .= "<p>Farm Harvested: $quant Vegetables</p>";
+			}
+		}
+
+	}
 	if($result){
 	    header("Location: gamepage.php?game=$game");
 	}else{
