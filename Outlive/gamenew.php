@@ -30,5 +30,57 @@ $result = mysqli_query($connection, $query) or die(mysql_error());
 $query = "INSERT INTO db_outlive.inventory (id, user, game) VALUES (NULL, '{$user['id']}', '{$game_id}')";
 $result = mysqli_query($connection, $query) or die(mysql_error());
 
+
+#Random Inicial Items
+$woods = rand(15, 40);
+$nails = rand(5, 18);
+$scraps = rand(8, 20);
+$pipes = rand(5, 9);
+$beers = rand(2, 4);
+$water = rand(3, 5);
+$vegetables = rand(1, 3);
+$meats = rand(1, 2);
+$canned_foods = rand(1, 4);
+$medicines = rand(0, 1);
+$tools = rand(0, 2);
+$gears = rand(0, 3);
+
+$query = "UPDATE db_outlive.inventory SET woods = $woods WHERE game = $game_id and user = $user[id]";
+$result = mysqli_query($connection, $query);
+
+$query = "UPDATE db_outlive.inventory SET nails = $nails WHERE game = $game_id and user = $user[id]";
+$result = mysqli_query($connection, $query);
+
+$query = "UPDATE db_outlive.inventory SET scraps = $scraps WHERE game = $game_id and user = $user[id]";
+$result = mysqli_query($connection, $query);
+
+$query = "UPDATE db_outlive.inventory SET pipes = $pipes WHERE game = $game_id and user = $user[id]";
+$result = mysqli_query($connection, $query);
+
+$query = "UPDATE db_outlive.inventory SET beers = $beers WHERE game = $game_id and user = $user[id]";
+$result = mysqli_query($connection, $query);
+
+$query = "UPDATE db_outlive.inventory SET bottles_of_water = $water WHERE game = $game_id and user = $user[id]";
+$result = mysqli_query($connection, $query);
+
+$query = "UPDATE db_outlive.inventory SET vegetables = $vegetables WHERE game = $game_id and user = $user[id]";
+$result = mysqli_query($connection, $query);
+
+$query = "UPDATE db_outlive.inventory SET meats = $meats WHERE game = $game_id and user = $user[id]";
+$result = mysqli_query($connection, $query);
+
+$query = "UPDATE db_outlive.inventory SET canned_foods = $canned_foods WHERE game = $game_id and user = $user[id]";
+$result = mysqli_query($connection, $query);
+
+$query = "UPDATE db_outlive.inventory SET medicines = $medicines WHERE game = $game_id and user = $user[id]";
+$result = mysqli_query($connection, $query);
+
+$query = "UPDATE db_outlive.inventory SET tools = $tools WHERE game = $game_id and user = $user[id]";
+$result = mysqli_query($connection, $query);
+
+$query = "UPDATE db_outlive.inventory SET gears = $gears WHERE game = $game_id and user = $user[id]";
+$result = mysqli_query($connection, $query);
+
+
 header("Location: userpage.php");
 ?>

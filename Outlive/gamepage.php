@@ -192,6 +192,9 @@ include('login_veryfy.php')
 
 					}
 
+					if (!is_float($game["day"]/10) and $game["day"] != 0){
+						echo "Trader Day";
+					}
 					if(isset($_SESSION['rain'])) {
 						echo $_SESSION['rain'];
 					}
