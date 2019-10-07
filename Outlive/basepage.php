@@ -66,7 +66,7 @@
 
         <div id = "header">
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#080d1b;">
-                <a href="#" style="color:#f1f0ea;font-size:4vh;margin-right:15px;text-decoration:none;" id="LogoName">Outlive</a>
+                <a href="index.php" style="color:#f1f0ea;font-size:4vh;margin-right:15px;text-decoration:none;" id="LogoName">Outlive</a>
 
                 <button class="navbar-toggler" style="background-color:#e7ecef;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="SpanButton">
                     <span class="navbar-toggler-icon" style="height: 7vh;"></span>
@@ -79,17 +79,36 @@
                             <a class="nav-link" href="index.php" style="color:#e7ecef;">Home<span class="sr-only">(current)</span></a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="registerpage.php" style="color:#e7ecef;">Register</a>
-                        </li>
+                        <?php
+                        if (session_status() == PHP_SESSION_NONE) {
+                            session_start();
+                            
+                        }if(isset($_SESSION['username'])) {
+                            if(!$_SESSION['username']){
+                                echo '<li class="nav-item">
+                                    <a class="nav-link" href="registerpage.php" style="color:#e7ecef;">Register</a>
+                                </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="loginpage.php" style="color:#e7ecef;">Login</a>
-                        </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="loginpage.php" style="color:#e7ecef;">Login</a>
+                                </li>';
+                            }else{
+                                echo '<li class="nav-item">
+                                    <a class="nav-link" href="userpage.php" style="color:#e7ecef;">Play</a>
+                                </li>';
+                                
+                            }
+                        }else{
+                                echo '<li class="nav-item">
+                                <a class="nav-link" href="registerpage.php" style="color:#e7ecef;">Register</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="userpage.php" style="color:#e7ecef;">Play</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="loginpage.php" style="color:#e7ecef;">Login</a>
+                            </li>';
+                        }
+                        
+                        ?>
 
                     </ul>
 
