@@ -12,9 +12,9 @@ $find_cigarettes = 100;
 $find_gears = 80;
 #Food and Water:
 $find_vegetable_seeds = 90;
-$find_vegetables = 50;
-$find_meats = 30;
-$find_canned_foods = 25;
+$find_vegetables = 70;
+$find_meats = 40;
+$find_canned_foods = 130;
 $find_beers = 170;
 $find_bottles_of_water = 90;
 $fertilizers = 160;
