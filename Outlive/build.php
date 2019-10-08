@@ -26,22 +26,22 @@ if($row["day"] == NULL){
 	$inventory = mysqli_fetch_array($result);
 	
 
-	if($build == "Stove" and $inventory["tools"] >= 1 and $inventory["woods"] >= 15 and $inventory["scraps"] >= 30 and $inventory["pipes"] >= 4){
+	if($build == "Stove" and $inventory["tools"] >= 1 and $inventory["woods"] >= 40 and $inventory["scraps"] >= 75 and $inventory["pipes"] >= 16){
 		$query = "UPDATE db_outlive.house SET spots = spots-1 WHERE game = $game and user = $user";
 		$result = mysqli_query($connection, $query);
 
 		$query = "INSERT INTO db_outlive.builds (id, user, game, name, time) VALUES (NULL, '{$user}', '{$game}', 'Stove', NULL)";
 		$result = mysqli_query($connection, $query);
 		
-		$quant = $inventory["woods"]-15;
+		$quant = $inventory["woods"]-40;
 		$query = "UPDATE db_outlive.inventory SET woods = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 		
-		$quant = $inventory["scraps"]-30;
+		$quant = $inventory["scraps"]-75;
 		$query = "UPDATE db_outlive.inventory SET scraps = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 
-		$quant = $inventory["pipes"]-4;
+		$quant = $inventory["pipes"]-16;
 		$query = "UPDATE db_outlive.inventory SET pipes = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 
@@ -49,18 +49,18 @@ if($row["day"] == NULL){
 		$query = "UPDATE db_outlive.inventory SET tools = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 
-	}else if($build == "Bed" and $inventory["tools"] >= 1 and $inventory["woods"] >= 40 and $inventory["nails"] >= 20){
+	}else if($build == "Bed" and $inventory["tools"] >= 1 and $inventory["woods"] >= 80 and $inventory["nails"] >= 60){
 		$query = "UPDATE db_outlive.house SET spots = spots-1 WHERE game = $game and user = $user";
 		$result = mysqli_query($connection, $query);
 
 		$query = "INSERT INTO db_outlive.builds (id, user, game, name, time) VALUES (NULL, '{$user}', '{$game}', 'Bed', NULL)";
 		$result = mysqli_query($connection, $query);
 		
-		$quant = $inventory["woods"]-40;
+		$quant = $inventory["woods"]-80;
 		$query = "UPDATE db_outlive.inventory SET woods = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 		
-		$quant = $inventory["nails"]-20;
+		$quant = $inventory["nails"]-60;
 		$query = "UPDATE db_outlive.inventory SET nails = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 
@@ -68,21 +68,21 @@ if($row["day"] == NULL){
 		$query = "UPDATE db_outlive.inventory SET tools = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 
-	}else if($build == "Workbench" and $inventory["tools"] >= 1 and $inventory["woods"] >= 50 and $inventory["nails"] >= 15 and $inventory["scraps"] >= 10){
+	}else if($build == "Workbench" and $inventory["tools"] >= 1 and $inventory["woods"] >= 60 and $inventory["nails"] >= 30 and $inventory["scraps"] >= 40){
 		$query = "UPDATE db_outlive.house SET spots = spots-1 WHERE game = $game and user = $user";
 		$result = mysqli_query($connection, $query);
 
 		$query = "INSERT INTO db_outlive.builds (id, user, game, name, time) VALUES (NULL, '{$user}', '{$game}', 'Workbench', NULL)";
 		$result = mysqli_query($connection, $query);		
-		$quant = $inventory["woods"]-50;
+		$quant = $inventory["woods"]-60;
 		$query = "UPDATE db_outlive.inventory SET woods = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 		
-		$quant = $inventory["nails"]-15;
+		$quant = $inventory["nails"]-30;
 		$query = "UPDATE db_outlive.inventory SET nails = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 
-		$quant = $inventory["scraps"]-10;
+		$quant = $inventory["scraps"]-40;
 		$query = "UPDATE db_outlive.inventory SET scraps = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 
@@ -90,18 +90,18 @@ if($row["day"] == NULL){
 		$query = "UPDATE db_outlive.inventory SET tools = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 
-	}else if($build == "Chair" and $inventory["tools"] >= 1 and $inventory["woods"] >= 20 and $inventory["nails"] >= 10){
+	}else if($build == "Chair" and $inventory["tools"] >= 1 and $inventory["woods"] >= 40 and $inventory["nails"] >= 30){
 		$query = "UPDATE db_outlive.house SET spots = spots-1 WHERE game = $game and user = $user";
 		$result = mysqli_query($connection, $query);
 
 		$query = "INSERT INTO db_outlive.builds (id, user, game, name, time) VALUES (NULL, '{$user}', '{$game}', 'Chair', NULL)";
 		$result = mysqli_query($connection, $query);
 		
-		$quant = $inventory["woods"]-20;
+		$quant = $inventory["woods"]-40;
 		$query = "UPDATE db_outlive.inventory SET woods = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 		
-		$quant = $inventory["nails"]-10;
+		$quant = $inventory["nails"]-30;
 		$query = "UPDATE db_outlive.inventory SET nails = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 
@@ -109,22 +109,22 @@ if($row["day"] == NULL){
 		$query = "UPDATE db_outlive.inventory SET tools = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 
-	}else if($build == "Water Collector" and $inventory["tools"] >= 1 and $inventory["woods"] >= 12 and $inventory["scraps"] >= 15 and $inventory["pipes"] >= 10 ){
+	}else if($build == "Water Collector" and $inventory["tools"] >= 1 and $inventory["woods"] >= 60 and $inventory["scraps"] >= 50 and $inventory["pipes"] >= 25 ){
 		$query = "UPDATE db_outlive.house SET spots = spots-1 WHERE game = $game and user = $user";
 		$result = mysqli_query($connection, $query);
 
 		$query = "INSERT INTO db_outlive.builds (id, user, game, name, time) VALUES (NULL, '{$user}', '{$game}', 'Water Collector', NULL)";
 		$result = mysqli_query($connection, $query);
 		
-		$quant = $inventory["woods"]-12;
+		$quant = $inventory["woods"]-60;
 		$query = "UPDATE db_outlive.inventory SET woods = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 
-		$quant = $inventory["scraps"]-15;
+		$quant = $inventory["scraps"]-50;
 		$query = "UPDATE db_outlive.inventory SET scrap = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 		
-		$quant = $inventory["pipes"]-10;
+		$quant = $inventory["pipes"]-25;
 		$query = "UPDATE db_outlive.inventory SET pipes = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 
@@ -132,22 +132,22 @@ if($row["day"] == NULL){
 		$query = "UPDATE db_outlive.inventory SET tools = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 
-	}else if($build == "Farm" and $inventory["tools"] >= 1 and $inventory["woods"] >= 40 and $inventory["pipes"] >= 4 and $inventory["nails"] >= 15 and $inventory["fertilizers"] >= 1){
+	}else if($build == "Farm" and $inventory["tools"] >= 1 and $inventory["woods"] >= 65 and $inventory["pipes"] >= 12 and $inventory["nails"] >= 22 and $inventory["fertilizers"] >= 1){
 		$query = "UPDATE db_outlive.house SET spots = spots-1 WHERE game = $game and user = $user";
 		$result = mysqli_query($connection, $query);
 
 		$query = "INSERT INTO db_outlive.builds (id, user, game, name, time) VALUES (NULL, '{$user}', '{$game}', 'Farm', NULL)";
 		$result = mysqli_query($connection, $query);
 		
-		$quant = $inventory["woods"]-40;
+		$quant = $inventory["woods"]-65;
 		$query = "UPDATE db_outlive.inventory SET woods = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 
-		$quant = $inventory["nails"]-15;
+		$quant = $inventory["nails"]-22;
 		$query = "UPDATE db_outlive.inventory SET nails = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 		
-		$quant = $inventory["pipes"]-4;
+		$quant = $inventory["pipes"]-12;
 		$query = "UPDATE db_outlive.inventory SET pipes = $quant WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 

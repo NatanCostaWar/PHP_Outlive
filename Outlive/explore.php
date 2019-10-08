@@ -40,7 +40,7 @@ $inventory = mysqli_fetch_array($result);
 #Basic Stuff:
 $find = rand (0, 1000);
 if($find < $find_woods) {
-	$quant = rand (10, 25);
+	$quant = rand (8, 15);
 	$_SESSION["msg"] .= "<p>$quant woods</p>";
 	$quant += $inventory["woods"];
 	$query = "UPDATE db_outlive.inventory SET woods = $quant WHERE game = $game";
@@ -56,7 +56,7 @@ if($find < $find_scraps) {
 }
 $find = rand (0, 1000);
 if($find < $find_nails) {
-	$quant = rand (5, 12);
+	$quant = rand (5, 10);
 	$_SESSION["msg"] .= "<p>$quant nails</p>";
 	$quant += $inventory["nails"];
 	$query = "UPDATE db_outlive.inventory SET nails = $quant WHERE game = $game";
@@ -64,7 +64,7 @@ if($find < $find_nails) {
 }
 $find = rand (0, 1000);
 if($find < $find_pipes) {
-	$quant = rand (2, 6);
+	$quant = rand (2, 4);
 	$_SESSION["msg"] .= "<p>$quant pipes</p>";
 	$quant += $inventory["pipes"];
 	$query = "UPDATE db_outlive.inventory SET pipes = $quant WHERE game = $game";
@@ -88,7 +88,7 @@ if($find < $find_cigarettes) {
 }
 $find = rand (0, 1000);
 if($find < $find_gears) {
-	$quant = rand (1, 5);
+	$quant = rand (1, 2);
 	$_SESSION["msg"] .= "<p>$quant gears</p>";
 	$quant += $inventory["gears"];
 	$query = "UPDATE db_outlive.inventory SET gears = $quant WHERE game = $game";
@@ -153,7 +153,7 @@ if($find < $find_bottles_of_water) {
 }
 $find = rand (0, 1000);
 if($find < $fertilizers) {
-	$quant = rand (1, 2);
+	$quant = 1;
 	$_SESSION["msg"] .= "<p>$quant Fertilizers</p>";
 	$quant += $inventory["fertilizers"];
 	$query = "UPDATE db_outlive.inventory SET fertilizers = $quant WHERE game = $game";
@@ -207,7 +207,7 @@ if($find < $find_guns) {
 }
 $find = rand (0, 1000);
 if($find < $find_bullets) {
-	$quant = rand (2, 8);
+	$quant = rand(2, 4);
 	$_SESSION["msg"] .= "<p>$quant Bullets</p>";
 	$quant += $inventory["bullets"];
 	$query = "UPDATE db_outlive.inventory SET bullets = $quant WHERE game = $game";

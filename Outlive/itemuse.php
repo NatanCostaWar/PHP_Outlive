@@ -21,31 +21,31 @@ $result = mysqli_query($connection, $query);
 
 #DRINK
 if($item == 'bottles_of_water'){
-	$query = "UPDATE db_outlive.player SET thirst = thirst+27  WHERE user = $user and game = $game";
+	$query = "UPDATE db_outlive.player SET thirst = thirst+70  WHERE user = $user and game = $game";
 	$result = mysqli_query($connection, $query);
 }
 if($item == 'beers'){
-	$query = "UPDATE db_outlive.player SET thirst = thirst+15, rest = rest-10  WHERE user = $user and game = $game";
+	$query = "UPDATE db_outlive.player SET thirst = thirst+35, rest = rest-10  WHERE user = $user and game = $game";
 	$result = mysqli_query($connection, $query);
 }
 
 #EAT
 if($item == 'vegetables'){
-	$query = "UPDATE db_outlive.player SET hunger = hunger+15, life = life+3  WHERE user = $user and game = $game";
+	$query = "UPDATE db_outlive.player SET hunger = hunger+30, life = life+3  WHERE user = $user and game = $game";
 	$result = mysqli_query($connection, $query);
 }
 if($item == 'meats'){
-	$query = "UPDATE db_outlive.player SET hunger = hunger+20  WHERE user = $user and game = $game";
+	$query = "UPDATE db_outlive.player SET hunger = hunger+50  WHERE user = $user and game = $game";
 	$result = mysqli_query($connection, $query);
 }
 if($item == 'canned_foods'){
-	$query = "UPDATE db_outlive.player SET hunger = hunger+25  WHERE user = $user and game = $game";
+	$query = "UPDATE db_outlive.player SET hunger = hunger+40  WHERE user = $user and game = $game";
 	$result = mysqli_query($connection, $query);
 }
 
 #LIFE
 if($item == 'medicines'){
-	$query = "UPDATE db_outlive.player SET life = life+35 WHERE user = $user and game = $game";
+	$query = "UPDATE db_outlive.player SET life = life+60 WHERE user = $user and game = $game";
 	$result = mysqli_query($connection, $query);
 }
 if($item == 'herbs'){

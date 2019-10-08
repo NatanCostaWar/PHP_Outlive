@@ -46,23 +46,33 @@ if($row["day"] == NULL){
 		if(isset($bed) and $rest_bonus == 1){
 			$_SESSION["msg"] .= "<p>A bed is really comfortable, +20 rest bonus</p>";
 			#Updating player rest value
-			$query = "UPDATE db_outlive.player SET rest = rest+60 WHERE game = $game";
+			$query = "UPDATE db_outlive.player SET rest = rest+80 WHERE game = $game";
 			$result = mysqli_query($connection, $query);
 		}else{
 			#Updating player rest value
-			$query = "UPDATE db_outlive.player SET rest = rest+40 WHERE game = $game";
+			$query = "UPDATE db_outlive.player SET rest = rest+60 WHERE game = $game";
 			$result = mysqli_query($connection, $query);
 		}
 		
 	}
 
-	#Updating player Life
+	#Updating player Life Hunger/Thirst damage
 	if ($player["hunger"] <= 0) {
 		$query = "UPDATE db_outlive.player SET life = life-10 WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 	}
 	if ($player["thirst"] <= 0) {
 		$query = "UPDATE db_outlive.player SET life = life-25 WHERE game = $game";
+		$result = mysqli_query($connection, $query);
+	}
+
+	#Updating player Life Hunger/Thirst Half damage
+	if ($player["hunger"] <= 20) {
+		$query = "UPDATE db_outlive.player SET life = life-5 WHERE game = $game";
+		$result = mysqli_query($connection, $query);
+	}
+	if ($player["thirst"] <= 25){
+		$query = "UPDATE db_outlive.player SET life = life-12 WHERE game = $game";
 		$result = mysqli_query($connection, $query);
 	}
 	
@@ -87,7 +97,7 @@ if($row["day"] == NULL){
 			$result = mysqli_query($connection, $query);
 			$WC = mysqli_num_rows($result);
 		if ($WC > 0){
-			$quant = rand(3, 6) * $WC;
+			$quant = rand(1, 2) * $WC;
 			$_SESSION["rain"] .= ", You filled $quant bottles of water</p>";
 			$query = "UPDATE db_outlive.inventory SET bottles_of_water = bottles_of_water+$quant WHERE game = $game";
 			$result = mysqli_query($connection, $query);
@@ -117,7 +127,7 @@ if($row["day"] == NULL){
 				$query = "UPDATE db_outlive.builds SET hold = NULL WHERE game = $game and id = $farm[id]";
 				$update = mysqli_query($connection, $query);
 
-				$quant = rand(2, 4);
+				$quant = rand(1, 2);
 				$query = "UPDATE db_outlive.inventory SET herbs = herbs+$quant WHERE game = $game";
 				$update = mysqli_query($connection, $query);
 
@@ -128,7 +138,7 @@ if($row["day"] == NULL){
 				$query = "UPDATE db_outlive.builds SET hold = NULL WHERE game = $game and id = $farm[id]";
 				$update = mysqli_query($connection, $query);
 
-				$quant = rand(2, 4);
+				$quant = rand(1, 2);
 				$query = "UPDATE db_outlive.inventory SET vegetables = vegetables+$quant WHERE game = $game";
 				$update = mysqli_query($connection, $query);
 
