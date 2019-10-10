@@ -27,6 +27,12 @@ if($row["day"] == NULL){
 	
 
 	if($build == "Stove" and $inventory["tools"] >= 1 and $inventory["woods"] >= 40 and $inventory["scraps"] >= 75 and $inventory["pipes"] >= 16){
+		#Updating Story:
+		#Updating Story
+		$story = '<p>I made a stove, with a little luck I can cook something</p>';
+		$query = "UPDATE db_outlive.game SET story = CONCAT(story, '$story')  WHERE user = $user and id = $game";
+	    $result = mysqli_query($connection, $query);
+
 		$query = "UPDATE db_outlive.house SET spots = spots-1 WHERE game = $game and user = $user";
 		$result = mysqli_query($connection, $query);
 
@@ -50,6 +56,11 @@ if($row["day"] == NULL){
 		$result = mysqli_query($connection, $query);
 
 	}else if($build == "Bed" and $inventory["tools"] >= 1 and $inventory["woods"] >= 80 and $inventory["nails"] >= 60){
+		#Updating Story
+		$story = '<p>Today i made a bed, my back say thanks</p>';
+		$query = "UPDATE db_outlive.game SET story = CONCAT(story, '$story')  WHERE user = $user and id = $game";
+	    $result = mysqli_query($connection, $query);
+
 		$query = "UPDATE db_outlive.house SET spots = spots-1 WHERE game = $game and user = $user";
 		$result = mysqli_query($connection, $query);
 
@@ -69,6 +80,11 @@ if($row["day"] == NULL){
 		$result = mysqli_query($connection, $query);
 
 	}else if($build == "Workbench" and $inventory["tools"] >= 1 and $inventory["woods"] >= 60 and $inventory["nails"] >= 30 and $inventory["scraps"] >= 40){
+		#Updating Story
+		$story = '<p>I managed to build a small workbench, hope this come in handy</p>';
+		$query = "UPDATE db_outlive.game SET story = CONCAT(story, '$story')  WHERE user = $user and id = $game";
+	    $result = mysqli_query($connection, $query);
+
 		$query = "UPDATE db_outlive.house SET spots = spots-1 WHERE game = $game and user = $user";
 		$result = mysqli_query($connection, $query);
 
@@ -91,6 +107,11 @@ if($row["day"] == NULL){
 		$result = mysqli_query($connection, $query);
 
 	}else if($build == "Chair" and $inventory["tools"] >= 1 and $inventory["woods"] >= 40 and $inventory["nails"] >= 30){
+		#Updating Story
+		$story = '<p>I was tired to stand up so i made a  chair</p>';
+		$query = "UPDATE db_outlive.game SET story = CONCAT(story, '$story')  WHERE user = $user and id = $game";
+	    $result = mysqli_query($connection, $query);
+
 		$query = "UPDATE db_outlive.house SET spots = spots-1 WHERE game = $game and user = $user";
 		$result = mysqli_query($connection, $query);
 
@@ -110,6 +131,11 @@ if($row["day"] == NULL){
 		$result = mysqli_query($connection, $query);
 
 	}else if($build == "Water Collector" and $inventory["tools"] >= 1 and $inventory["woods"] >= 60 and $inventory["scraps"] >= 50 and $inventory["pipes"] >= 25 ){
+		#Updating Story
+		$story = '<p>I improvised a water collector, no drop will be wasted</p>';
+		$query = "UPDATE db_outlive.game SET story = CONCAT(story, '$story')  WHERE user = $user and id = $game";
+	    $result = mysqli_query($connection, $query);
+
 		$query = "UPDATE db_outlive.house SET spots = spots-1 WHERE game = $game and user = $user";
 		$result = mysqli_query($connection, $query);
 
@@ -133,6 +159,11 @@ if($row["day"] == NULL){
 		$result = mysqli_query($connection, $query);
 
 	}else if($build == "Farm" and $inventory["tools"] >= 1 and $inventory["woods"] >= 65 and $inventory["pipes"] >= 12 and $inventory["nails"] >= 22 and $inventory["fertilizers"] >= 1){
+		#Updating Story
+		$story = '<p>Just made a small gardem, time to grow food</p>';
+		$query = "UPDATE db_outlive.game SET story = CONCAT(story, '$story')  WHERE user = $user and id = $game";
+	    $result = mysqli_query($connection, $query);
+
 		$query = "UPDATE db_outlive.house SET spots = spots-1 WHERE game = $game and user = $user";
 		$result = mysqli_query($connection, $query);
 

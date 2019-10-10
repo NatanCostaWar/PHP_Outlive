@@ -24,6 +24,9 @@ if($row["day"] == NULL){
 	$query = "UPDATE db_outlive.game SET day = $day WHERE user = $user and id = $game";
 	$result = mysqli_query($connection, $query);
 
+	#Updating Story
+	$story = '<div><center><h3>Day: ' . $day . '</h3></center></div>';
+
 	#PLAYER INFORMATION
 	$query = "SELECT * FROM db_outlive.player WHERE game = $game and user = $user";
 	$result = mysqli_query($connection, $query);
@@ -44,6 +47,9 @@ if($row["day"] == NULL){
 		$bed = mysqli_fetch_array($result);
 		$rest_bonus = rand(1, 2);
 		if(isset($bed) and $rest_bonus == 1){
+			#Updating Story
+			$story .= '<center><p>I had a good night of sleep</p></center>';
+			
 			$_SESSION["msg"] .= "<p>A bed is really comfortable, +20 rest bonus</p>";
 			#Updating player rest value
 			$query = "UPDATE db_outlive.player SET rest = rest+80 WHERE game = $game";
@@ -85,6 +91,35 @@ if($row["day"] == NULL){
 	#Updating player thirst
 	$query = "UPDATE db_outlive.player SET thirst = thirst-25 WHERE game = $game";
 	$result = mysqli_query($connection, $query);
+
+	#Updating Story Hunger/Thirst
+	if ($player["hunger"] <= 30) {
+		switch ($i = rand(0,3)){
+		    case 0:
+		        $story .= '<center><p>I feel my stomach bubbling</p></center>';
+		        break;
+		    case 1:
+		        $story .= '<center><p>Havent eaten in a long time</p></center>';
+		        break;
+		    case 2:
+		        $story .= '<center><p>I can dream about food</p></center>';
+		        break;
+		}
+	}
+	if ($player["thirst"] <= 40) {
+		switch ($i = rand(0,3)){
+		    case 0:
+		        $story .= '<center><p>My throat feels like a desert</p></center>';
+		        break;
+		    case 1:
+		        $story .= '<center><p>Im almost drinking my pee</p></center>';
+		        break;
+		    case 2:
+		        $story .= '<center><p>How many days does a human live without water?</p></center>';
+		        break;
+		}
+	}
+
 
 	include('playernormalize.php');
 
@@ -147,10 +182,18 @@ if($row["day"] == NULL){
 		}
 
 	}
+
+	#Updating Story
+	if($player["life"] <= 0){
+		$story .= '<center><p>You Died</p></center>';
+	}
+	$query = "UPDATE db_outlive.game SET story = CONCAT(story, '$story')  WHERE user = $user and id = $game";
+    $result = mysqli_query($connection, $query);
+
 	if($result){
-	    header("Location: gamepage.php?game=$game");
+	    #header("Location: gamepage.php?game=$game");
 	}else{
-	    header("Location: index.php");
+	    #header("Location: index.php");
 	}
 }
 ?>

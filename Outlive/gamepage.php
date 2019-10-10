@@ -57,7 +57,6 @@ include('login_veryfy.php')
 
 <body style="background-color:#11121a;">
 
-
 	<?php
 		#USER INFORMATION
 		include("connect.php");
@@ -91,12 +90,16 @@ include('login_veryfy.php')
 		$result = mysqli_query($connection, $query);
 		$inventory = mysqli_fetch_array($result);
 
-		
-
-
 	?>
 
-	
+
+
+	<?php
+		#IF YOU HAVE DIED
+		if($player["life"]<= 0){
+			header("Location: dead.php?game=$game[id]");
+		}
+	?>
 
 	<div class="container" style="min-width:100%;">
 		<div class='row' style="width:100%;">

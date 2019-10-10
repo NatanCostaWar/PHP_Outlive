@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 07-Out-2019 às 00:15
+-- Data de Criação: 10-Out-2019 às 01:21
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `builds` (
   PRIMARY KEY (`id`),
   KEY `game` (`game`),
   KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -50,16 +50,10 @@ CREATE TABLE IF NOT EXISTS `game` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user` int(11) NOT NULL,
   `day` int(11) NOT NULL DEFAULT '0',
+  `story` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=60 ;
-
---
--- Extraindo dados da tabela `game`
---
-
-INSERT INTO `game` (`id`, `user`, `day`) VALUES
-(59, 8, 0);
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=79 ;
 
 -- --------------------------------------------------------
 
@@ -76,14 +70,7 @@ CREATE TABLE IF NOT EXISTS `house` (
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
-
---
--- Extraindo dados da tabela `house`
---
-
-INSERT INTO `house` (`id`, `user`, `game`, `level`, `spots`) VALUES
-(23, 8, 59, 0, 3);
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 -- --------------------------------------------------------
 
@@ -120,14 +107,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
-
---
--- Extraindo dados da tabela `inventory`
---
-
-INSERT INTO `inventory` (`id`, `user`, `game`, `guns`, `bullets`, `nails`, `cigarettes`, `woods`, `scraps`, `pipes`, `herbal_seeds`, `vegetable_seeds`, `melee_weapons`, `beers`, `bottles_of_water`, `vegetables`, `meats`, `canned_foods`, `medicines`, `tools`, `coffees`, `herbs`, `gun_parts`, `gears`, `fertilizers`) VALUES
-(23, 8, 59, 0, 0, 7, 0, 17, 9, 7, 0, 0, 0, 2, 5, 2, 1, 1, 1, 0, 0, 0, 0, 3, 0);
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 -- --------------------------------------------------------
 
@@ -146,14 +126,7 @@ CREATE TABLE IF NOT EXISTS `player` (
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
-
---
--- Extraindo dados da tabela `player`
---
-
-INSERT INTO `player` (`id`, `user`, `game`, `life`, `hunger`, `thirst`, `rest`) VALUES
-(23, 8, 59, 100, 100, 100, 100);
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 -- --------------------------------------------------------
 
@@ -168,13 +141,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
-
---
--- Extraindo dados da tabela `user`
---
-
-INSERT INTO `user` (`id`, `name`, `password`) VALUES
-(8, 'natan', '21232f297a57a5a743894a0e4a801fc3');
 
 --
 -- Constraints for dumped tables

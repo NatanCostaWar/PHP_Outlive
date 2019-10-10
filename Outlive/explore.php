@@ -248,13 +248,22 @@ if($find < $find_gun_parts) {
 $danger = 'false';
 #Find a Creature
 $danger_chance = rand (0, 1000);
-if($danger_chance < 50){
+if($danger_chance < 500){
 	$_SESSION["msg"] .= "<p>You found a Creature";
+	
+	#Updating Story
+	$story .= '<center><p>i found one of that things'; 
+
 	$danger = 'true';
-	$random = rand (0, 100);
+
+	$random = rand(0,100);
 	#it see you chance
 	if ($random < 20){
 		$_SESSION["msg"] .=", but it didnt see you.</p>";
+
+		#Updating Story
+		$story .= ' but it didnt see me, i was bad scared</p></center>';
+
 		$danger = 'false';
 	}else{
 		$_SESSION["msg"] .=":</p>";
@@ -266,6 +275,9 @@ if($danger_chance < 50){
 				$danger = 'false';
 				$query = "UPDATE db_outlive.inventory SET melee_weapons = melee_weapons-1 WHERE game = $game";
 				$result = mysqli_query($connection, $query);
+
+				#Updating Story
+				$story .= ' somehow i manage to escape, weapons are really a need</p></center>';
 			}else{
 				$_SESSION["msg"] .="<p>You had a melee weapon, but it was not enough.</p>";
 				$danger = 'true';
@@ -285,6 +297,8 @@ if($danger_chance < 50){
 					$query = "UPDATE db_outlive.inventory SET bullets = bullets-$i WHERE game = $game";
 					$result = mysqli_query($connection, $query);
 					$danger = 'false';
+					#Updating Story
+					$story .= ' my hands still smell like gunpowder, still better than dying</p></center>';
 					break;
 				}
 			}
@@ -296,9 +310,11 @@ if($danger_chance < 50){
 			}
 		}
 	if($danger == 'true'){
-		$_SESSION["msg"] .="40 life Damage</p>";
-		$query = "UPDATE db_outlive.player SET life = life-40 WHERE game = $game";
+		$_SESSION["msg"] .="20 life Damage</p>";
+		$query = "UPDATE db_outlive.player SET life = life-20 WHERE game = $game";
 		$result = mysqli_query($connection, $query);
+		#Updating Story
+		$story .= '</p></center>';
 	}
 	}
 }
