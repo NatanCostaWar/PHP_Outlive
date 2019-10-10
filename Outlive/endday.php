@@ -191,9 +191,9 @@ if($row["day"] == NULL){
     $result = mysqli_query($connection, $query);
 
 	if($result){
-	    #header("Location: gamepage.php?game=$game");
+	    header("Location: gamepage.php?game=$game");
 	}else{
-	    #header("Location: index.php");
+	    header("Location: index.php");
 	}
 }
 ?>
