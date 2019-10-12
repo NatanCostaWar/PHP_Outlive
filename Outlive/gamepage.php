@@ -525,6 +525,7 @@ include('login_veryfy.php')
 
 
 				<?php
+
 					echo '<div class="row">
 					        <button type="button" class="btn border" data-toggle="modal" data-target="#exampleModal" style="color:#f1f0ea;margin-top:4px;">
 					            Build
@@ -543,49 +544,17 @@ include('login_veryfy.php')
 					            </div>
 				                <div class="modal-body" style="color:#11121a;background-color:#f1f0ea;">';
 
-				                echo '<table style="color:#11121a">
-									    <tr>
-									      <th scope="row">Stove</th>
-									      <td>1 tool</td>
-									      <td>15 woods</td>
-									      <td>30 Metal Scraps</td>
-									      <td>4 Pipes</td>
-									    </tr>
-									    <tr>
-									      <th scope="row">Bed</th>
-									      <td>1 tool</td>
-									      <td>40 woods</td>
-									      <td>20 Nails</td>
-									    </tr>
-									    <tr>
-									      <th scope="row">Workbench</th>
-									      <td>1 tool</td>
-									      <td>50 woods</td>
-									      <td>10 Metal Scraps</td>
-									      <td>15 Nails</td>
-									    </tr>
-									    <tr>
-									      <th scope="row">Chair</th>
-									      <td>1 tool</td>
-									      <td>20 woods</td>
-									      <td>10 Nails</td>
-									    </tr>
-									    <tr>
-									      <th scope="row">Water Collector</th>
-									      <td>1 tool</td>
-									      <td>12 woods</td>
-									      <td>15 Metal Scraps</td>
-									      <td>10 Pipes</td>
-									    </tr>
-									    <tr>
-									      <th scope="row">Farm</th>
-									      <td>1 tool</td>
-									      <td>40 woods</td>
-									      <td>15 Nails</td>
-									      <td>4 Pipes</td>
-									      <td>1 Fertilizers</td>
-									    </tr>
-								</table>';
+				                echo '<div>
+								    <form action="manual.php#builds" method="post">
+
+								    	<input type="hidden" name="game" value=' . $game["id"] .'>
+										<input type="hidden" name="user" value=' . $user["id"] . '>
+											
+										<button type="submit" class="btn border" style="color:#f1f0ea;background-color:#11121a;padding:1px;margin:2px;">
+								        	See Builds
+										</button>
+							        </form>
+								</div>';
 
 									if ($house["spots"]>0) {
 
@@ -619,6 +588,20 @@ include('login_veryfy.php')
 		            		</div>
 		        		</div>
 		    		</div>';
+				?>
+
+				<?php
+					echo '<div style="position:fixed;bottom:0;right:0;">
+					    <form action="manual.php" method="post">
+
+					    	<input type="hidden" name="game" value=' . $game["id"] .'>
+							<input type="hidden" name="user" value=' . $user["id"] . '>
+								
+							<button type="submit" class="btn border" style="color:#f1f0ea;padding:4px;padding-bottom:15vh;margin:5px;">
+					        	Game Manual
+							</button>
+				        </form>
+					</div>';
 				?>
 
 				

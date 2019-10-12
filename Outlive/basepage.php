@@ -55,6 +55,8 @@
     #11121a - base black
     #0b1428 - blue black
     #f2cd5d - carton yellow
+    #8fcb9b - Green
+    #ef3e36 - Red
      -->
 
      <!-- 

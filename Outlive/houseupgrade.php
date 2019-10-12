@@ -49,7 +49,7 @@ if($house["level"] == 0 and $inventory["tools"] >= 1 and $inventory["woods"] >= 
 	$result = mysqli_query($connection, $query);
 }
 
-if($house["level"] == 1 and $inventory["tools"] >= 1 and $inventory["woods"] >= 100 and $inventory["scraps"] >= 70 and $inventory["pipes"] >= 20 and $inventory["gears"] >= 8){
+if($house["level"] == 1 and $inventory["tools"] >= 1 and $inventory["woods"] >= 100 and $inventory["scraps"] >= 70 and $inventory["pipes"] >= 30 and $inventory["gears"] >= 8){
 	$query = "UPDATE db_outlive.house SET level = level+1 WHERE game = $game and user = $user";
 	$result = mysqli_query($connection, $query);
 
@@ -78,5 +78,5 @@ if($house["level"] == 1 and $inventory["tools"] >= 1 and $inventory["woods"] >= 
 }
 
 		
-	#header("Location: gamepage.php?game=$game");
+	header("Location: gamepage.php?game=$game");
 ?>
