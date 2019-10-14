@@ -71,7 +71,7 @@ $inventory = mysqli_fetch_array($result);
 
         <div id = "header">
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#080d1b;position: fixed;top: 0;width: 100%;">
-                <a href="index.php" style="color:#f1f0ea;font-size:4vh;margin-right:15px;text-decoration:none;" id="LogoName">Outlive Manual</a>
+                <a href="#" style="color:#f1f0ea;font-size:4vh;margin-right:15px;text-decoration:none;" id="LogoName">Outlive Manual</a>
 
                 <button class="navbar-toggler" style="background-color:#e7ecef;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="SpanButton">
                     <span class="navbar-toggler-icon" style="height: 7vh;"></span>
@@ -80,13 +80,22 @@ $inventory = mysqli_fetch_array($result);
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
 
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="#builds" style="color:#e7ecef;">Builds<span class="sr-only">(current)</span></a>
                         </li>
 
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="#house" style="color:#e7ecef;">House Updates<span class="sr-only">(current)</span></a>
                         </li>
+                        <?php
+
+                        echo '<li class="nav-item">
+                                    <a class="nav-link" href="gamepage.php?game=' . $game . '" style="color:#e7ecef;">Back To Game<span class="sr-only">(current)</span></a>
+                                </li>';
+
+
+                        ?>
+                        
 
                     </ul>
 

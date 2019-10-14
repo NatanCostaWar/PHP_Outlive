@@ -248,7 +248,7 @@ if($find < $find_gun_parts) {
 $danger = 'false';
 #Find a Creature
 $danger_chance = rand (0, 1000);
-if($danger_chance < 500){
+if($danger_chance < 100){
 	$_SESSION["msg"] .= "<p>You found a Creature";
 	
 	#Updating Story

@@ -47,9 +47,7 @@ if($house["level"] == 0 and $inventory["tools"] >= 1 and $inventory["woods"] >= 
 	$quant = $inventory["gears"]-5;
 	$query = "UPDATE db_outlive.inventory SET gears = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
-}
-
-if($house["level"] == 1 and $inventory["tools"] >= 1 and $inventory["woods"] >= 100 and $inventory["scraps"] >= 70 and $inventory["pipes"] >= 30 and $inventory["gears"] >= 8){
+}else if($house["level"] == 1 and $inventory["tools"] >= 1 and $inventory["woods"] >= 100 and $inventory["scraps"] >= 70 and $inventory["pipes"] >= 30 and $inventory["gears"] >= 8){
 	$query = "UPDATE db_outlive.house SET level = level+1 WHERE game = $game and user = $user";
 	$result = mysqli_query($connection, $query);
 
@@ -75,6 +73,17 @@ if($house["level"] == 1 and $inventory["tools"] >= 1 and $inventory["woods"] >= 
 	$quant = $inventory["gears"]-8;
 	$query = "UPDATE db_outlive.inventory SET gears = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
+}else{
+	$_SESSION["msg"] .= '
+	<form action="manual.php#house" method="post">
+    	<input type="hidden" name="game" value=' . $game["id"] .'>
+		<input type="hidden" name="user" value=' . $user["id"] . '>
+		<p>Not Possible to Upgrade, See the	
+			<button type="submit" class="btn border" style="color:#f1f0ea;background-color:#11121a;padding:0px;">
+	        	Manual
+			</button>
+		</p>
+    </form>';
 }
 
 		
