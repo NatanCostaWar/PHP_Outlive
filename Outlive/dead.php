@@ -88,6 +88,11 @@ include('login_veryfy.php')
                 echo $game["story"];
 
             ?>
+            <br>
+            <center>
+                <a class="btn border" href="userpage.php" style="color:#e7ecef;">Back</a>
+            </center>
+            <br>
         </div>
 
     </body>

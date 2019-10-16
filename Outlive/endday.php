@@ -166,7 +166,7 @@ if($row["day"] == NULL){
 				$query = "UPDATE db_outlive.inventory SET herbs = herbs+$quant WHERE game = $game";
 				$update = mysqli_query($connection, $query);
 
-				$_SESSION["msg"] .= "<p>Farm Harvested: $quant Herbs</p>";
+				$_SESSION["msg"] .= "<p>Farm Harvested: $quant Herbs <img src='icons/herbs.png' class='invert' style='width:3vh;'></p>";
 			}
 			#Vegetable Harvest
 			else if($farm["hold"] == 'vegetable_seeds'){
@@ -177,7 +177,7 @@ if($row["day"] == NULL){
 				$query = "UPDATE db_outlive.inventory SET vegetables = vegetables+$quant WHERE game = $game";
 				$update = mysqli_query($connection, $query);
 
-				$_SESSION["msg"] .= "<p>Farm Harvested: $quant Vegetables</p>";
+				$_SESSION["msg"] .= "<p>Farm Harvested: $quant Vegetables <img src='icons/vegetables.png' class='invert' style='width:3vh;'></p>";
 			}
 		}
 

@@ -48,6 +48,10 @@ include('login_veryfy.php')
                 font-weight: 100;
                 text-decoration: none;
             }
+            .invert{
+			   -webkit-filter: invert(1);
+			   filter: invert(1);
+			}
         </style>
         </style>
 
@@ -129,8 +133,10 @@ include('login_veryfy.php')
 					#SHOW BUILDS:
 					while ($build_row = mysqli_fetch_assoc($builds_result)) {
 						echo "<div class='row'>
-							Build Space : " . $build_row["name"];
-						    echo '<form action="destroy.php" method="post">
+							Build Space : " . $build_row["name"] . "</div>";
+
+						    echo '<div class="row">
+						    	<form action="destroy.php" method="post">
 									<input type="hidden" name="game" value=' . $game["id"] . '>
 									<input type="hidden" name="user" value=' . $user["id"] . '>
 									<input type="hidden" name="build" value=' . $build_row["id"] . '>';
@@ -163,10 +169,10 @@ include('login_veryfy.php')
 														
 
 										            	if($inventory["herbal_seeds"] > 0){
-										            		echo '<p><input type="radio" NAME="seed" value="herbal_seeds">Herbal Seed</p>';
+										            		echo '<p><input type="radio" NAME="seed" value="herbal_seeds" style="min-height:3.5vh;min-width:3.5vh;"> Herbal Seed</p>';
 										            	}
 										            	if($inventory["vegetable_seeds"] > 0){
-										            		echo '<p><input type="radio" NAME="seed" value="vegetable_seeds">Vegetable Seed</p>';
+										            		echo '<p><input type="radio" NAME="seed" value="vegetable_seeds" style="min-height:3.5vh;min-width:3.5vh;">Vegetable Seed</p>';
 										            	}
 										            	echo '<button type="submit" class="btn btn-secondary" style="margin:2px;float:right;">Grow</button>
 										            	</form>
@@ -185,7 +191,14 @@ include('login_veryfy.php')
 						        
 
 
+					        }else if($build_row["name"] == 'Workbench') {
+					        	
+					        	echo '<p><button type="button" class="btn border" data-toggle="modal" data-target="" style="color:#f1f0ea;padding:1px;margin-left:4px;">
+						            Use
+						        </button></p>';
+
 					        }
+
 					        echo '</div>';
 
 
@@ -247,8 +260,10 @@ include('login_veryfy.php')
 
 					echo'<div class="row">
 						<button type="button" class="btn border" data-toggle="modal" data-target="#inventory" style="color:#f1f0ea;">
-							Open Inventory
+							<p>Inventory</p>
+							<img src="icons/inventory.png" style="width:12vh;">
 						</button>
+						
 					</div>
 
 					<div class="modal fade" id="inventory" tabindex="-1" role="dialog" aria-labelledby="inventorylabel" aria-hidden="true">
@@ -271,47 +286,70 @@ include('login_veryfy.php')
 
 									echo '<tbody>
 										<tr>
-										  <th scope="row">Guns</th>
+										  <th scope="row">
+										  	Guns
+										  	<img src="icons/guns.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["guns"] . '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Bullets</th>
+										  <th scope="row">Bullets
+										  	<img src="icons/bullets.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["bullets"] . '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Nails</th>
+										  <th scope="row">Nails
+										  	<img src="icons/nails.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["nails"] . '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Cigarettes</th>
+										  <th scope="row">Cigarettes
+										  	<img src="icons/cigarettes.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["cigarettes"] . '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Wood</th>
+										  <th scope="row">Wood
+										  	<img src="icons/woods.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["woods"] . '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Metal Scrap</th>
+										  <th scope="row">Metal Scrap
+										  	<img src="icons/scraps.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["scraps"] . '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Pipes</th>
+										  <th scope="row">Pipes
+										  	<img src="icons/pipes.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["pipes"] . '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Herbal seeds</th>
+										  <th scope="row">Herbal seeds
+										  	<img src="icons/seeds.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["herbal_seeds"] . '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Vegetable seeds</th>
+										  <th scope="row">Vegetable seeds
+										  	<img src="icons/seeds.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["vegetable_seeds"] . '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Melee weapons</th>
+										  <th scope="row">Melee weapons
+										  	<img src="icons/melee_weapons.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["melee_weapons"] . '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Beer</th>
+										  <th scope="row">Beer
+										  	<img src="icons/beers.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["beers"] . ' ';
 										   if ($inventory["beers"]>=1){
 										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
@@ -329,7 +367,9 @@ include('login_veryfy.php')
 										echo '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Bottles of water</th>
+										  <th scope="row">Bottles of water
+										  	<img src="icons/bottles_of_water.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["bottles_of_water"] . ' ';
 										   if ($inventory["bottles_of_water"]>=1){
 										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
@@ -347,7 +387,9 @@ include('login_veryfy.php')
 										echo '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Vegetables</th>
+										  <th scope="row">Vegetables
+										  	<img src="icons/vegetables.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["vegetables"] . ' ';
 										   if ($inventory["vegetables"]>=1){
 										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
@@ -365,7 +407,9 @@ include('login_veryfy.php')
 										echo '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Meat</th>
+										  <th scope="row">Meat
+										  	<img src="icons/meats.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["meats"] . ' ';
 										   if ($inventory["meats"]>=1){
 										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
@@ -383,7 +427,9 @@ include('login_veryfy.php')
 										echo '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Canned food</th>
+										  <th scope="row">Canned food
+										  	<img src="icons/canned_foods.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["canned_foods"] . ' ';
 										   if ($inventory["canned_foods"]>=1){
 										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
@@ -401,7 +447,9 @@ include('login_veryfy.php')
 										echo '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Medicines</th>
+										  <th scope="row">Medicines
+										  	<img src="icons/medicines.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["medicines"] . ' ';
 										   if ($inventory["medicines"]>=1){
 										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
@@ -419,15 +467,21 @@ include('login_veryfy.php')
 										echo '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Tools</th>
+										  <th scope="row">Tools
+										  	<img src="icons/tools.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["tools"] . '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Coffee</th>
+										  <th scope="row">Coffee
+										  	<img src="icons/coffees.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["coffees"] . '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Herbs</th>
+										  <th scope="row">Herbs
+										  	<img src="icons/herbs.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["herbs"] . ' ';
 										   if ($inventory["herbs"]>=1){
 										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
@@ -445,15 +499,21 @@ include('login_veryfy.php')
 										echo '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Gun parts</th>
+										  <th scope="row">Gun parts
+										  	<img src="icons/gun_parts.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["gun_parts"] . '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Gears</th>
+										  <th scope="row">Gears
+										  	<img src="icons/gears.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["gears"] . '</td>
 										</tr>
 										<tr>
-										  <th scope="row">Fertilizers</th>
+										  <th scope="row">Fertilizers
+										  	<img src="icons/fertilizers.png" style="width:5vh;">
+										  </th>
 										  <td>' . $inventory["fertilizers"] . '</td>
 										</tr>
 									</tbody>';
@@ -473,7 +533,8 @@ include('login_veryfy.php')
 
 					echo '<div class="row">
 					        <button type="button" class="btn border" data-toggle="modal" data-target="#exampleModal" style="color:#f1f0ea;margin-top:5px;">
-					            Build
+					        	<p>Build</p>
+					            <img src="icons/build.png" style="width:12vh;">
 					        </button>
 					    </div>';
 
@@ -542,8 +603,9 @@ include('login_veryfy.php')
 					    	<input type="hidden" name="game" value=' . $game["id"] .'>
 							<input type="hidden" name="user" value=' . $user["id"] . '>
 								
-							<button type="submit" class="btn border" style="color:#f1f0ea;padding:4px;margin-top:5px;padding-bottom:13vh;">
-					        	Game Manual
+							<button type="submit" class="btn border" style="color:#f1f0ea;margin-top:5px;">
+								<p>Manual</p>
+					        	<img src="icons/manual.png" style="width:12vh;">
 							</button>
 				        </form>
 					</div>';

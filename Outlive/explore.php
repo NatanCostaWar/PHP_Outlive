@@ -41,7 +41,7 @@ $inventory = mysqli_fetch_array($result);
 $find = rand (0, 1000);
 if($find < $find_woods) {
 	$quant = rand (8, 15);
-	$_SESSION["msg"] .= "<p>$quant woods</p>";
+	$_SESSION["msg"] .= "<p>$quant woods <img src='icons/woods.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["woods"];
 	$query = "UPDATE db_outlive.inventory SET woods = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -49,7 +49,7 @@ if($find < $find_woods) {
 $find = rand (0, 1000);
 if($find < $find_scraps) {
 	$quant = rand (5, 12);
-	$_SESSION["msg"] .= "<p>$quant scraps</p>";
+	$_SESSION["msg"] .= "<p>$quant scraps <img src='icons/scraps.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["scraps"];
 	$query = "UPDATE db_outlive.inventory SET scraps = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -57,7 +57,7 @@ if($find < $find_scraps) {
 $find = rand (0, 1000);
 if($find < $find_nails) {
 	$quant = rand (5, 10);
-	$_SESSION["msg"] .= "<p>$quant nails</p>";
+	$_SESSION["msg"] .= "<p>$quant nails <img src='icons/nails.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["nails"];
 	$query = "UPDATE db_outlive.inventory SET nails = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -65,7 +65,7 @@ if($find < $find_nails) {
 $find = rand (0, 1000);
 if($find < $find_pipes) {
 	$quant = rand (2, 4);
-	$_SESSION["msg"] .= "<p>$quant pipes</p>";
+	$_SESSION["msg"] .= "<p>$quant pipes <img src='icons/pipes.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["pipes"];
 	$query = "UPDATE db_outlive.inventory SET pipes = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -73,7 +73,7 @@ if($find < $find_pipes) {
 $find = rand (0, 1000);
 if($find < $find_coffees) {
 	$quant = rand (5, 10);
-	$_SESSION["msg"] .= "<p>$quant coffees</p>";
+	$_SESSION["msg"] .= "<p>$quant coffees <img src='icons/coffees.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["coffees"];
 	$query = "UPDATE db_outlive.inventory SET coffees = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -81,7 +81,7 @@ if($find < $find_coffees) {
 $find = rand (0, 1000);
 if($find < $find_cigarettes) {
 	$quant = rand (3, 8);
-	$_SESSION["msg"] .= "<p>$quant cigarettes</p>";
+	$_SESSION["msg"] .= "<p>$quant cigarettes <img src='icons/cigarettes.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["cigarettes"];
 	$query = "UPDATE db_outlive.inventory SET cigarettes = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -89,7 +89,7 @@ if($find < $find_cigarettes) {
 $find = rand (0, 1000);
 if($find < $find_gears) {
 	$quant = rand (1, 2);
-	$_SESSION["msg"] .= "<p>$quant gears</p>";
+	$_SESSION["msg"] .= "<p>$quant gears <img src='icons/gears.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["gears"];
 	$query = "UPDATE db_outlive.inventory SET gears = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -106,7 +106,7 @@ if($find < $find_gears) {
 $find = rand (0, 1000);
 if($find < $find_vegetable_seeds) {
 	$quant = rand (1, 2);
-	$_SESSION["msg"] .= "<p>$quant Vegetable seeds</p>";
+	$_SESSION["msg"] .= "<p>$quant Vegetable seeds <img src='icons/seeds.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["vegetable_seeds"];
 	$query = "UPDATE db_outlive.inventory SET vegetable_seeds = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -114,7 +114,7 @@ if($find < $find_vegetable_seeds) {
 $find = rand (0, 1000);
 if($find < $find_vegetables) {
 	$quant = rand (1, 2);
-	$_SESSION["msg"] .= "<p>$quant Vegetables</p>";
+	$_SESSION["msg"] .= "<p>$quant Vegetables <img src='icons/vegetables.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["vegetables"];
 	$query = "UPDATE db_outlive.inventory SET vegetables = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -122,7 +122,7 @@ if($find < $find_vegetables) {
 $find = rand (0, 1000);
 if($find < $find_meats) {
 	$quant = 1;
-	$_SESSION["msg"] .= "<p>$quant Meat</p>";
+	$_SESSION["msg"] .= "<p>$quant Meat <img src='icons/meats.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["meats"];
 	$query = "UPDATE db_outlive.inventory SET meats = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -130,7 +130,7 @@ if($find < $find_meats) {
 $find = rand (0, 1000);
 if($find < $find_canned_foods) {
 	$quant = 1;
-	$_SESSION["msg"] .= "<p>$quant Canned food</p>";
+	$_SESSION["msg"] .= "<p>$quant Canned food <img src='icons/canned_foods.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["canned_foods"];
 	$query = "UPDATE db_outlive.inventory SET canned_foods = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -138,7 +138,7 @@ if($find < $find_canned_foods) {
 $find = rand (0, 1000);
 if($find < $find_beers) {
 	$quant = rand (1, 4);
-	$_SESSION["msg"] .= "<p>$quant Beers</p>";
+	$_SESSION["msg"] .= "<p>$quant Beers <img src='icons/beers.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["beers"];
 	$query = "UPDATE db_outlive.inventory SET beers = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -146,7 +146,7 @@ if($find < $find_beers) {
 $find = rand (0, 1000);
 if($find < $find_bottles_of_water) {
 	$quant = rand (1, 2);
-	$_SESSION["msg"] .= "<p>$quant Bottles Of Water</p>";
+	$_SESSION["msg"] .= "<p>$quant Bottles Of Water <img src='icons/bottles_of_water.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["bottles_of_water"];
 	$query = "UPDATE db_outlive.inventory SET bottles_of_water = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -154,7 +154,7 @@ if($find < $find_bottles_of_water) {
 $find = rand (0, 1000);
 if($find < $fertilizers) {
 	$quant = 1;
-	$_SESSION["msg"] .= "<p>$quant Fertilizers</p>";
+	$_SESSION["msg"] .= "<p>$quant Fertilizers <img src='icons/fertilizers.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["fertilizers"];
 	$query = "UPDATE db_outlive.inventory SET fertilizers = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -169,7 +169,7 @@ if($find < $fertilizers) {
 $find = rand (0, 1000);
 if($find < $find_herbal_seeds) {
 	$quant = rand (1, 2);
-	$_SESSION["msg"] .= "<p>$quant Herbal seeds</p>";
+	$_SESSION["msg"] .= "<p>$quant Herbal seeds <img src='icons/seeds.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["herbal_seeds"];
 	$query = "UPDATE db_outlive.inventory SET herbal_seeds = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -177,7 +177,7 @@ if($find < $find_herbal_seeds) {
 $find = rand (0, 1000);
 if($find < $find_herbs) {
 	$quant = rand (1, 2);
-	$_SESSION["msg"] .= "<p>$quant Herbs</p>";
+	$_SESSION["msg"] .= "<p>$quant Herbs <img src='icons/herbs.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["herbs"];
 	$query = "UPDATE db_outlive.inventory SET herbs = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -185,7 +185,7 @@ if($find < $find_herbs) {
 $find = rand (0, 1000);
 if($find < $find_medicines) {
 	$quant = 1;
-	$_SESSION["msg"] .= "<p>$quant Medicine</p>";
+	$_SESSION["msg"] .= "<p>$quant Medicine <img src='icons/medicines.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["medicines"];
 	$query = "UPDATE db_outlive.inventory SET medicines = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -200,7 +200,7 @@ if($find < $find_medicines) {
 $find = rand (0, 1000);
 if($find < $find_guns) {
 	$quant = 1;
-	$_SESSION["msg"] .= "<p>$quant Gun</p>";
+	$_SESSION["msg"] .= "<p>$quant Gun <img src='icons/guns.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["guns"];
 	$query = "UPDATE db_outlive.inventory SET guns = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -208,7 +208,7 @@ if($find < $find_guns) {
 $find = rand (0, 1000);
 if($find < $find_bullets) {
 	$quant = rand(2, 4);
-	$_SESSION["msg"] .= "<p>$quant Bullets</p>";
+	$_SESSION["msg"] .= "<p>$quant Bullets <img src='icons/bullets.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["bullets"];
 	$query = "UPDATE db_outlive.inventory SET bullets = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -216,7 +216,7 @@ if($find < $find_bullets) {
 $find = rand (0, 1000);
 if($find < $find_melee_weapons) {
 	$quant = 1;
-	$_SESSION["msg"] .= "<p>$quant Melee weapon</p>";
+	$_SESSION["msg"] .= "<p>$quant Melee weapon <img src='icons/melee_weapons.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["melee_weapons"];
 	$query = "UPDATE db_outlive.inventory SET melee_weapons = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -224,7 +224,7 @@ if($find < $find_melee_weapons) {
 $find = rand (0, 1000);
 if($find < $find_tools) {
 	$quant = 1;
-	$_SESSION["msg"] .= "<p>$quant Tool</p>";
+	$_SESSION["msg"] .= "<p>$quant Tool <img src='icons/tools.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["tools"];
 	$query = "UPDATE db_outlive.inventory SET tools = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
@@ -232,7 +232,7 @@ if($find < $find_tools) {
 $find = rand (0, 1000);
 if($find < $find_gun_parts) {
 	$quant = rand (1,2);
-	$_SESSION["msg"] .= "<p>$quant Gun parts</p>";
+	$_SESSION["msg"] .= "<p>$quant Gun parts <img src='icons/gun_parts.png' class='invert' style='width:3vh;'></p>";
 	$quant += $inventory["gun_parts"];
 	$query = "UPDATE db_outlive.inventory SET gun_parts = $quant WHERE game = $game";
 	$result = mysqli_query($connection, $query);
