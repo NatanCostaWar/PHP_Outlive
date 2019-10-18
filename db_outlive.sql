@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 10-Out-2019 às 01:21
+-- Data de Criação: 18-Out-2019 às 00:48
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `builds` (
   PRIMARY KEY (`id`),
   KEY `game` (`game`),
   KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 -- --------------------------------------------------------
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `game` (
   `story` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=79 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=84 ;
 
 -- --------------------------------------------------------
 
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `house` (
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
 
 -- --------------------------------------------------------
 
@@ -97,6 +97,9 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   `vegetables` int(11) NOT NULL,
   `meats` int(11) NOT NULL,
   `canned_foods` int(11) NOT NULL,
+  `tacos` int(11) NOT NULL,
+  `canned_meals` int(11) NOT NULL,
+  `soups` int(11) NOT NULL,
   `medicines` int(11) NOT NULL,
   `tools` int(11) NOT NULL,
   `coffees` int(11) NOT NULL,
@@ -107,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
 
 -- --------------------------------------------------------
 
@@ -126,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `player` (
   PRIMARY KEY (`id`),
   KEY `user` (`user`),
   KEY `game` (`game`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
 
 -- --------------------------------------------------------
 
@@ -140,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(128) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Constraints for dumped tables

@@ -30,15 +30,29 @@ if($row["day"] == NULL){
 	$result = mysqli_query($connection, $query);
 	$player = mysqli_fetch_array($result);
 
-	echo $player["rest"];
+	#See if The player has a chair:
+	$query = "SELECT * FROM db_outlive.builds where game = $game and user = $user";
+	$builds_result = mysqli_query($connection, $query);
+	while ($build_row = mysqli_fetch_assoc($builds_result)){
+		if($build_row["name"] == "Chair"){
+			$rest_bonus = rand(1, 2);
+		}
+	}
+	if(!isset($rest_bonus)){
+		$rest_bonus = 1;
+	}
 
 	#if player is too tired:
-	if($player["rest"] < 20){
+	if($player["rest"] < (20/$rest_bonus)){
 		$_SESSION["msg"] .= "<p>Too tired</p>";
 	}else{
+		#Updating Player Rest value:
+		$query = "UPDATE db_outlive.player SET rest = rest-20/$rest_bonus WHERE game = $game and user = $user";
+		$result = mysqli_query($connection, $query);
+
+		#Constructing:
 		if($build == "Stove" and $inventory["tools"] >= 1 and $inventory["woods"] >= 40 and $inventory["scraps"] >= 75 and $inventory["pipes"] >= 16){
 			#Updating Story:
-			#Updating Story
 			$story = '<p>I made a stove, with a little luck I can cook something</p>';
 			$query = "UPDATE db_outlive.game SET story = CONCAT(story, '$story')  WHERE user = $user and id = $game";
 		    $result = mysqli_query($connection, $query);
@@ -201,6 +215,9 @@ if($row["day"] == NULL){
 			$result = mysqli_query($connection, $query);
 		}else{
 			$_SESSION["build_error"] = "<p>Not Possible to Build</p>";
+			#Updating Player Rest value:
+			$query = "UPDATE db_outlive.player SET rest = rest+20/$rest_bonus WHERE game = $game and user = $user";
+			$result = mysqli_query($connection, $query);
 		}
 
 	}
