@@ -258,6 +258,18 @@ include('login_veryfy.php')
 										                    </p>';
 										                    $possible = False;
 										                }
+
+										                $quant = 8;
+										                if ($inventory["woods"]>=$quant) {
+										                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
+										                    <img src="icons/woods.png" style="width:4vh;">
+										                    </p>';
+										                }else{
+										                    echo '<p style="color:#ef3e36;"> ' . $quant . '
+										                    <img src="icons/woods.png" style="width:4vh;">
+										                    </p>';
+										                    $possible = False;
+										                }
 														
 													
 														if($possible){
@@ -298,6 +310,18 @@ include('login_veryfy.php')
 										                }else{
 										                    echo '<p style="color:#ef3e36;"> ' . $quant . ' 
 										                    <img src="icons/canned_foods.png" style="width:4vh;">
+										                    </p>';
+										                    $possible = False;
+										                }
+
+										                $quant = 8;
+										                if ($inventory["woods"]>=$quant) {
+										                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
+										                    <img src="icons/woods.png" style="width:4vh;">
+										                    </p>';
+										                }else{
+										                    echo '<p style="color:#ef3e36;"> ' . $quant . '
+										                    <img src="icons/woods.png" style="width:4vh;">
 										                    </p>';
 										                    $possible = False;
 										                }
@@ -353,6 +377,18 @@ include('login_veryfy.php')
 										                }else{
 										                    echo '<p style="color:#ef3e36;"> ' . $quant . ' 
 										                    <img src="icons/meats.png" style="width:4vh;">
+										                    </p>';
+										                    $possible = False;
+										                }
+
+										                $quant = 8;
+										                if ($inventory["woods"]>=$quant) {
+										                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
+										                    <img src="icons/woods.png" style="width:4vh;">
+										                    </p>';
+										                }else{
+										                    echo '<p style="color:#ef3e36;"> ' . $quant . '
+										                    <img src="icons/woods.png" style="width:4vh;">
 										                    </p>';
 										                    $possible = False;
 										                }

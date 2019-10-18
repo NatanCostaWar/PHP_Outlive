@@ -85,7 +85,9 @@ include('login_veryfy.php')
                 $result = mysqli_query($connection, $query);
                 $game = mysqli_fetch_array($result);
 
+                echo "<center>";
                 echo $game["story"];
+                echo "</center>";
 
             ?>
             <br>
