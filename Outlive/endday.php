@@ -179,6 +179,18 @@ if($row["day"] == NULL){
 
 				$_SESSION["msg"] .= "<p>Farm Harvested: $quant Vegetables <img src='icons/vegetables.png' class='invert' style='width:3vh;'></p>";
 			}
+
+			#Cereal Harvest
+			else if($farm["hold"] == 'cereal_seeds'){
+				$query = "UPDATE db_outlive.builds SET hold = NULL WHERE game = $game and id = $farm[id]";
+				$update = mysqli_query($connection, $query);
+
+				$quant = rand(2, 4);
+				$query = "UPDATE db_outlive.inventory SET cereals = cereals+$quant WHERE game = $game";
+				$update = mysqli_query($connection, $query);
+
+				$_SESSION["msg"] .= "<p>Farm Harvested: $quant Cereals <img src='icons/cereals.png' class='invert' style='width:3vh;'></p>";
+			}
 		}
 
 	}

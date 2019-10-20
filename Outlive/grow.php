@@ -29,6 +29,16 @@ if($_POST["seed"] == "vegetable_seeds"){
 	$update = mysqli_query($connection, $query);
 	$query = "UPDATE db_outlive.builds SET time = 5 WHERE game = $game and user = $user and id = $farm";
 	$update = mysqli_query($connection, $query);
+
+
+}else if($_POST["seed"] == "cereal_seeds"){
+	$query = "UPDATE db_outlive.inventory SET cereal_seeds = cereal_seeds-1 WHERE game = $game and user = $user";
+	$result = mysqli_query($connection, $query);
+
+	$query = "UPDATE db_outlive.builds SET hold = 'cereal_seeds' WHERE game = $game and user = $user and id = $farm";
+	$update = mysqli_query($connection, $query);
+	$query = "UPDATE db_outlive.builds SET time = 5 WHERE game = $game and user = $user and id = $farm";
+	$update = mysqli_query($connection, $query);
 }
 
 header("Location: gamepage.php?game=$game");

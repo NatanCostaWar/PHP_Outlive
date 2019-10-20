@@ -174,6 +174,9 @@ include('login_veryfy.php')
 										            	if($inventory["vegetable_seeds"] > 0){
 										            		echo '<p><input type="radio" NAME="seed" value="vegetable_seeds" style="min-height:3.5vh;min-width:3.5vh;"> Vegetable Seed</p>';
 										            	}
+										            	if($inventory["cereal_seeds"] > 0){
+										            		echo '<p><input type="radio" NAME="seed" value="cereal_seeds" style="min-height:3.5vh;min-width:3.5vh;"> Cereal Seed</p>';
+										            	}
 										            	echo '<button type="submit" class="btn btn-secondary" style="margin:2px;float:right;">Grow</button>
 										            	</form>
 										            </div>
@@ -215,116 +218,134 @@ include('login_veryfy.php')
 								            </div>
 								            <div class="modal-body">';
 													#Printing Cook Menu:
-													echo '
-													<center>';
 										            	
 										            	echo '
-														<h2>Soup</h2>';
+														<center><h2>Soup</h2></center>';
+
+														echo'<div class="row">';
 														$possible = True;
-														$quant = 2;
-										                if ($inventory["bottles_of_water"]>=$quant) {
-										                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
-										                    <img src="icons/bottles_of_water.png" style="width:4vh;">
-										                    </p>';
-										                }else{
-										                    echo '<p style="color:#ef3e36;"> ' . $quant . '
-										                    <img src="icons/bottles_of_water.png" style="width:4vh;">
-										                    </p>';
-										                    $possible = False;
-										                }
+														echo'<div class="col-3" align="center">';
+															$quant = 2;
+											                if ($inventory["bottles_of_water"]>=$quant) {
+											                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
+											                    <img src="icons/bottles_of_water.png" style="width:4vh;">
+											                    </p>';
+											                }else{
+											                    echo '<p style="color:#ef3e36;"> ' . $quant . '
+											                    <img src="icons/bottles_of_water.png" style="width:4vh;">
+											                    </p>';
+											                    $possible = False;
+											                }
+											            echo '</div>';
 
+											            echo'<div class="col-3" align="center">';
+											                $quant = 1;
+											                if ($inventory["vegetables"]>=$quant) {
+											                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
+											                    <img src="icons/vegetables.png" style="width:4vh;">
+											                    </p>';
+											                }else{
+											                    echo '<p style="color:#ef3e36;"> ' . $quant . ' 
+											                    <img src="icons/vegetables.png" style="width:4vh;">
+											                    </p>';
+											                    $possible = False;
+											                }
+											            echo '</div>';
 
-										                $quant = 1;
-										                if ($inventory["vegetables"]>=$quant) {
-										                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
-										                    <img src="icons/vegetables.png" style="width:4vh;">
-										                    </p>';
-										                }else{
-										                    echo '<p style="color:#ef3e36;"> ' . $quant . ' 
-										                    <img src="icons/vegetables.png" style="width:4vh;">
-										                    </p>';
-										                    $possible = False;
-										                }
+										                echo'<div class="col-3" align="center">';
+											                $quant = 1;
+											                if ($inventory["meats"]>=$quant) {
+											                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
+											                    <img src="icons/meats.png" style="width:4vh;">
+											                    </p>';
+											                }else{
+											                    echo '<p style="color:#ef3e36;"> ' . $quant . '
+											                    <img src="icons/meats.png" style="width:4vh;">
+											                    </p>';
+											                    $possible = False;
+											                }
+											            echo '</div>';
 
+											            echo'<div class="col-3" align="center">';
+											                $quant = 8;
+											                if ($inventory["woods"]>=$quant) {
+											                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
+											                    <img src="icons/woods.png" style="width:4vh;">
+											                    </p>';
+											                }else{
+											                    echo '<p style="color:#ef3e36;"> ' . $quant . '
+											                    <img src="icons/woods.png" style="width:4vh;">
+											                    </p>';
+											                    $possible = False;
+											                }
+											            echo '</div>';
+											        echo '</div>';
 
-										                $quant = 1;
-										                if ($inventory["meats"]>=$quant) {
-										                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
-										                    <img src="icons/meats.png" style="width:4vh;">
-										                    </p>';
-										                }else{
-										                    echo '<p style="color:#ef3e36;"> ' . $quant . '
-										                    <img src="icons/meats.png" style="width:4vh;">
-										                    </p>';
-										                    $possible = False;
-										                }
-
-										                $quant = 8;
-										                if ($inventory["woods"]>=$quant) {
-										                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
-										                    <img src="icons/woods.png" style="width:4vh;">
-										                    </p>';
-										                }else{
-										                    echo '<p style="color:#ef3e36;"> ' . $quant . '
-										                    <img src="icons/woods.png" style="width:4vh;">
-										                    </p>';
-										                    $possible = False;
-										                }
+											        	echo '<center>';
+															if($possible){
+																echo'
+																<form id="cookform" action="cook.php" method="post">
+												            	<input type="hidden" name="game" value=' . $game["id"] . '>
+																<input type="hidden" name="user" value=' . $user["id"] . '>';
+																echo'<input type="hidden" name="name" value="soup">';
+																echo'<button type="submit" class="btn" style="margin:2px;color:#f1f0ea;background-color:#11121a">Cook</button><br></form>';
+															}
+														echo '</center>';
 														
 													
-														if($possible){
-															echo'
-															<form id="cookform" action="cook.php" method="post">
-											            	<input type="hidden" name="game" value=' . $game["id"] . '>
-															<input type="hidden" name="user" value=' . $user["id"] . '>';
-															echo'<input type="hidden" name="name" value="soup">';
-															echo'<button type="submit" class="btn" style="margin:2px;color:#f1f0ea;background-color:#11121a">Cook</button><br></form>';
-														}
 													
-													echo '</center>';
 
 													echo "<hr class='my-4' />";
 
 													echo '
-													<center>
-														<h2>Canned Meal</h2>';
+														<center><h2>Canned Meal</h2></center>';
+
+														echo'<div class="row">';
 														$possible = True;
-														$quant = 1;
-										                if ($inventory["bottles_of_water"]>=$quant) {
-										                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
-										                    <img src="icons/bottles_of_water.png" style="width:4vh;">
-										                    </p>';
-										                }else{
-										                    echo '<p style="color:#ef3e36;"> ' . $quant . '
-										                    <img src="icons/bottles_of_water.png" style="width:4vh;">
-										                    </p>';
-										                    $possible = False;
-										                }
+														echo'<div class="col-4" align="center">';
+															$quant = 1;
+											                if ($inventory["bottles_of_water"]>=$quant) {
+											                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
+											                    <img src="icons/bottles_of_water.png" style="width:4vh;">
+											                    </p>';
+											                }else{
+											                    echo '<p style="color:#ef3e36;"> ' . $quant . '
+											                    <img src="icons/bottles_of_water.png" style="width:4vh;">
+											                    </p>';
+											                    $possible = False;
+											                }
+											            echo'</div>';
 
+											            echo'<div class="col-4" align="center">';
+											                $quant = 1;
+											                if ($inventory["canned_foods"]>=$quant) {
+											                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
+											                    <img src="icons/canned_foods.png" style="width:4vh;">
+											                    </p>';
+											                }else{
+											                    echo '<p style="color:#ef3e36;"> ' . $quant . ' 
+											                    <img src="icons/canned_foods.png" style="width:4vh;">
+											                    </p>';
+											                    $possible = False;
+											                }
+											            echo'</div>';
 
-										                $quant = 1;
-										                if ($inventory["canned_foods"]>=$quant) {
-										                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
-										                    <img src="icons/canned_foods.png" style="width:4vh;">
-										                    </p>';
-										                }else{
-										                    echo '<p style="color:#ef3e36;"> ' . $quant . ' 
-										                    <img src="icons/canned_foods.png" style="width:4vh;">
-										                    </p>';
-										                    $possible = False;
-										                }
+											            echo'<div class="col-4" align="center">';
+											                $quant = 8;
+											                if ($inventory["woods"]>=$quant) {
+											                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
+											                    <img src="icons/woods.png" style="width:4vh;">
+											                    </p>';
+											                }else{
+											                    echo '<p style="color:#ef3e36;"> ' . $quant . '
+											                    <img src="icons/woods.png" style="width:4vh;">
+											                    </p>';
+											                    $possible = False;
+											                }
+											            echo'</div>';
+											        echo '</div>';
 
-										                $quant = 8;
-										                if ($inventory["woods"]>=$quant) {
-										                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
-										                    <img src="icons/woods.png" style="width:4vh;">
-										                    </p>';
-										                }else{
-										                    echo '<p style="color:#ef3e36;"> ' . $quant . '
-										                    <img src="icons/woods.png" style="width:4vh;">
-										                    </p>';
-										                    $possible = False;
-										                }
+											        echo '<center>';
 
 										                if($possible){
 															echo '<form id="cookform" action="cook.php" method="post">
@@ -334,65 +355,73 @@ include('login_veryfy.php')
 															echo'<button type="submit" class="btn" style="margin:2px;color:#f1f0ea;background-color:#11121a">Cook</button><br></form>';
 														}
 														
-													echo'
-													</center>';
+													echo'</center>';
 
 													echo "<hr class='my-4' />";
 
 													echo '
-													<center>
-														<h2>Taco</h2>';
+														<center><h2>Taco</h2></center>';
+
+														echo'<div class="row">';
 														$possible = True;
-														$quant = 1;
-										                if ($inventory["bottles_of_water"]>=$quant) {
-										                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
-										                    <img src="icons/bottles_of_water.png" style="width:4vh;">
-										                    </p>';
-										                }else{
-										                    echo '<p style="color:#ef3e36;"> ' . $quant . '
-										                    <img src="icons/bottles_of_water.png" style="width:4vh;">
-										                    </p>';
-										                    $possible = False;
-										                }
+														echo'<div class="col-3" align="center">';
+															$quant = 1;
+											                if ($inventory["bottles_of_water"]>=$quant) {
+											                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
+											                    <img src="icons/bottles_of_water.png" style="width:4vh;">
+											                    </p>';
+											                }else{
+											                    echo '<p style="color:#ef3e36;"> ' . $quant . '
+											                    <img src="icons/bottles_of_water.png" style="width:4vh;">
+											                    </p>';
+											                    $possible = False;
+											                }
+											            echo '</div>';
 
+											            echo'<div class="col-3" align="center">';
+											                $quant = 1;
+											                if ($inventory["canned_foods"]>=$quant) {
+											                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
+											                    <img src="icons/canned_foods.png" style="width:4vh;">
+											                    </p>';
+											                }else{
+											                    echo '<p style="color:#ef3e36;"> ' . $quant . ' 
+											                    <img src="icons/canned_foods.png" style="width:4vh;">
+											                    </p>';
+											                    $possible = False;
+											                }
+											            echo'</div>';
 
-										                $quant = 1;
-										                if ($inventory["canned_foods"]>=$quant) {
-										                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
-										                    <img src="icons/canned_foods.png" style="width:4vh;">
-										                    </p>';
-										                }else{
-										                    echo '<p style="color:#ef3e36;"> ' . $quant . ' 
-										                    <img src="icons/canned_foods.png" style="width:4vh;">
-										                    </p>';
-										                    $possible = False;
-										                }
+											            echo'<div class="col-3" align="center">';
+											                $quant = 1;
+											                if ($inventory["meats"]>=$quant) {
+											                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
+											                    <img src="icons/meats.png" style="width:4vh;">
+											                    </p>';
+											                }else{
+											                    echo '<p style="color:#ef3e36;"> ' . $quant . ' 
+											                    <img src="icons/meats.png" style="width:4vh;">
+											                    </p>';
+											                    $possible = False;
+											                }
+											            echo'</div>';
 
+											            echo'<div class="col-3" align="center">';
+											                $quant = 8;
+											                if ($inventory["woods"]>=$quant) {
+											                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
+											                    <img src="icons/woods.png" style="width:4vh;">
+											                    </p>';
+											                }else{
+											                    echo '<p style="color:#ef3e36;"> ' . $quant . '
+											                    <img src="icons/woods.png" style="width:4vh;">
+											                    </p>';
+											                    $possible = False;
+											                }
+											            echo'</div>';
+											        echo'</div>';
 
-										                $quant = 1;
-										                if ($inventory["meats"]>=$quant) {
-										                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
-										                    <img src="icons/meats.png" style="width:4vh;">
-										                    </p>';
-										                }else{
-										                    echo '<p style="color:#ef3e36;"> ' . $quant . ' 
-										                    <img src="icons/meats.png" style="width:4vh;">
-										                    </p>';
-										                    $possible = False;
-										                }
-
-										                $quant = 8;
-										                if ($inventory["woods"]>=$quant) {
-										                    echo '<p style="color:#8fcb9b;"> ' . $quant . '
-										                    <img src="icons/woods.png" style="width:4vh;">
-										                    </p>';
-										                }else{
-										                    echo '<p style="color:#ef3e36;"> ' . $quant . '
-										                    <img src="icons/woods.png" style="width:4vh;">
-										                    </p>';
-										                    $possible = False;
-										                }
-
+											        echo'<center>';
 										                if($possible){
 															echo '<form id="cookform" action="cook.php" method="post">
 											            	<input type="hidden" name="game" value=' . $game["id"] . '>
@@ -401,8 +430,7 @@ include('login_veryfy.php')
 															echo'<button type="submit" class="btn" style="margin:2px;color:#f1f0ea;background-color:#11121a">Cook</button><br></form>';
 														}
 														
-													echo'
-													</center>';
+													echo'</center>';
 
 									            	echo '
 									            	<button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin:2px;float:right;">
@@ -489,112 +517,136 @@ include('login_veryfy.php')
 					            <div class="modal-body">';
 
 
-
-
-
-
-
-
-					            	#Basic:
+					            #Basic:
 									echo "<h2>Basic:</h2>";
 
-									echo'<table class="table">
-										<thead>
-											<tr>
-											  <th scope="col">Item</th>
-											  <th scope="col">amount</th>
-											</tr>
-										</thead><tbody>';
+									echo'<div class="row">';
+										echo'<div class="col-4 col-md-8">';
+										echo'Wood <img src="icons/woods.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["woods"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo'</div>';
+									echo'</div>';
 
-									echo '
-										<tr>
-										  <th scope="row">Wood
-										  	<img src="icons/woods.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["woods"] . '</td>
-										</tr>
-										<tr>
-										  <th scope="row">Nails
-										  	<img src="icons/nails.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["nails"] . '</td>
-										</tr>
-										<tr>
-										  <th scope="row">Metal Scrap
-										  	<img src="icons/scraps.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["scraps"] . '</td>
-										</tr>
-										<tr>
-										  <th scope="row">Pipes
-										  	<img src="icons/pipes.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["pipes"] . '</td>
-										</tr>
-										<tr>
-										  <th scope="row">Tools
-										  	<img src="icons/tools.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["tools"] . '</td>
-										</tr>
-										<tr>
-										  <th scope="row">Cigarettes
-										  	<img src="icons/cigarettes.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["cigarettes"] . '</td>
-										</tr>
-										<tr>
-										  <th scope="row">Coffee
-										  	<img src="icons/coffees.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["coffees"] . '</td>
-										</tr>
-										<tr>
-										  <th scope="row">Gun parts
-										  	<img src="icons/gun_parts.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["gun_parts"] . '</td>
-										</tr>
-										<tr>
-										  <th scope="row">Gears
-										  	<img src="icons/gears.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["gears"] . '</td>
-										</tr>
-										<tr>
-										  <th scope="row">Fertilizers
-										  	<img src="icons/fertilizers.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["fertilizers"] . '</td>
-										</tr>';
+									echo'<div class="row" style="margin-top:2px;">';
+										echo'<div class="col-4 col-md-8">';
+										echo'Nails <img src="icons/nails.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["nails"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo'</div>';
+									echo'</div>';
 
-									echo '</tbody></table>';
+									echo'<div class="row" style="margin-top:2px;">';
+										echo'<div class="col-4 col-md-8">';
+										echo'Metal Scraps <img src="icons/scraps.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["scraps"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo'</div>';
+									echo'</div>';
 
-								
+									echo'<div class="row" style="margin-top:2px;">';
+										echo'<div class="col-4 col-md-8">';
+										echo'Pipes <img src="icons/pipes.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["pipes"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo'</div>';
+									echo'</div>';
+
+									echo'<div class="row" style="margin-top:2px;">';
+										echo'<div class="col-4 col-md-8">';
+										echo'Tools <img src="icons/tools.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["tools"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo'</div>';
+									echo'</div>';
+
+									echo'<div class="row" style="margin-top:2px;">';
+										echo'<div class="col-4 col-md-8">';
+										echo'Cigarettes <img src="icons/cigarettes.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["cigarettes"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo'</div>';
+									echo'</div>';
+
+									echo'<div class="row" style="margin-top:2px;">';
+										echo'<div class="col-4 col-md-8">';
+										echo'Coffees <img src="icons/coffees.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["coffees"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo'</div>';
+									echo'</div>';
+
+									echo'<div class="row" style="margin-top:2px;">';
+										echo'<div class="col-4 col-md-8">';
+										echo'Gun Parts <img src="icons/gun_parts.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["gun_parts"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo'</div>';
+									echo'</div>';
+
+									echo'<div class="row" style="margin-top:2px;">';
+										echo'<div class="col-4 col-md-8">';
+										echo'Gears <img src="icons/gears.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["gears"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo'</div>';
+									echo'</div>';
+
+									echo'<div class="row" style="margin-top:2px;">';
+										echo'<div class="col-4 col-md-8">';
+										echo'Fertilizers <img src="icons/fertilizers.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["fertilizers"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo'</div>';
+									echo'</div>';
 
 
 
 
 
 
-									#Food:
 									echo "<h2>Food:</h2>";
 
-									echo'<table class="table">
-										<thead>
-											<tr>
-											  <th scope="col">Item</th>
-											  <th scope="col">amount</th>
-											</tr>
-										</thead><tbody>';
-
-									echo '<tr>
-										  <th scope="row">Vegetables
-										  	<img src="icons/vegetables.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["vegetables"] . ' ';
-										   if ($inventory["vegetables"]>=1){
-										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+									echo'<div class="row">';
+										echo'<div class="col-4 col-md-8">';
+										echo'Vegetables <img src="icons/vegetables.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["vegetables"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+											if ($inventory["vegetables"]>=1){
+										   		echo"<form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
 
 													<input type='hidden' name='game' value=" . $game["id"] .">
 													<input type='hidden' name='user' value=" . $user["id"] . ">
@@ -603,18 +655,19 @@ include('login_veryfy.php')
 													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
 														Use Item
 													</button>
-												</form></td>";
+												</form>";
 										   }
+										echo'</div>';
 
-										   echo '</td></tr>';
-										
-										echo '<tr>
-										  <th scope="row">Meat
-										  	<img src="icons/meats.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["meats"] . ' ';
-										   if ($inventory["meats"]>=1){
-										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+										echo'<div class="col-4 col-md-8">';
+										echo'Meat <img src="icons/meats.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["meats"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+											if ($inventory["meats"]>=1){
+										   		echo"<form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
 
 													<input type='hidden' name='game' value=" . $game["id"] .">
 													<input type='hidden' name='user' value=" . $user["id"] . ">
@@ -623,18 +676,19 @@ include('login_veryfy.php')
 													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
 														Use Item
 													</button>
-												</form></td>";
+												</form>";
 										   }
+										echo'</div>';
 
-										   echo '</td></tr>';
-										
-										echo '<tr>
-										  <th scope="row">Canned food
-										  	<img src="icons/canned_foods.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["canned_foods"] . ' ';
-										   if ($inventory["canned_foods"]>=1){
-										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+										echo'<div class="col-4 col-md-8">';
+										echo'Canned Foods <img src="icons/canned_foods.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["canned_foods"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+											if ($inventory["canned_foods"]>=1){
+										   		echo"<form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
 
 													<input type='hidden' name='game' value=" . $game["id"] .">
 													<input type='hidden' name='user' value=" . $user["id"] . ">
@@ -643,18 +697,19 @@ include('login_veryfy.php')
 													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
 														Use Item
 													</button>
-												</form></td>";
+												</form>";
 										   }
+										echo'</div>';
 
-										   echo '</td></tr>';
-
-										echo '<tr>
-										  <th scope="row">Canned Meal
-										  	<img src="icons/canned_meals.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["canned_meals"] . ' ';
-										   if ($inventory["canned_meals"]>=1){
-										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+										echo'<div class="col-4 col-md-8">';
+										echo'Canned Meals <img src="icons/canned_meals.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["canned_meals"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+											if ($inventory["canned_meals"]>=1){
+										   		echo"<form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
 
 													<input type='hidden' name='game' value=" . $game["id"] .">
 													<input type='hidden' name='user' value=" . $user["id"] . ">
@@ -663,18 +718,19 @@ include('login_veryfy.php')
 													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
 														Use Item
 													</button>
-												</form></td>";
+												</form>";
 										   }
+										echo'</div>';
 
-										   echo '</td></tr>';
-
-										echo '<tr>
-										  <th scope="row">Soup
-										  	<img src="icons/soups.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["soups"] . ' ';
-										   if ($inventory["soups"]>=1){
-										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+										echo'<div class="col-4 col-md-8">';
+										echo'Soups <img src="icons/soups.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["soups"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+											if ($inventory["soups"]>=1){
+										   		echo"<form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
 
 													<input type='hidden' name='game' value=" . $game["id"] .">
 													<input type='hidden' name='user' value=" . $user["id"] . ">
@@ -683,18 +739,19 @@ include('login_veryfy.php')
 													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
 														Use Item
 													</button>
-												</form></td>";
+												</form>";
 										   }
+										echo'</div>';
 
-										   echo '</td></tr>';
-
-										echo'<tr>
-										  <th scope="row">Taco
-										  	<img src="icons/tacos.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["tacos"] . ' ';
-										   if ($inventory["tacos"]>=1){
-										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+										echo'<div class="col-4 col-md-8">';
+										echo'Tacos <img src="icons/tacos.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["tacos"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+											if ($inventory["tacos"]>=1){
+										   		echo"<form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
 
 													<input type='hidden' name='game' value=" . $game["id"] .">
 													<input type='hidden' name='user' value=" . $user["id"] . ">
@@ -703,18 +760,19 @@ include('login_veryfy.php')
 													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
 														Use Item
 													</button>
-												</form></td>";
+												</form>";
 										   }
-										
-											echo '</td></tr>';
+										echo'</div>';
 
-										echo '<tr>
-										  <th scope="row">Bottles of water
-										  	<img src="icons/bottles_of_water.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["bottles_of_water"] . ' ';
-										   if ($inventory["bottles_of_water"]>=1){
-										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+										echo'<div class="col-4 col-md-8">';
+										echo'Bottles Of Water <img src="icons/bottles_of_water.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["bottles_of_water"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+											if ($inventory["bottles_of_water"]>=1){
+										   		echo"<form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
 
 													<input type='hidden' name='game' value=" . $game["id"] .">
 													<input type='hidden' name='user' value=" . $user["id"] . ">
@@ -723,18 +781,19 @@ include('login_veryfy.php')
 													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
 														Use Item
 													</button>
-												</form></td>";
+												</form>";
 										   }
-										
-										echo '</td></tr>';
+										echo'</div>';
 
-										echo '<tr>
-										  <th scope="row">Beer
-										  	<img src="icons/beers.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["beers"] . ' ';
-										   if ($inventory["beers"]>=1){
-										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+										echo'<div class="col-4 col-md-8">';
+										echo'Beer <img src="icons/beers.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["beers"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+											if ($inventory["beers"]>=1){
+										   		echo"<form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
 
 													<input type='hidden' name='game' value=" . $game["id"] .">
 													<input type='hidden' name='user' value=" . $user["id"] . ">
@@ -743,26 +802,46 @@ include('login_veryfy.php')
 													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
 														Use Item
 													</button>
-												</form></td>";
+												</form>";
 										   }
-										
-										   echo '</td></tr>';
+										echo'</div>';
 
-									echo '
-									<tr>
-									  <th scope="row">Herbal seeds
-									  	<img src="icons/seeds.png" style="width:5vh;">
-									  </th>
-									  <td>' . $inventory["herbal_seeds"] . '</td>
-									</tr>
-									<tr>
-									  <th scope="row">Vegetable seeds
-									  	<img src="icons/seeds.png" style="width:5vh;">
-									  </th>
-									  <td>' . $inventory["vegetable_seeds"] . '</td>
-									</tr>';
+										echo'<div class="col-4 col-md-8">';
+										echo'Cereals <img src="icons/cereals.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["cereals"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo'</div>';
 
-									echo '</tbody></table>';
+										echo'<div class="col-4 col-md-8">';
+										echo'Herbal Seeds <img src="icons/herbal_seeds.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["herbal_seeds"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo'</div>';
+
+										echo'<div class="col-4 col-md-8">';
+										echo'Cereal Seeds <img src="icons/cereal_seeds.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["cereal_seeds"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo'</div>';
+
+										echo'<div class="col-4 col-md-8">';
+										echo'Vegetable Seeds <img src="icons/vegetable_seeds.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["vegetable_seeds"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo'</div>';
+									echo'</div>';
 
 
 
@@ -770,26 +849,18 @@ include('login_veryfy.php')
 
 
 
-
-
-									#Medicines:
 									echo "<h2>Medicines:</h2>";
 
-									echo'<table class="table">
-										<thead>
-											<tr>
-											  <th scope="col">Item</th>
-											  <th scope="col">amount</th>
-											</tr>
-										</thead><tbody>';
-
-									echo '<tr>
-										  <th scope="row">Medicines
-										  	<img src="icons/medicines.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["medicines"] . ' ';
-										   if ($inventory["medicines"]>=1){
-										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+									echo'<div class="row">';
+										echo'<div class="col-4 col-md-8">';
+										echo'Medicines <img src="icons/medicines.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["medicines"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+											if ($inventory["medicines"]>=1){
+										   		echo"<form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
 
 													<input type='hidden' name='game' value=" . $game["id"] .">
 													<input type='hidden' name='user' value=" . $user["id"] . ">
@@ -798,18 +869,19 @@ include('login_veryfy.php')
 													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
 														Use Item
 													</button>
-												</form></td>";
+												</form>";
 										   }
-										
-											echo '</td></tr>';
-										
-										echo'<tr>
-										  <th scope="row">Herbs
-										  	<img src="icons/herbs.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["herbs"] . ' ';
-										   if ($inventory["herbs"]>=1){
-										   		echo"<td><form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+										echo'</div>';
+
+										echo'<div class="col-4 col-md-8">';
+										echo'Herbs <img src="icons/herbs.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["herbs"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+											if ($inventory["herbs"]>=1){
+										   		echo"<form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
 
 													<input type='hidden' name='game' value=" . $game["id"] .">
 													<input type='hidden' name='user' value=" . $user["id"] . ">
@@ -818,12 +890,10 @@ include('login_veryfy.php')
 													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
 														Use Item
 													</button>
-												</form></td>";
+												</form>";
 										   }
-										
-											echo '</td></tr>';
-
-									echo '</tbody></table>';
+										echo'</div>';
+									echo'</div>';
 
 
 
@@ -831,43 +901,73 @@ include('login_veryfy.php')
 
 
 
-
-
-									#Combat:
 									echo "<h2>Combat:</h2>";
 
-									echo'<table class="table">
-										<thead>
-											<tr>
-											  <th scope="col">Item</th>
-											  <th scope="col">amount</th>
-											</tr>
-										</thead><tbody>';
+									echo'<div class="row">';
+										echo'<div class="col-4 col-md-8">';
+										echo'Guns <img src="icons/guns.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["guns"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+											if ($inventory["guns"]>=1){
+										   		echo"<form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
 
-									echo '<tr>
-										  <th scope="row">
-										  	Guns
-										  	<img src="icons/guns.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["guns"] . '</td>
-										</tr>
-										<tr>
-										  <th scope="row">Bullets
-										  	<img src="icons/bullets.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["bullets"] . '</td>
-										</tr>
-										
-										<tr>
-										  <th scope="row">Melee weapons
-										  	<img src="icons/melee_weapons.png" style="width:5vh;">
-										  </th>
-										  <td>' . $inventory["melee_weapons"] . '</td>
-										</tr>';
+													<input type='hidden' name='game' value=" . $game["id"] .">
+													<input type='hidden' name='user' value=" . $user["id"] . ">
+													<input type='hidden' name='item' value='guns'>
 
-									
+													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
+														Use Item
+													</button>
+												</form>";
+										   }
+										echo'</div>';
 
-									echo '</tbody></table>';
+										echo'<div class="col-4 col-md-8">';
+										echo'Bullets <img src="icons/bullets.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["bullets"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+											if ($inventory["bullets"]>=1){
+										   		echo"<form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+
+													<input type='hidden' name='game' value=" . $game["id"] .">
+													<input type='hidden' name='user' value=" . $user["id"] . ">
+													<input type='hidden' name='item' value='bullets'>
+
+													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
+														Use Item
+													</button>
+												</form>";
+										   }
+										echo'</div>';
+
+										echo'<div class="col-4 col-md-8">';
+										echo'Melee Weapons <img src="icons/melee_weapons.png" style="width:5vh">';
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+										echo $inventory["melee_weapons"];
+										echo'</div>';
+										echo'<div class="col-4 col-md-2">';
+											if ($inventory["melee_weapons"]>=1){
+										   		echo"<form action='itemuse.php' method='post' style='margin:0;margin-top:5px;'>
+
+													<input type='hidden' name='game' value=" . $game["id"] .">
+													<input type='hidden' name='user' value=" . $user["id"] . ">
+													<input type='hidden' name='item' value='melee_weapons'>
+
+													<button type='submit' class='btn border' style='color:#f1f0ea;background-color:#11121a;padding:1px;'>
+														Use Item
+													</button>
+												</form>";
+										   }
+										echo'</div>';
+									echo'</div>';
+
 
 					            echo '</div>
 					            <div class="modal-footer">
