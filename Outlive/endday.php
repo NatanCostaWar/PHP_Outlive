@@ -195,6 +195,40 @@ if($row["day"] == NULL){
 
 	}
 
+	#Beer Kit Update/ Beer Production
+	$query = "SELECT * FROM db_outlive.builds WHERE game = $game and user = $user and name = 'Beer Kit'" or die(mysqli_error());
+	$result = mysqli_query($connection, $query);
+	while($beer_kit = mysqli_fetch_assoc($result)){
+		#Update:
+		if ($beer_kit["time"] > 1){
+			$query = "UPDATE db_outlive.builds SET time = time-1 WHERE game = $game and id = $beer_kit[id]";
+			$update = mysqli_query($connection, $query);
+		#Harvest:
+		}else if($beer_kit["time"] == 1){
+			$query = "UPDATE db_outlive.builds SET time = NULL WHERE game = $game and id = $beer_kit[id]";
+			$update = mysqli_query($connection, $query);
+
+			#Homemade Beer Harvest
+			if($beer_kit["hold"] == 'homemade_beers'){
+				#Updating Story:
+				$story = '<p>I made homemade beers, this could be worth something</p>';
+				$query = "UPDATE db_outlive.game SET story = CONCAT(story, '$story')  WHERE user = $user and id = $game";
+			    $result = mysqli_query($connection, $query);
+
+				$query = "UPDATE db_outlive.builds SET hold = NULL WHERE game = $game and id = $beer_kit[id]";
+				$update = mysqli_query($connection, $query);
+
+				$quant = rand(2, 4);
+				$query = "UPDATE db_outlive.inventory SET homemade_beers = homemade_beers+$quant WHERE game = $game";
+				$update = mysqli_query($connection, $query);
+
+				$_SESSION["msg"] .= "<p>Beers Done: $quant Beers <img src='icons/homemade_beers.png' class='invert' style='width:3vh;'></p>";
+			}
+			
+		}
+
+	}
+
 	#Updating Story
 	if($player["life"] <= 0){
 		$story .= '<center><p>You Died</p></center>';

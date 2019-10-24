@@ -5,6 +5,9 @@
     <body class="background">
 
         <div id="main">
+            <center>
+                <h1 class="display-3">Register</h1>
+            </center>
             <div id="main-login_form-div">
 
                     <form action="register.php" method="post">

@@ -28,6 +28,10 @@ if($item == 'beers'){
 	$query = "UPDATE db_outlive.player SET thirst = thirst+35, rest = rest-10  WHERE user = $user and game = $game";
 	$result = mysqli_query($connection, $query);
 }
+if($item == 'homemade_beers'){
+	$query = "UPDATE db_outlive.player SET thirst = thirst+25, rest = rest-10  WHERE user = $user and game = $game";
+	$result = mysqli_query($connection, $query);
+}
 
 #EAT
 if($item == 'vegetables'){

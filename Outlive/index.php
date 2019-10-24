@@ -21,7 +21,7 @@
                 </a>
             </center>
 
-            <div style="margin-top:80px;">
+            <!--<div style="margin-top:80px;">
                 <center>
                     <p>How to play</p>   
                 </center>
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 
-            </div>
+            </div>-->
         </div>
 
         <div id="info">

@@ -7,6 +7,9 @@
        
 
         <div id="main">
+            <center>
+                <h1 class="display-3">Login</h1>
+            </center>
             <div id="main-login_form-div">
 
                     <form action="login.php" method="post">
