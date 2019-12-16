@@ -91,11 +91,6 @@ include('login_veryfy.php')
 	$result = mysqli_query($connection, $query);
 	$inventory = mysqli_fetch_array($result);
 
-	#TRADER INFORMATION
-	$query = "SELECT * FROM db_outlive.trader where game = $game[id] and user = $user[id]";
-	$result = mysqli_query($connection, $query);
-	$trader = mysqli_fetch_array($result);
-
 	?>
 
 	<?php
