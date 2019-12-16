@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 24-Out-2019 às 01:31
+-- Data de Criação: 16-Dez-2019 às 17:15
 -- Versão do servidor: 5.6.13
 -- versão do PHP: 5.4.17
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `builds` (
   PRIMARY KEY (`id`),
   KEY `game` (`game`),
   KEY `user` (`user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

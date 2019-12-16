@@ -33,6 +33,7 @@ if($row["day"] == NULL){
 	$player = mysqli_fetch_array($result);
 
 	$_SESSION["msg"] = "";
+	$_SESSION['build_error'] = "";
 
 
 	#If Explore Option Call Explore Page

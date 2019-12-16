@@ -26,6 +26,9 @@ $result = mysqli_query($connection, $query) or die(mysql_error());
 #creating Player
 $query = "INSERT INTO db_outlive.player (id, user, game) VALUES (NULL, '{$user['id']}', '{$game_id}')";
 $result = mysqli_query($connection, $query) or die(mysql_error());
+#creating Trader
+$query = "INSERT INTO db_outlive.trader (id, user, game) VALUES (NULL, '{$user['id']}', '{$game_id}')";
+$result = mysqli_query($connection, $query) or die(mysql_error());
 #creating inventory
 $query = "INSERT INTO db_outlive.inventory (id, user, game) VALUES (NULL, '{$user['id']}', '{$game_id}')";
 $result = mysqli_query($connection, $query) or die(mysql_error());
