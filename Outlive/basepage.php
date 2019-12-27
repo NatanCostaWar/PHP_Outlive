@@ -5,7 +5,7 @@
         <title>OUTLIVE</title>
 
         <meta charset = "utf-8">                
-        <meta content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel = stylesheet type = text/css href = style.css>
 
@@ -30,7 +30,7 @@
                 color: #f1f0ea;
             }
             html {
-                font-size: 3vh;
+                font-size: 1.4em;
             }
 
             @font-face{
@@ -45,6 +45,7 @@
                 font-weight: 100;
                 text-decoration: none;
             }
+
         </style>
 
 
