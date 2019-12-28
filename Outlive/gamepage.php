@@ -154,26 +154,47 @@ include('login_veryfy.php')
 		</div>
 		<div class='row'>								
 			<div class='col-lg-12 col-md-12'>
-			<!--HOUSE LEVEL || HOUSE UPGRADE-->
+			<!--SHELTTER  BUTTON -->
+
 				<?php
-				echo '<div style="float:left"><p>House [Level ' . $house["level"] . ']</p></div>';
 
-				echo '<div style="float:right">
-				<form action="houseupgrade.php" method="post">
+				echo '
+				<button type="button" class="btn border btn-block" data-toggle="modal" data-target="#shelterModal" style="color:#f1f0ea;margin-top:5px;">
+				<p>Shelter</p>
+				<img src="icons/shelter.png" style="width:6vh;">
+				</button>';
 
-				<input type="hidden" name="game" value=' . $game["id"] .'>
-				<input type="hidden" name="user" value=' . $user["id"] . '>
 
-				<button type="submit" class="btn border" style="color:#f1f0ea;padding:1px;margin:2px;">
-				Upgrade House
+				echo '<div class="modal left fade" id="shelterModal" tabindex="-1" role="dialog" aria-labelledby="shelterModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document" style="min-width: 95%;width: auto;">
+				<div class="modal-content">
+				<div class="modal-header" style="color:#11121a;background-color:#f1f0ea;">
+				<h5 class="modal-title">Shelter</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">X</span>
 				</button>
-				</form>
+				</div>
+				<div class="modal-body" style="color:#11121a;background-color:#f1f0ea;">';
+
+				echo '<div class="row">';
+					echo '<div class="col-12">';
+					echo '<div style="float:left"><p>[Level ' . $house["level"] . ']</p></div>';
+
+					echo '<div style="float:right">
+					<form action="houseupgrade.php" method="post">
+
+					<input type="hidden" name="game" value=' . $game["id"] .'>
+					<input type="hidden" name="user" value=' . $user["id"] . '>
+
+					<button type="submit" class="btn border" style="color:#f1f0ea;padding:1px;margin:2px;background-color:#11121a;">
+					Upgrade House
+					</button>
+					</form>
+					</div>
+					</div>
 				</div>';
-				?>
-			</div>
-			<div class='col-lg-12 col-md-12'>
-			<!--HOUSE BUILDS-->
-				<?php
+
+
 				for ($i = 1; $i <= $house["spots"]; $i++) {
 					echo "<p><div class='row'>Build Space:  ------</div></p>";
 
@@ -715,7 +736,19 @@ include('login_veryfy.php')
 					echo '</div>';
 
 				}
+				
+
+				echo '</div>
+
+				</div>
+				</div>
+				</div>';
 				?>
+				
+			</div>
+			<div class='col-lg-12 col-md-12'>
+			<!--HOUSE BUILDS-->
+				
 			</div>
 			<div class='col-lg-12 col-md-12'>
 			<!--TRADER-->
@@ -763,9 +796,9 @@ include('login_veryfy.php')
 				<?php
 
 				echo'
-				<button type="button" class="btn border" data-toggle="modal" data-target="#inventory" style="color:#f1f0ea;">
+				<button type="button" class="btn border btn-block" data-toggle="modal" data-target="#inventory" style="color:#f1f0ea;">
 				<p>Inventory</p>
-				<img src="icons/inventory.png" style="width:8vh;">
+				<img src="icons/inventory.png" style="width:6vh;">
 				</button>
 
 
@@ -1269,9 +1302,9 @@ include('login_veryfy.php')
 				<?php
 
 				echo '
-				<button type="button" class="btn border" data-toggle="modal" data-target="#exampleModal" style="color:#f1f0ea;margin-top:5px;">
+				<button type="button" class="btn border btn-block" data-toggle="modal" data-target="#exampleModal" style="color:#f1f0ea;margin-top:5px;">
 				<p>Build</p>
-				<img src="icons/build.png" style="width:8vh;">
+				<img src="icons/build.png" style="width:6vh;">
 				</button>';
 
 
@@ -1350,7 +1383,7 @@ include('login_veryfy.php')
 			<!--END_DAY   BUTTON-->
 				<?php
 				echo '
-				<button type="button" class="btn border" data-toggle="modal" data-target="#enddaymodal" style="color:#f1f0ea;">
+				<button type="button" class="btn border btn-block" data-toggle="modal" data-target="#enddaymodal" style="color:#f1f0ea;">
 				End Day
 				</button>
 				';
