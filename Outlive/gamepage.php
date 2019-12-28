@@ -100,655 +100,675 @@ include('login_veryfy.php')
 	}
 	?>
 <body style="background-color:#11121a;">
-	<div class="container" style="min-width:100%;">
-		<div class='row' style="width:100%;">								
-			<div class='col-lg-8 col-md-8'>
-				<div class='row' style="width:100%;">
-					<div class='col-lg-6 col-md-12'>
-					<!--HOUSE LEVEL || HOUSE UPGRADE-->
-						<?php
-						echo '<div class="row" style="float:left"><p>House [Level ' . $house["level"] . ']</p></div>';
-
-						echo '<div class="row justify-content-end">
-						<form action="houseupgrade.php" method="post">
-
-						<input type="hidden" name="game" value=' . $game["id"] .'>
-						<input type="hidden" name="user" value=' . $user["id"] . '>
-
-						<button type="submit" class="btn border" style="color:#f1f0ea;padding:1px;margin:2px;">
-						Upgrade House
-						</button>
-						</form>
-						</div>';
-						?>
-					<!--HOUSE BUILDS-->
-						<?php
-						for ($i = 1; $i <= $house["spots"]; $i++) {
-							echo "<p><div class='row'>Build Space:  ------</div></p>";
-
-						}
-
-							#SHOW BUILDS:
-						while ($build_row = mysqli_fetch_assoc($builds_result)) {
-							echo "<div class='row'>
-							Build Space : " . $build_row["name"] . "</div>";
-
-							echo '<div class="row">
-							<form action="destroy.php" method="post">
-							<input type="hidden" name="game" value=' . $game["id"] . '>
-							<input type="hidden" name="user" value=' . $user["id"] . '>
-							<input type="hidden" name="build" value=' . $build_row["id"] . '>';
-
-							echo '<button type="submit" class="btn border" style="color:#f1f0ea;padding:1px;margin-left:4px;">
-							Destroy
-							</button></form>';
-
-							if ($build_row["name"] == 'Farm') {
-								if ($build_row["time"] == NULL){
-									echo '<p><button type="button" class="btn border" data-toggle="modal" data-target="#grow" style="color:#f1f0ea;padding:1px;margin-left:4px;">
-									Grow
-									</button></p>';
-
-									echo '<div class="modal fade" id="grow" tabindex="-1" role="dialog" aria-labelledby="Growlabel" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 80%;width:auto;">
-									<div class="modal-content" style="color: #11121a;background-color: #f1f0ea;">
-									<div class="modal-header">
-									<h5 class="modal-title" id="Growlabel">Choose a Seed</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">X</span>
-									</button>
-									</div>
-									<div class="modal-body">
-									<form id="growform" action="grow.php" method="post">';
-									echo '<input type="hidden" name="game" value=' . $game["id"] . '>
-									<input type="hidden" name="user" value=' . $user["id"] . '>
-
-									<input type="hidden" name="farm" value=' . $build_row["id"] . '>';
-
-
-									if($inventory["herbal_seeds"] > 0){
-										echo '<p><input type="radio" NAME="seed" value="herbal_seeds" style="min-height:3.5vh;min-width:3.5vh;"> Herbal Seed</p>';
-									}
-									if($inventory["vegetable_seeds"] > 0){
-										echo '<p><input type="radio" NAME="seed" value="vegetable_seeds" style="min-height:3.5vh;min-width:3.5vh;"> Vegetable Seed</p>';
-									}
-									if($inventory["cereal_seeds"] > 0){
-										echo '<p><input type="radio" NAME="seed" value="cereal_seeds" style="min-height:3.5vh;min-width:3.5vh;"> Cereal Seed</p>';
-									}
-									echo '<button type="submit" class="btn btn-secondary" style="margin:2px;float:right;">Grow</button>
-									</form>
-									</div>
-									</div>
-									</div>
-									</div>';
-
-
-								}else{
-									echo '<p><a class="btn border" style="color:#f1f0ea;padding:1px;margin-left:4px;">
-									Growing
-									</a></p>';
-								}
-
-
-
-
-							}else if($build_row["name"] == 'Workbench') {
-
-								echo '<p><button type="button" class="btn border" data-toggle="modal" data-target="#work" style="color:#f1f0ea;padding:1px;margin-left:4px;">
-								Use
-								</button></p>';
-
-								echo '<div class="modal fade" id="work" tabindex="-1" role="dialog" aria-labelledby="Worklabel" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 80%;width:auto;">
-								<div class="modal-content" style="color: #11121a;background-color: #f1f0ea;">
-								<div class="modal-header">
-								<h5 class="modal-title" id="Worklabel">
-								Workbench Menu
-								</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">X</span>
-								</button>
-								</div>
-
-								<div class="modal-body">';
-								echo '<center><h2>Builds</h2></center>';
-								echo '<h2>Beer Kit</h2>';
-								echo '<div class="row">';
-								$possible = True;
-								echo'<div class="col-2">';
-								$quant = 1;
-								if ($inventory["tools"]>=$quant) {
-									echo '<p style="color:#8fcb9b;"> ' . $quant . '
-									<img src="icons/tools.png" style="width:4vh;">
-									</p>';
-								}else{
-									echo '<p style="color:#ef3e36;"> ' . $quant . '
-									<img src="icons/tools.png" style="width:4vh;">
-									</p>';
-									$possible = False;
-								}
-								echo '</div>';
-
-								echo'<div class="col-2">';
-								$quant = 30;
-								if ($inventory["woods"]>=$quant) {
-									echo '<p style="color:#8fcb9b;"> ' . $quant . '
-									<img src="icons/woods.png" style="width:4vh;">
-									</p>';
-								}else{
-									echo '<p style="color:#ef3e36;"> ' . $quant . '
-									<img src="icons/woods.png" style="width:4vh;">
-									</p>';
-									$possible = False;
-								}
-								echo '</div>';
-
-								echo'<div class="col-2">';
-								$quant = 20;
-								if ($inventory["pipes"]>=$quant) {
-									echo '<p style="color:#8fcb9b;"> ' . $quant . '
-									<img src="icons/pipes.png" style="width:4vh;">
-									</p>';
-								}else{
-									echo '<p style="color:#ef3e36;"> ' . $quant . '
-									<img src="icons/pipes.png" style="width:4vh;">
-									</p>';
-									$possible = False;
-								}
-								echo '</div>';
-
-								echo'<div class="col-2">';
-								$quant = 25;
-								if ($inventory["scraps"]>=$quant) {
-									echo '<p style="color:#8fcb9b;"> ' . $quant . '
-									<img src="icons/scraps.png" style="width:4vh;">
-									</p>';
-								}else{
-									echo '<p style="color:#ef3e36;"> ' . $quant . '
-									<img src="icons/scraps.png" style="width:4vh;">
-									</p>';
-									$possible = False;
-								}
-								echo '</div>';
-
-								echo'<div class="col-2">';
-								echo '</div>';
-
-								echo'<div class="col-2" align="center">';
-								if($possible){
-									echo'
-									<form id="cookform" action="build.php" method="post">
-									<input type="hidden" name="game" value=' . $game["id"] . '>
-									<input type="hidden" name="user" value=' . $user["id"] . '>';
-									echo'<input type="hidden" name="build" value="Beer Kit">';
-									echo'<button type="submit" class="btn" style="margin:2px;color:#f1f0ea;background-color:#11121a">Build</button></form>';
-								}
-								echo '</div>';
-
-								echo '</div>';
-
-
-
-
-								echo "<hr class='my-4' />";
-
-								echo '
-								<button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin:2px;float:right;">
-								Close
-								</button>
-								</div>
-								</div>
-								</div>
-								</div>';
-
-							}else if($build_row["name"] == 'Beer Kit') {
-								if ($build_row["time"] == NULL){
-									echo '<p><button type="button" class="btn border" data-toggle="modal" data-target="#beerkit" style="color:#f1f0ea;padding:1px;margin-left:4px;">
-									Use
-									</button></p>';
-
-									echo '<div class="modal fade" id="beerkit" tabindex="-1" role="dialog" aria-labelledby="beerkitlabel" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 80%;width:auto;">
-									<div class="modal-content" style="color: #11121a;background-color: #f1f0ea;">
-									<div class="modal-header">
-									<h5 class="modal-title" id="beerkitlabel">
-									Workbench Menu
-									</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">X</span>
-									</button>
-									</div>
-
-									<div class="modal-body">';
-									echo '<h2>Homemade Beer</h2>';
-									echo '<div class="row">';
-
-									echo'<div class="col-2">';
-									$quant = 10;
-									if ($inventory["woods"]>=$quant) {
-										echo '<p style="color:#8fcb9b;"> ' . $quant . '
-										<img src="icons/woods.png" style="width:4vh;">
-										</p>';
-									}else{
-										echo '<p style="color:#ef3e36;"> ' . $quant . '
-										<img src="icons/woods.png" style="width:4vh;">
-										</p>';
-										$possible = False;
-									}
-									echo '</div>';
-
-									$possible = True;
-									echo'<div class="col-2">';
-									$quant = 5;
-									if ($inventory["cereals"]>=$quant) {
-										echo '<p style="color:#8fcb9b;"> ' . $quant . '
-										<img src="icons/cereals.png" style="width:4vh;">
-										</p>';
-									}else{
-										echo '<p style="color:#ef3e36;"> ' . $quant . '
-										<img src="icons/cereals.png" style="width:4vh;">
-										</p>';
-										$possible = False;
-									}
-									echo '</div>';
-
-									echo'<div class="col-2">';
-									$quant = 3;
-									if ($inventory["bottles_of_water"]>=$quant) {
-										echo '<p style="color:#8fcb9b;"> ' . $quant . '
-										<img src="icons/bottles_of_water.png" style="width:4vh;">
-										</p>';
-									}else{
-										echo '<p style="color:#ef3e36;"> ' . $quant . '
-										<img src="icons/bottles_of_water.png" style="width:4vh;">
-										</p>';
-										$possible = False;
-									}
-									echo '</div>';
-
-
-
-									echo'<div class="col-4">';
-									echo '</div>';
-
-									echo'<div class="col-2" align="center">';
-									if($possible){
-										echo'
-										<form id="cookform" action="make.php" method="post">
-										<input type="hidden" name="game" value=' . $game["id"] . '>
-										<input type="hidden" name="user" value=' . $user["id"] . '>';
-										echo'<input type="hidden" name="name" value="homemade_beers">';
-										echo '<input type="hidden" name="kit" value=' . $build_row["id"] . '>';
-										echo'<button type="submit" class="btn" style="margin:2px;color:#f1f0ea;background-color:#11121a">Make</button></form>';
-									}
-									echo '</div>';
-
-									echo '</div>';
-
-
-									echo "<hr class='my-4' />";
-
-									echo '
-									<button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin:2px;float:right;">
-									Close
-									</button>
-									</div>
-									</div>
-									</div>
-									</div>';
-
-								}else{
-									echo '<p><a class="btn border" style="color:#f1f0ea;padding:1px;margin-left:4px;">
-									Fermenting
-									</a></p>';
-								}
-
-
-							}else if ($build_row["name"] == 'Stove') {
-								echo '<p><button type="button" class="btn border" data-toggle="modal" data-target="#cook" style="color:#f1f0ea;padding:1px;margin-left:4px;">
-								Cook
-								</button></p>';
-
-								echo '<div class="modal fade" id="cook" tabindex="-1" role="dialog" aria-labelledby="Cooklabel" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 80%;width:auto;">
-								<div class="modal-content" style="color: #11121a;background-color: #f1f0ea;">
-								<div class="modal-header">
-								<h5 class="modal-title" id="Cooklabel">
-								Dishes
-								</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">X</span>
-								</button>
-								</div>
-								<div class="modal-body">';
-															#Printing Cook Menu:
-
-								echo '
-								<h2>Soup</h2>';
-
-								echo'<div class="row">';
-								$possible = True;
-								echo'<div class="col-2">';
-								$quant = 2;
-								if ($inventory["bottles_of_water"]>=$quant) {
-									echo '<p style="color:#8fcb9b;"> ' . $quant . '
-									<img src="icons/bottles_of_water.png" style="width:4vh;">
-									</p>';
-								}else{
-									echo '<p style="color:#ef3e36;"> ' . $quant . '
-									<img src="icons/bottles_of_water.png" style="width:4vh;">
-									</p>';
-									$possible = False;
-								}
-								echo '</div>';
-
-								echo'<div class="col-2">';
-								$quant = 1;
-								if ($inventory["vegetables"]>=$quant) {
-									echo '<p style="color:#8fcb9b;"> ' . $quant . '
-									<img src="icons/vegetables.png" style="width:4vh;">
-									</p>';
-								}else{
-									echo '<p style="color:#ef3e36;"> ' . $quant . ' 
-									<img src="icons/vegetables.png" style="width:4vh;">
-									</p>';
-									$possible = False;
-								}
-								echo '</div>';
-
-								echo'<div class="col-2">';
-								$quant = 1;
-								if ($inventory["meats"]>=$quant) {
-									echo '<p style="color:#8fcb9b;"> ' . $quant . '
-									<img src="icons/meats.png" style="width:4vh;">
-									</p>';
-								}else{
-									echo '<p style="color:#ef3e36;"> ' . $quant . '
-									<img src="icons/meats.png" style="width:4vh;">
-									</p>';
-									$possible = False;
-								}
-								echo '</div>';
-
-								echo'<div class="col-2">';
-								$quant = 8;
-								if ($inventory["woods"]>=$quant) {
-									echo '<p style="color:#8fcb9b;"> ' . $quant . '
-									<img src="icons/woods.png" style="width:4vh;">
-									</p>';
-								}else{
-									echo '<p style="color:#ef3e36;"> ' . $quant . '
-									<img src="icons/woods.png" style="width:4vh;">
-									</p>';
-									$possible = False;
-								}
-								echo '</div>';
-
-								echo'<div class="col-2">';
-
-								echo '</div>';
-
-								echo'<div class="col-2" align="center">';
-								if($possible){
-									echo'
-									<form id="cookform" action="cook.php" method="post">
-									<input type="hidden" name="game" value=' . $game["id"] . '>
-									<input type="hidden" name="user" value=' . $user["id"] . '>';
-									echo'<input type="hidden" name="name" value="soup">';
-									echo'<button type="submit" class="btn" style="margin:2px;color:#f1f0ea;background-color:#11121a">Cook</button><br></form>';
-								}
-								echo '</div>';
-								echo '</div>';
-
-
-
-
-
-
-								echo "<hr class='my-4' />";
-
-								echo '<h2>Canned Meal</h2>';
-
-								echo'<div class="row">';
-								$possible = True;
-								echo'<div class="col-2">';
-								$quant = 1;
-								if ($inventory["bottles_of_water"]>=$quant) {
-									echo '<p style="color:#8fcb9b;"> ' . $quant . '
-									<img src="icons/bottles_of_water.png" style="width:4vh;">
-									</p>';
-								}else{
-									echo '<p style="color:#ef3e36;"> ' . $quant . '
-									<img src="icons/bottles_of_water.png" style="width:4vh;">
-									</p>';
-									$possible = False;
-								}
-								echo'</div>';
-
-								echo'<div class="col-2">';
-								$quant = 1;
-								if ($inventory["canned_foods"]>=$quant) {
-									echo '<p style="color:#8fcb9b;"> ' . $quant . '
-									<img src="icons/canned_foods.png" style="width:4vh;">
-									</p>';
-								}else{
-									echo '<p style="color:#ef3e36;"> ' . $quant . ' 
-									<img src="icons/canned_foods.png" style="width:4vh;">
-									</p>';
-									$possible = False;
-								}
-								echo'</div>';
-
-								echo'<div class="col-2">';
-								$quant = 8;
-								if ($inventory["woods"]>=$quant) {
-									echo '<p style="color:#8fcb9b;"> ' . $quant . '
-									<img src="icons/woods.png" style="width:4vh;">
-									</p>';
-								}else{
-									echo '<p style="color:#ef3e36;"> ' . $quant . '
-									<img src="icons/woods.png" style="width:4vh;">
-									</p>';
-									$possible = False;
-								}
-								echo'</div>';
-
-								echo'<div class="col-4" align="center">';
-								echo '</div>';
-
-								echo'<div class="col-2" align="center">';
-
-								if($possible){
-									echo '<form id="cookform" action="cook.php" method="post">
-									<input type="hidden" name="game" value=' . $game["id"] . '>
-									<input type="hidden" name="user" value=' . $user["id"] . '>';
-									echo'<input type="hidden" name="name" value="canned_meal">';
-									echo'<button type="submit" class="btn" style="margin:2px;color:#f1f0ea;background-color:#11121a">Cook</button><br></form>';
-								}
-
-								echo '</div>';
-								echo '</div>';
-
-
-
-								echo "<hr class='my-4' />";
-
-								echo '<h2>Taco</h2>';
-
-								echo'<div class="row">';
-								$possible = True;
-								echo'<div class="col-2">';
-								$quant = 1;
-								if ($inventory["bottles_of_water"]>=$quant) {
-									echo '<p style="color:#8fcb9b;"> ' . $quant . '
-									<img src="icons/bottles_of_water.png" style="width:4vh;">
-									</p>';
-								}else{
-									echo '<p style="color:#ef3e36;"> ' . $quant . '
-									<img src="icons/bottles_of_water.png" style="width:4vh;">
-									</p>';
-									$possible = False;
-								}
-								echo '</div>';
-
-								echo'<div class="col-2">';
-								$quant = 1;
-								if ($inventory["canned_foods"]>=$quant) {
-									echo '<p style="color:#8fcb9b;"> ' . $quant . '
-									<img src="icons/canned_foods.png" style="width:4vh;">
-									</p>';
-								}else{
-									echo '<p style="color:#ef3e36;"> ' . $quant . ' 
-									<img src="icons/canned_foods.png" style="width:4vh;">
-									</p>';
-									$possible = False;
-								}
-								echo'</div>';
-
-								echo'<div class="col-2">';
-								$quant = 1;
-								if ($inventory["meats"]>=$quant) {
-									echo '<p style="color:#8fcb9b;"> ' . $quant . '
-									<img src="icons/meats.png" style="width:4vh;">
-									</p>';
-								}else{
-									echo '<p style="color:#ef3e36;"> ' . $quant . ' 
-									<img src="icons/meats.png" style="width:4vh;">
-									</p>';
-									$possible = False;
-								}
-								echo'</div>';
-
-								echo'<div class="col-2">';
-								$quant = 8;
-								if ($inventory["woods"]>=$quant) {
-									echo '<p style="color:#8fcb9b;"> ' . $quant . '
-									<img src="icons/woods.png" style="width:4vh;">
-									</p>';
-								}else{
-									echo '<p style="color:#ef3e36;"> ' . $quant . '
-									<img src="icons/woods.png" style="width:4vh;">
-									</p>';
-									$possible = False;
-								}
-								echo'</div>';
-
-								echo'<div class="col-2">';
-								echo'</div>';
-
-								echo'<div class="col-2" align="center">';
-								if($possible){
-									echo '<form id="cookform" action="cook.php" method="post">
-									<input type="hidden" name="game" value=' . $game["id"] . '>
-									<input type="hidden" name="user" value=' . $user["id"] . '>';
-									echo'<input type="hidden" name="name" value="taco">';
-									echo'<button type="submit" class="btn" style="margin:2px;color:#f1f0ea;background-color:#11121a">Cook</button><br></form>';
-								}
-
-								echo'</div>';
-								echo'</div>';
-
-
-
-								echo '
-								<button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin:2px;float:right;">
-								Close
-								</button>
-								</div>
-								</div>
-								</div>
-								</div>';
-
-							}
-
-							echo '</div>';
-
-						}
-						?>
-					</div>
-					<div class='col-lg-6 col-md-12'>
-					<!--TRADER-->
-						<?php
-						if (!is_float($game["day"]/10) and $game["day"] != 0){
-							#echo "Trader Day";
-
-							echo '<div class="row">
-							<p>Someone is at the door  
-							</p>
-							</div>';
-						}
-						?>
-					<!--GAME MSG -->
-						<?php
-						if(isset($_SESSION['rain'])) {
-							echo $_SESSION['rain'];
-						}
-						if(isset($_SESSION['msg'])) {
-							echo $_SESSION['msg'];
-							#$_SESSION['msg'] = "";
-						}
-						if(isset($_SESSION["build_error"])) {
-							echo $_SESSION["build_error"];
-							#$_SESSION['build_error'] = "";
-						}
-						if(isset($_GET["terminal"])) {
-							echo '<form action="terminal.php" method="post" style="margin:0;margin-top:5px;">
-								<input type="hidden" name="game" value=' . $game["id"] . '>
-								<input type="hidden" name="user" value=' . $user["id"] . '>
-								<center><p>Terminal</p></center>
-								<input type="text" name="code">';
-
-
-								echo '<button type="submit" style="float:right;margin-top:5px;">Execute</button>';
-
-								echo '</form>';
-						}
-						?>
-					</div>
-				</div>
-			</div>
-			<div class='col-lg-4 col-md-4' style="margin:0; padding: 0;">
+	<div class="container" style="margin:0;max-width:100%;">
+		<div class='row' >
+			<div class='col-lg-12 col-md-12'>
 			<!--DAY || BACK TO MENU || PLAYER STATUS-->
 				<?php
 
-				echo "<p>Day: " . $game["day"];
+				echo "<div class='row'>
+				<div class='col-6'><p>Day: " . $game["day"] . "</p></div>";
 
-				echo '<a href="userpage.php" class="btn border" style="color:#f1f0ea;padding:1px;margin:2px;float:right;">
+				echo '
+				<div class="col-6">				
+				<a href="userpage.php" class="btn border" style="color:#f1f0ea;padding:1px;margin:2px;float:right;">
 				Back to Menu
-				</a></p>';
+				</a>
+				</div>
+				</div>';
 
 
-				echo "<center><p>Player:</p></center>";
-				echo'<table class="table" style="color: #f1f0ea;">
-				<thead>
-				<tr>
-				<th scope="col">Life</th>
-				<th scope="col">Hunger</th>
-				<th scope="col">Thirst</th>
-				<th scope="col">Rest</th>
-				</tr>
-				</thead>';
+				echo '
+				<div style="background-color: #26272e;">
+				  <center><p>Player:</p></center>
+				</div>';
 
-				echo '<tbody>
-				<tr>
-				<th scope="row">'. $player["life"] .'</th>
-				<td>'. $player["hunger"] .'</td>
-				<td>'. $player["thirst"] .'</td>
-				<td>'. $player["rest"] .'</td>
-				</tr>
-				</tbody>';
+				echo '
+				<div class="progress" style="background-color: #26272e;">
+				  <div class="progress-bar progress-bar-striped" style="width: '. $player["life"] .'%; background-color: #645258;" aria-valuemin="0" aria-valuemax="100">
+				  	<div style="position:absolute;">Life - '. $player["life"].'</div>
+				  </div>
+				</div>
+
+				<div class="progress" style="background-color: #26272e;">
+				  <div class="progress-bar progress-bar-striped" style="width: '. $player["hunger"] .'%; background-color: #4d5d54;" aria-valuemin="0" aria-valuemax="100">
+				  	<div style="position:absolute;">Hunger - '. $player["hunger"] .'</div>
+				  </div>
+				</div>
+
+				<div class="progress" style="background-color: #26272e;">
+				  <div class="progress-bar progress-bar-striped" style="width: '. $player["thirst"] .'%; background-color: #4d4e5f;" aria-valuemin="0" aria-valuemax="100">
+				  	<div style="position:absolute;">Thirst - '. $player["thirst"] .'</div>
+				  </div>
+				</div>
+
+				<div class="progress" style="background-color: #26272e;">
+				  <div class="progress-bar progress-bar-striped" style="width: '. $player["rest"] .'%; background-color: #737a53;" aria-valuemin="0" aria-valuemax="100">
+				  	<div style="position:absolute;">Energy - '. $player["rest"] .'</div>
+				  </div>
+				</div>
+				';
 				?>
+
+			</div>
+		</div>
+		<div class='row'>								
+			<div class='col-lg-12 col-md-12'>
+			<!--HOUSE LEVEL || HOUSE UPGRADE-->
+				<?php
+				echo '<div style="float:left"><p>House [Level ' . $house["level"] . ']</p></div>';
+
+				echo '<div style="float:right">
+				<form action="houseupgrade.php" method="post">
+
+				<input type="hidden" name="game" value=' . $game["id"] .'>
+				<input type="hidden" name="user" value=' . $user["id"] . '>
+
+				<button type="submit" class="btn border" style="color:#f1f0ea;padding:1px;margin:2px;">
+				Upgrade House
+				</button>
+				</form>
+				</div>';
+				?>
+			</div>
+			<div class='col-lg-12 col-md-12'>
+			<!--HOUSE BUILDS-->
+				<?php
+				for ($i = 1; $i <= $house["spots"]; $i++) {
+					echo "<p><div class='row'>Build Space:  ------</div></p>";
+
+				}
+
+					#SHOW BUILDS:
+				while ($build_row = mysqli_fetch_assoc($builds_result)) {
+					echo "<div class='row'>
+					Build Space : " . $build_row["name"] . "</div>";
+
+					echo '<div class="row">
+					<form action="destroy.php" method="post">
+					<input type="hidden" name="game" value=' . $game["id"] . '>
+					<input type="hidden" name="user" value=' . $user["id"] . '>
+					<input type="hidden" name="build" value=' . $build_row["id"] . '>';
+
+					echo '<button type="submit" class="btn border" style="color:#f1f0ea;padding:1px;margin-left:4px;">
+					Destroy
+					</button></form>';
+
+					if ($build_row["name"] == 'Farm') {
+						if ($build_row["time"] == NULL){
+							echo '<p><button type="button" class="btn border" data-toggle="modal" data-target="#grow" style="color:#f1f0ea;padding:1px;margin-left:4px;">
+							Grow
+							</button></p>';
+
+							echo '<div class="modal fade" id="grow" tabindex="-1" role="dialog" aria-labelledby="Growlabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 80%;width:auto;">
+							<div class="modal-content" style="color: #11121a;background-color: #f1f0ea;">
+							<div class="modal-header">
+							<h5 class="modal-title" id="Growlabel">Choose a Seed</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">X</span>
+							</button>
+							</div>
+							<div class="modal-body">
+							<form id="growform" action="grow.php" method="post">';
+							echo '<input type="hidden" name="game" value=' . $game["id"] . '>
+							<input type="hidden" name="user" value=' . $user["id"] . '>
+
+							<input type="hidden" name="farm" value=' . $build_row["id"] . '>';
+
+
+							if($inventory["herbal_seeds"] > 0){
+								echo '<p><input type="radio" NAME="seed" value="herbal_seeds" style="min-height:3.5vh;min-width:3.5vh;"> Herbal Seed</p>';
+							}
+							if($inventory["vegetable_seeds"] > 0){
+								echo '<p><input type="radio" NAME="seed" value="vegetable_seeds" style="min-height:3.5vh;min-width:3.5vh;"> Vegetable Seed</p>';
+							}
+							if($inventory["cereal_seeds"] > 0){
+								echo '<p><input type="radio" NAME="seed" value="cereal_seeds" style="min-height:3.5vh;min-width:3.5vh;"> Cereal Seed</p>';
+							}
+							echo '<button type="submit" class="btn btn-secondary" style="margin:2px;float:right;">Grow</button>
+							</form>
+							</div>
+							</div>
+							</div>
+							</div>';
+
+
+						}else{
+							echo '<p><a class="btn border" style="color:#f1f0ea;padding:1px;margin-left:4px;">
+							Growing
+							</a></p>';
+						}
+
+
+
+
+					}else if($build_row["name"] == 'Workbench') {
+
+						echo '<p><button type="button" class="btn border" data-toggle="modal" data-target="#work" style="color:#f1f0ea;padding:1px;margin-left:4px;">
+						Use
+						</button></p>';
+
+						echo '<div class="modal fade" id="work" tabindex="-1" role="dialog" aria-labelledby="Worklabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 80%;width:auto;">
+						<div class="modal-content" style="color: #11121a;background-color: #f1f0ea;">
+						<div class="modal-header">
+						<h5 class="modal-title" id="Worklabel">
+						Workbench Menu
+						</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">X</span>
+						</button>
+						</div>
+
+						<div class="modal-body">';
+						echo '<center><h2>Builds</h2></center>';
+						echo '<h2>Beer Kit</h2>';
+						echo '<div class="row">';
+						$possible = True;
+						echo'<div class="col-2">';
+						$quant = 1;
+						if ($inventory["tools"]>=$quant) {
+							echo '<p style="color:#8fcb9b;"> ' . $quant . '
+							<img src="icons/tools.png" style="width:4vh;">
+							</p>';
+						}else{
+							echo '<p style="color:#ef3e36;"> ' . $quant . '
+							<img src="icons/tools.png" style="width:4vh;">
+							</p>';
+							$possible = False;
+						}
+						echo '</div>';
+
+						echo'<div class="col-2">';
+						$quant = 30;
+						if ($inventory["woods"]>=$quant) {
+							echo '<p style="color:#8fcb9b;"> ' . $quant . '
+							<img src="icons/woods.png" style="width:4vh;">
+							</p>';
+						}else{
+							echo '<p style="color:#ef3e36;"> ' . $quant . '
+							<img src="icons/woods.png" style="width:4vh;">
+							</p>';
+							$possible = False;
+						}
+						echo '</div>';
+
+						echo'<div class="col-2">';
+						$quant = 20;
+						if ($inventory["pipes"]>=$quant) {
+							echo '<p style="color:#8fcb9b;"> ' . $quant . '
+							<img src="icons/pipes.png" style="width:4vh;">
+							</p>';
+						}else{
+							echo '<p style="color:#ef3e36;"> ' . $quant . '
+							<img src="icons/pipes.png" style="width:4vh;">
+							</p>';
+							$possible = False;
+						}
+						echo '</div>';
+
+						echo'<div class="col-2">';
+						$quant = 25;
+						if ($inventory["scraps"]>=$quant) {
+							echo '<p style="color:#8fcb9b;"> ' . $quant . '
+							<img src="icons/scraps.png" style="width:4vh;">
+							</p>';
+						}else{
+							echo '<p style="color:#ef3e36;"> ' . $quant . '
+							<img src="icons/scraps.png" style="width:4vh;">
+							</p>';
+							$possible = False;
+						}
+						echo '</div>';
+
+						echo'<div class="col-2">';
+						echo '</div>';
+
+						echo'<div class="col-2" align="center">';
+						if($possible){
+							echo'
+							<form id="cookform" action="build.php" method="post">
+							<input type="hidden" name="game" value=' . $game["id"] . '>
+							<input type="hidden" name="user" value=' . $user["id"] . '>';
+							echo'<input type="hidden" name="build" value="Beer Kit">';
+							echo'<button type="submit" class="btn" style="margin:2px;color:#f1f0ea;background-color:#11121a">Build</button></form>';
+						}
+						echo '</div>';
+
+						echo '</div>';
+
+
+
+
+						echo "<hr class='my-4' />";
+
+						echo '
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin:2px;float:right;">
+						Close
+						</button>
+						</div>
+						</div>
+						</div>
+						</div>';
+
+					}else if($build_row["name"] == 'Beer Kit') {
+						if ($build_row["time"] == NULL){
+							echo '<p><button type="button" class="btn border" data-toggle="modal" data-target="#beerkit" style="color:#f1f0ea;padding:1px;margin-left:4px;">
+							Use
+							</button></p>';
+
+							echo '<div class="modal fade" id="beerkit" tabindex="-1" role="dialog" aria-labelledby="beerkitlabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 80%;width:auto;">
+							<div class="modal-content" style="color: #11121a;background-color: #f1f0ea;">
+							<div class="modal-header">
+							<h5 class="modal-title" id="beerkitlabel">
+							Workbench Menu
+							</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">X</span>
+							</button>
+							</div>
+
+							<div class="modal-body">';
+							echo '<h2>Homemade Beer</h2>';
+							echo '<div class="row">';
+
+							echo'<div class="col-2">';
+							$quant = 10;
+							if ($inventory["woods"]>=$quant) {
+								echo '<p style="color:#8fcb9b;"> ' . $quant . '
+								<img src="icons/woods.png" style="width:4vh;">
+								</p>';
+							}else{
+								echo '<p style="color:#ef3e36;"> ' . $quant . '
+								<img src="icons/woods.png" style="width:4vh;">
+								</p>';
+								$possible = False;
+							}
+							echo '</div>';
+
+							$possible = True;
+							echo'<div class="col-2">';
+							$quant = 5;
+							if ($inventory["cereals"]>=$quant) {
+								echo '<p style="color:#8fcb9b;"> ' . $quant . '
+								<img src="icons/cereals.png" style="width:4vh;">
+								</p>';
+							}else{
+								echo '<p style="color:#ef3e36;"> ' . $quant . '
+								<img src="icons/cereals.png" style="width:4vh;">
+								</p>';
+								$possible = False;
+							}
+							echo '</div>';
+
+							echo'<div class="col-2">';
+							$quant = 3;
+							if ($inventory["bottles_of_water"]>=$quant) {
+								echo '<p style="color:#8fcb9b;"> ' . $quant . '
+								<img src="icons/bottles_of_water.png" style="width:4vh;">
+								</p>';
+							}else{
+								echo '<p style="color:#ef3e36;"> ' . $quant . '
+								<img src="icons/bottles_of_water.png" style="width:4vh;">
+								</p>';
+								$possible = False;
+							}
+							echo '</div>';
+
+
+
+							echo'<div class="col-4">';
+							echo '</div>';
+
+							echo'<div class="col-2" align="center">';
+							if($possible){
+								echo'
+								<form id="cookform" action="make.php" method="post">
+								<input type="hidden" name="game" value=' . $game["id"] . '>
+								<input type="hidden" name="user" value=' . $user["id"] . '>';
+								echo'<input type="hidden" name="name" value="homemade_beers">';
+								echo '<input type="hidden" name="kit" value=' . $build_row["id"] . '>';
+								echo'<button type="submit" class="btn" style="margin:2px;color:#f1f0ea;background-color:#11121a">Make</button></form>';
+							}
+							echo '</div>';
+
+							echo '</div>';
+
+
+							echo "<hr class='my-4' />";
+
+							echo '
+							<button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin:2px;float:right;">
+							Close
+							</button>
+							</div>
+							</div>
+							</div>
+							</div>';
+
+						}else{
+							echo '<p><a class="btn border" style="color:#f1f0ea;padding:1px;margin-left:4px;">
+							Fermenting
+							</a></p>';
+						}
+
+
+					}else if ($build_row["name"] == 'Stove') {
+						echo '<p><button type="button" class="btn border" data-toggle="modal" data-target="#cook" style="color:#f1f0ea;padding:1px;margin-left:4px;">
+						Cook
+						</button></p>';
+
+						echo '<div class="modal fade" id="cook" tabindex="-1" role="dialog" aria-labelledby="Cooklabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 80%;width:auto;">
+						<div class="modal-content" style="color: #11121a;background-color: #f1f0ea;">
+						<div class="modal-header">
+						<h5 class="modal-title" id="Cooklabel">
+						Dishes
+						</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">X</span>
+						</button>
+						</div>
+						<div class="modal-body">';
+													#Printing Cook Menu:
+
+						echo '
+						<h2>Soup</h2>';
+
+						echo'<div class="row">';
+						$possible = True;
+						echo'<div class="col-2">';
+						$quant = 2;
+						if ($inventory["bottles_of_water"]>=$quant) {
+							echo '<p style="color:#8fcb9b;"> ' . $quant . '
+							<img src="icons/bottles_of_water.png" style="width:4vh;">
+							</p>';
+						}else{
+							echo '<p style="color:#ef3e36;"> ' . $quant . '
+							<img src="icons/bottles_of_water.png" style="width:4vh;">
+							</p>';
+							$possible = False;
+						}
+						echo '</div>';
+
+						echo'<div class="col-2">';
+						$quant = 1;
+						if ($inventory["vegetables"]>=$quant) {
+							echo '<p style="color:#8fcb9b;"> ' . $quant . '
+							<img src="icons/vegetables.png" style="width:4vh;">
+							</p>';
+						}else{
+							echo '<p style="color:#ef3e36;"> ' . $quant . ' 
+							<img src="icons/vegetables.png" style="width:4vh;">
+							</p>';
+							$possible = False;
+						}
+						echo '</div>';
+
+						echo'<div class="col-2">';
+						$quant = 1;
+						if ($inventory["meats"]>=$quant) {
+							echo '<p style="color:#8fcb9b;"> ' . $quant . '
+							<img src="icons/meats.png" style="width:4vh;">
+							</p>';
+						}else{
+							echo '<p style="color:#ef3e36;"> ' . $quant . '
+							<img src="icons/meats.png" style="width:4vh;">
+							</p>';
+							$possible = False;
+						}
+						echo '</div>';
+
+						echo'<div class="col-2">';
+						$quant = 8;
+						if ($inventory["woods"]>=$quant) {
+							echo '<p style="color:#8fcb9b;"> ' . $quant . '
+							<img src="icons/woods.png" style="width:4vh;">
+							</p>';
+						}else{
+							echo '<p style="color:#ef3e36;"> ' . $quant . '
+							<img src="icons/woods.png" style="width:4vh;">
+							</p>';
+							$possible = False;
+						}
+						echo '</div>';
+
+						echo'<div class="col-2">';
+
+						echo '</div>';
+
+						echo'<div class="col-2" align="center">';
+						if($possible){
+							echo'
+							<form id="cookform" action="cook.php" method="post">
+							<input type="hidden" name="game" value=' . $game["id"] . '>
+							<input type="hidden" name="user" value=' . $user["id"] . '>';
+							echo'<input type="hidden" name="name" value="soup">';
+							echo'<button type="submit" class="btn" style="margin:2px;color:#f1f0ea;background-color:#11121a">Cook</button><br></form>';
+						}
+						echo '</div>';
+						echo '</div>';
+
+
+
+
+
+
+						echo "<hr class='my-4' />";
+
+						echo '<h2>Canned Meal</h2>';
+
+						echo'<div class="row">';
+						$possible = True;
+						echo'<div class="col-2">';
+						$quant = 1;
+						if ($inventory["bottles_of_water"]>=$quant) {
+							echo '<p style="color:#8fcb9b;"> ' . $quant . '
+							<img src="icons/bottles_of_water.png" style="width:4vh;">
+							</p>';
+						}else{
+							echo '<p style="color:#ef3e36;"> ' . $quant . '
+							<img src="icons/bottles_of_water.png" style="width:4vh;">
+							</p>';
+							$possible = False;
+						}
+						echo'</div>';
+
+						echo'<div class="col-2">';
+						$quant = 1;
+						if ($inventory["canned_foods"]>=$quant) {
+							echo '<p style="color:#8fcb9b;"> ' . $quant . '
+							<img src="icons/canned_foods.png" style="width:4vh;">
+							</p>';
+						}else{
+							echo '<p style="color:#ef3e36;"> ' . $quant . ' 
+							<img src="icons/canned_foods.png" style="width:4vh;">
+							</p>';
+							$possible = False;
+						}
+						echo'</div>';
+
+						echo'<div class="col-2">';
+						$quant = 8;
+						if ($inventory["woods"]>=$quant) {
+							echo '<p style="color:#8fcb9b;"> ' . $quant . '
+							<img src="icons/woods.png" style="width:4vh;">
+							</p>';
+						}else{
+							echo '<p style="color:#ef3e36;"> ' . $quant . '
+							<img src="icons/woods.png" style="width:4vh;">
+							</p>';
+							$possible = False;
+						}
+						echo'</div>';
+
+						echo'<div class="col-4" align="center">';
+						echo '</div>';
+
+						echo'<div class="col-2" align="center">';
+
+						if($possible){
+							echo '<form id="cookform" action="cook.php" method="post">
+							<input type="hidden" name="game" value=' . $game["id"] . '>
+							<input type="hidden" name="user" value=' . $user["id"] . '>';
+							echo'<input type="hidden" name="name" value="canned_meal">';
+							echo'<button type="submit" class="btn" style="margin:2px;color:#f1f0ea;background-color:#11121a">Cook</button><br></form>';
+						}
+
+						echo '</div>';
+						echo '</div>';
+
+
+
+						echo "<hr class='my-4' />";
+
+						echo '<h2>Taco</h2>';
+
+						echo'<div class="row">';
+						$possible = True;
+						echo'<div class="col-2">';
+						$quant = 1;
+						if ($inventory["bottles_of_water"]>=$quant) {
+							echo '<p style="color:#8fcb9b;"> ' . $quant . '
+							<img src="icons/bottles_of_water.png" style="width:4vh;">
+							</p>';
+						}else{
+							echo '<p style="color:#ef3e36;"> ' . $quant . '
+							<img src="icons/bottles_of_water.png" style="width:4vh;">
+							</p>';
+							$possible = False;
+						}
+						echo '</div>';
+
+						echo'<div class="col-2">';
+						$quant = 1;
+						if ($inventory["canned_foods"]>=$quant) {
+							echo '<p style="color:#8fcb9b;"> ' . $quant . '
+							<img src="icons/canned_foods.png" style="width:4vh;">
+							</p>';
+						}else{
+							echo '<p style="color:#ef3e36;"> ' . $quant . ' 
+							<img src="icons/canned_foods.png" style="width:4vh;">
+							</p>';
+							$possible = False;
+						}
+						echo'</div>';
+
+						echo'<div class="col-2">';
+						$quant = 1;
+						if ($inventory["meats"]>=$quant) {
+							echo '<p style="color:#8fcb9b;"> ' . $quant . '
+							<img src="icons/meats.png" style="width:4vh;">
+							</p>';
+						}else{
+							echo '<p style="color:#ef3e36;"> ' . $quant . ' 
+							<img src="icons/meats.png" style="width:4vh;">
+							</p>';
+							$possible = False;
+						}
+						echo'</div>';
+
+						echo'<div class="col-2">';
+						$quant = 8;
+						if ($inventory["woods"]>=$quant) {
+							echo '<p style="color:#8fcb9b;"> ' . $quant . '
+							<img src="icons/woods.png" style="width:4vh;">
+							</p>';
+						}else{
+							echo '<p style="color:#ef3e36;"> ' . $quant . '
+							<img src="icons/woods.png" style="width:4vh;">
+							</p>';
+							$possible = False;
+						}
+						echo'</div>';
+
+						echo'<div class="col-2">';
+						echo'</div>';
+
+						echo'<div class="col-2" align="center">';
+						if($possible){
+							echo '<form id="cookform" action="cook.php" method="post">
+							<input type="hidden" name="game" value=' . $game["id"] . '>
+							<input type="hidden" name="user" value=' . $user["id"] . '>';
+							echo'<input type="hidden" name="name" value="taco">';
+							echo'<button type="submit" class="btn" style="margin:2px;color:#f1f0ea;background-color:#11121a">Cook</button><br></form>';
+						}
+
+						echo'</div>';
+						echo'</div>';
+
+
+
+						echo '
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin:2px;float:right;">
+						Close
+						</button>
+						</div>
+						</div>
+						</div>
+						</div>';
+
+					}
+
+					echo '</div>';
+
+				}
+				?>
+			</div>
+			<div class='col-lg-12 col-md-12'>
+			<!--TRADER-->
+				<?php
+				if (!is_float($game["day"]/10) and $game["day"] != 0){
+					#echo "Trader Day";
+
+					echo '<div class="row">
+					<p>Someone is at the door  
+					</p>
+					</div>';
+				}
+				?>
+			<!--GAME MSG -->
+				<?php
+				if(isset($_SESSION['rain'])) {
+					echo $_SESSION['rain'];
+				}
+				if(isset($_SESSION['msg'])) {
+					echo $_SESSION['msg'];
+					#$_SESSION['msg'] = "";
+				}
+				if(isset($_SESSION["build_error"])) {
+					echo $_SESSION["build_error"];
+					#$_SESSION['build_error'] = "";
+				}
+				if(isset($_GET["terminal"])) {
+					echo '<form action="terminal.php" method="post" style="margin:0;margin-top:5px;">
+						<input type="hidden" name="game" value=' . $game["id"] . '>
+						<input type="hidden" name="user" value=' . $user["id"] . '>
+						<center><p>Terminal</p></center>
+						<input type="text" name="code">';
+
+
+						echo '<button type="submit" style="float:right;margin-top:5px;">Execute</button>';
+
+						echo '</form>';
+				}
+				?>
+			</div>
+		</div>
+		<div class='row'>
+			<div class='col-lg-4 col-md-4'>
 			<!--INVENTORY BUTTON-->
 				<?php
-				echo '</table>';
 
-				echo'<div class="row">
+				echo'
 				<button type="button" class="btn border" data-toggle="modal" data-target="#inventory" style="color:#f1f0ea;">
 				<p>Inventory</p>
-				<img src="icons/inventory.png" style="width:12vh;">
+				<img src="icons/inventory.png" style="width:8vh;">
 				</button>
 
-				</div>
+
 
 				<div class="modal fade" id="inventory" tabindex="-1" role="dialog" aria-labelledby="inventorylabel" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 80%;width: auto;">
@@ -1243,15 +1263,16 @@ include('login_veryfy.php')
 				</div>
 				</div>';
 				?>
+			</div>
+			<div class='col-lg-4 col-md-4'>
 			<!--BUILD 	  BUTTON -->
 				<?php
 
-				echo '<div class="row">
+				echo '
 				<button type="button" class="btn border" data-toggle="modal" data-target="#exampleModal" style="color:#f1f0ea;margin-top:5px;">
 				<p>Build</p>
-				<img src="icons/build.png" style="width:12vh;">
-				</button>
-				</div>';
+				<img src="icons/build.png" style="width:8vh;">
+				</button>';
 
 
 				echo '<div class="modal left fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1310,28 +1331,29 @@ include('login_veryfy.php')
 				</div>
 				</div>';
 				?>
+			</div>
+			<div class='col-lg-4 col-md-4'>
 			<!--MANUAL 	  BUTTON -->
 				<?php
-				echo '<div class="row">
-				<form action="manual.php" method="post">
+				#echo '
+				#<form action="manual.php" method="post">
 
-				<input type="hidden" name="game" value=' . $game["id"] .'>
-				<input type="hidden" name="user" value=' . $user["id"] . '>
+				#<input type="hidden" name="game" value=' . $game["id"] .'>
+				#<input type="hidden" name="user" value=' . $user["id"] . '>
 
-				<button type="submit" class="btn border" style="color:#f1f0ea;margin-top:5px;">
-				<p>Manual</p>
-				<img src="icons/manual.png" style="width:12vh;">
-				</button>
-				</form>
-				</div>';
+				#<button type="submit" class="btn border" style="color:#f1f0ea;margin-top:5px;">
+				#<p>Manual</p>
+				#<img src="icons/manual.png" style="width:12vh;">
+				#</button>
+				#</form>';
 				?>
 			<!--END_DAY   BUTTON-->
 				<?php
-				echo '<div class="row" style="position:fixed;bottom:0;right:0;">
-				<button type="button" class="btn border" data-toggle="modal" data-target="#enddaymodal" style="color:#f1f0ea;margin:15px;">
+				echo '
+				<button type="button" class="btn border" data-toggle="modal" data-target="#enddaymodal" style="color:#f1f0ea;">
 				End Day
 				</button>
-				</div>';
+				';
 
 
 				echo '<div class="modal left fade" id="enddaymodal" tabindex="-1" role="dialog" aria-labelledby="enddaymodalLabel" aria-hidden="true">
