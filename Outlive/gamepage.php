@@ -1689,42 +1689,83 @@ include('login_veryfy.php')
 				<span aria-hidden="true">X</span>
 				</button>
 				</div>
-				<div class="modal-body" style="color:#11121a;background-color:#f1f0ea;">
-				<form id="enddayform" action="endday.php" method="post" style="margin:0;margin-top:5px;">
+				<div class="modal-body" style="color:#11121a;background-color:#f1f0ea;">';
 
-				<input type="hidden" name="game" value=' . $game["id"] . '>
-				<input type="hidden" name="user" value=' . $user["id"] . '>';
 
-				if ($player["rest"] >= 30){
+				echo ' 
+					<div id="endDayAccordion">
+					  <div class="card">
+					    <div class="card-header" style="background-color: #13151e;color:#f1f0ea;">
+					      <p data-toggle="collapse" href="#collapseExplore">
+					        Explore
+					      </p>
+					    </div>
+					    <div id="collapseExplore" class="collapse" data-parent="#endDayAccordion">
+					      <div class="card-body" style="background-color:#11121a;color:#f1f0ea;">';
 
-					echo '<p><input type="checkbox" id="explore" name="explore" style="min-height:3.5vh;min-width:3.5vh;">
-					<label for="explore">Explore</label></p>';
+							if ($player["rest"] >= 30){
+							echo '<form id="enddayform" action="endday.php" method="post" style="margin:0;margin-top:5px;">
 
-					echo '<p>Explore Options:</p>';
+								<input type="hidden" name="game" value=' . $game["id"] . '>
+								<input type="hidden" name="user" value=' . $user["id"] . '>
+								<input type="hidden" name="explore" value="True">';
 
-					if ($inventory["guns"] >= 1 and $inventory["bullets"] >= 1) {
-						echo '<p><input type="checkbox" id="guncheck" name="gun" style="min-height:3.5vh;min-width:3.5vh;">
-						<label for="guncheck">Carry a gun</label></p>';
-					}
-					if ($inventory["melee_weapons"] >= 1) {
-						echo '<p><input type="checkbox" id="meleecheck" name="melee" style="min-height:3.5vh;min-width:3.5vh;">
-						<label for="meleecheck">carry a melee weapon</label></p>';
-					}
+								if ($inventory["guns"] >= 1 and $inventory["bullets"] >= 1) {
+									echo '<p><input type="checkbox" id="guncheck" name="gun" style="min-height:3.5vh;min-width:3.5vh;">
+									<label for="guncheck">Carry a gun</label></p>';
+								}
+								if ($inventory["melee_weapons"] >= 1) {
+									echo '<p><input type="checkbox" id="meleecheck" name="melee" style="min-height:3.5vh;min-width:3.5vh;">
+									<label for="meleecheck">Carry a melee weapon</label></p>';
+								}
 
-				}else{
-					echo "Too tired to explore";
-				}
+							echo '<button type="submit" class="btn btn-block border" style="color:#f1f0ea;">Explore</button>';
+
+							}else{
+								echo "Too tired to explore";
+							}
+							echo '</form>';
+
+			            echo'
+					      </div>
+					    </div>
+					  </div>
+
+
+					  <div class="card">
+					    <div class="card-header" style="background-color: #13151e;color:#f1f0ea;">
+					      <p data-toggle="collapse" href="#collapseSleep">
+					        Sleep
+					      </p>
+					    </div>
+					    <div id="collapseSleep" class="collapse" data-parent="#endDayAccordion">
+					      <div class="card-body" style="background-color:#11121a;color:#f1f0ea;">';
+
+							echo '<form id="enddayform" action="endday.php" method="post" style="margin:0;margin-top:5px;">
+
+								<input type="hidden" name="game" value=' . $game["id"] . '>
+								<input type="hidden" name="user" value=' . $user["id"] . '>';
+
+							echo '<button type="submit" class="btn btn-block border" style="color:#f1f0ea;">Sleep</button>';
+
+							echo '</form>';
+
+			            echo'
+					      </div>
+					    </div>
+					  </div>';
+
+					echo'
+					</div>';
 
 
 
 				echo '
-				<button type="submit" class="btn btn-secondary" style="float:right;margin-top:5px;">End Day</button>
-				</form>
 				</div>
-
 				</div>
 				</div>
 				</div>';
+
 				?>
 			</div>
 			<div class='col-lg-12 col-md-12 overflow-auto' style="max-height:25vh;background-color:#13151e">
@@ -1733,10 +1774,7 @@ include('login_veryfy.php')
 				if (!is_float($game["day"]/10) and $game["day"] != 0){
 					#echo "Trader Day";
 
-					echo '<div class="row">
-					<p>Someone is at the door  
-					</p>
-					</div>';
+					echo '<p>Someone is at the door</p>';
 				}
 				?>
 			<!--GAME MSG -->
