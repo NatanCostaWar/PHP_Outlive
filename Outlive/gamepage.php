@@ -1274,49 +1274,375 @@ include('login_veryfy.php')
 				<div class="modal-dialog" role="document" style="min-width: 95%;width: auto;">
 				<div class="modal-content">
 				<div class="modal-header" style="color:#11121a;background-color:#f1f0ea;">
-				<h5 class="modal-title" id="inventorylabel">Building Prices:</h5>
+				<h5 class="modal-title" id="inventorylabel">Build:</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<span aria-hidden="true">X</span>
 				</button>
 				</div>
 				<div class="modal-body" style="color:#11121a;background-color:#f1f0ea;">';
 
-				echo '<div>
-				<form action="manual.php#builds" method="post">
-
-				<input type="hidden" name="game" value=' . $game["id"] .'>
-				<input type="hidden" name="user" value=' . $user["id"] . '>
-
-				<button type="submit" class="btn border" style="color:#f1f0ea;background-color:#11121a;padding:1px;margin:2px;">
-				See Builds
-				</button>
-				</form>
-				</div>';
-
 				if ($house["spots"]>0) {
 
-					echo '<form id="buildform" action="build.php" method="post" style="margin:0;margin-top:5px;">
-					<input type="hidden" name="game" value=' . $game["id"] . '>
-					<input type="hidden" name="user" value=' . $user["id"] . '>';
+					echo "<div class='row justify-content-center'>
+						<center><p>" . $house["spots"] . " spaces left in Shelter:</p></center>
+					</div>";
+
+					echo ' 
+					<div id="buildsAccordion">
+					  <div class="card">
+					    <div class="card-header" style="background-color: #13151e;color:#f1f0ea;">
+					      <p data-toggle="collapse" href="#collapseStove">
+					        Stove
+					      </p>
+					    </div>
+					    <div id="collapseStove" class="collapse" data-parent="#buildsAccordion">
+					      <div class="card-body" style="background-color:#11121a;color:#f1f0ea;">
+					        
+					        <p>A improvised stove that can cook improved food with basic ingredients and some wood.</p>
+                			<p>How To Make it:</p>';
+
+					      	$quant = 1;
+			                if ($inventory["tools"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Tool</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Tool</p>';
+			                }
+
+			                $quant = 40;
+			                if ($inventory["woods"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Woods</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Woods</p>';
+			                }
+
+			                $quant = 75;
+			                if ($inventory["scraps"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Metal Scraps</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Metal Scraps</p>';
+			                }
+
+			                $quant = 16;
+			                if ($inventory["pipes"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Pipes</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Pipes</p>';
+			                }
 
 
-					echo "<br><p>Your house have " . $house["spots"] . " builds spaces left:</p>";
 
-					echo '<select class="form-control" name="build" form="buildform">
-					<option value="Stove">Stove</option>
-					<option value="Bed">Bed</option>
-					<option value="Workbench">Workbench</option>
-					<option value="Chair">Chair</option>
-					<option value="Water Collector">Water Collector</option>
-					<option value="Farm">Farm</option>
-					</select>';
+			                echo '<form id="buildform" action="build.php" method="post" style="margin:0;">
+							<input type="hidden" name="game" value=' . $game["id"] . '>
+							<input type="hidden" name="user" value=' . $user["id"] . '>
+							<input type="hidden" name="build" value="Stove">';
 
-					echo '<button type="submit" class="btn btn-secondary" style="float:right;margin-top:5px;">Biuld</button>';
+							echo '<button type="submit" class="btn btn-block border" style="color:#f1f0ea;">Biuld</button>';
 
-					echo '</form>';
+							echo '</form>';
+
+			            echo'
+					      </div>
+					    </div>
+					  </div>';
+
+
+
+
+
+					  echo '<div class="card">
+					    <div class="card-header" style="background-color: #13151e;color:#f1f0ea;">
+					      <p data-toggle="collapse" href="#collapseBed">
+					        Bed
+					      </p>
+					    </div>
+					    <div id="collapseBed" class="collapse" data-parent="#buildsAccordion">
+					      <div class="card-body" style="background-color:#11121a;color:#f1f0ea;">
+					        
+					        <p>A basic bed to keep you of the ground, sleep in one can be really comfortable and restful.</p>
+			                <p>How To Make it:</p>';
+
+			                $quant = 1;
+			                if ($inventory["tools"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Tool</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Tool</p>';
+			                }
+
+			                $quant = 80;
+			                if ($inventory["woods"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Woods</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Woods</p>';
+			                }
+
+			                $quant = 60;
+			                if ($inventory["nails"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Nails</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Nails</p>';
+			                }
+
+
+
+			                echo '<form id="buildform" action="build.php" method="post" style="margin:0;">
+							<input type="hidden" name="game" value=' . $game["id"] . '>
+							<input type="hidden" name="user" value=' . $user["id"] . '>
+							<input type="hidden" name="build" value="Bed">';
+
+							echo '<button type="submit" class="btn btn-block border" style="color:#f1f0ea;">Biuld</button>';
+
+							echo '</form>';
+
+			            echo'
+					      </div>
+					    </div>
+					  </div>';
+					
+
+
+					  echo '<div class="card">
+					    <div class="card-header" style="background-color: #13151e;color:#f1f0ea;">
+					      <p data-toggle="collapse" href="#collapseWorkbench">
+					        Workbench
+					      </p>
+					    </div>
+					    <div id="collapseWorkbench" class="collapse" data-parent="#buildsAccordion">
+					      <div class="card-body" style="background-color:#11121a;color:#f1f0ea;">
+					        
+					        <p>Cant do much widauth one, some things need more elaborated tools</p>
+			                <p>How To Make it:</p>';
+			                $quant = 1;
+			                if ($inventory["tools"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Tool</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Tool</p>';
+			                }
+
+			                $quant = 60;
+			                if ($inventory["woods"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Woods</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Woods</p>';
+			                }
+
+			                $quant = 30;
+			                if ($inventory["nails"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Nails</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Nails</p>';
+			                }
+
+			                $quant = 40;
+			                if ($inventory["scraps"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Metal Scraps</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Metal Scraps</p>';
+			                }
+
+
+
+			                echo '<form id="buildform" action="build.php" method="post" style="margin:0;">
+							<input type="hidden" name="game" value=' . $game["id"] . '>
+							<input type="hidden" name="user" value=' . $user["id"] . '>
+							<input type="hidden" name="build" value="Workbench">';
+
+							echo '<button type="submit" class="btn btn-block border" style="color:#f1f0ea;">Biuld</button>';
+
+							echo '</form>';
+
+			            echo'
+					      </div>
+					    </div>
+					  </div>';
+
+
+
+
+
+
+					  echo '<div class="card">
+					    <div class="card-header" style="background-color: #13151e;color:#f1f0ea;">
+					      <p data-toggle="collapse" href="#collapseChair">
+					        Chair
+					      </p>
+					    </div>
+					    <div id="collapseChair" class="collapse" data-parent="#buildsAccordion">
+					      <div class="card-body" style="background-color:#11121a;color:#f1f0ea;">
+					        
+					        <p>Not very comfortable but still good to rest during the days activities</p>
+			                <p>How To Make it:</p>';
+			                $quant = 1;
+			                if ($inventory["tools"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Tool</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Tool</p>';
+			                }
+
+			                $quant = 40;
+			                if ($inventory["woods"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Woods</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Woods</p>';
+			                }
+
+			                $quant = 30;
+			                if ($inventory["nails"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Nails</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Nails</p>';
+			                }
+
+
+
+			                echo '<form id="buildform" action="build.php" method="post" style="margin:0;">
+							<input type="hidden" name="game" value=' . $game["id"] . '>
+							<input type="hidden" name="user" value=' . $user["id"] . '>
+							<input type="hidden" name="build" value="Chair">';
+
+							echo '<button type="submit" class="btn btn-block border" style="color:#f1f0ea;">Biuld</button>';
+
+							echo '</form>';
+
+			            echo'
+					      </div>
+					    </div>
+					  </div>';
+
+
+
+
+
+					  echo '<div class="card">
+					    <div class="card-header" style="background-color: #13151e;color:#f1f0ea;">
+					      <p data-toggle="collapse" href="#collapseWaterCollector">
+					        Water Collector
+					      </p>
+					    </div>
+					    <div id="collapseWaterCollector" class="collapse" data-parent="#buildsAccordion">
+					      <div class="card-body" style="background-color:#11121a;color:#f1f0ea;">
+					        
+					        <p>Dont waste any rain day, every drop matters</p>
+			                <p>How To Make it:</p>';
+			                $quant = 1;
+			                if ($inventory["tools"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Tool</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Tool</p>';
+			                }
+
+			                $quant = 60;
+			                if ($inventory["woods"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Woods</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Woods</p>';
+			                }
+
+			                $quant = 50;
+			                if ($inventory["scraps"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Metal Scraps</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Metal Scraps</p>';
+			                }
+
+			                $quant = 25;
+			                if ($inventory["pipes"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Pipes</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Pipes</p>';
+			                }
+
+
+
+			                echo '<form id="buildform" action="build.php" method="post" style="margin:0;">
+							<input type="hidden" name="game" value=' . $game["id"] . '>
+							<input type="hidden" name="user" value=' . $user["id"] . '>
+							<input type="hidden" name="build" value="Water Collector">';
+
+							echo '<button type="submit" class="btn btn-block border" style="color:#f1f0ea;">Biuld</button>';
+
+							echo '</form>';
+
+			            echo'
+					      </div>
+					    </div>
+					  </div>';
+
+
+
+
+					  echo '<div class="card">
+					    <div class="card-header" style="background-color: #13151e;color:#f1f0ea;">
+					      <p data-toggle="collapse" href="#collapseFarm">
+					        Farm
+					      </p>
+					    </div>
+					    <div id="collapseFarm" class="collapse" data-parent="#buildsAccordion">
+					      <div class="card-body" style="background-color:#11121a;color:#f1f0ea;">
+					        
+					        <p>with some effort the results can meet your need, seeds are needed nothing comes out of nowhere</p>
+			                <p>How To Make it:</p>';
+			                $quant = 1;
+			                if ($inventory["tools"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Tool</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Tool</p>';
+			                }
+
+			                $quant = 65;
+			                if ($inventory["woods"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Woods</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Woods</p>';
+			                }
+
+			                $quant = 22;
+			                if ($inventory["nails"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Nails</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Nails</p>';
+			                }
+
+			                $quant = 12;
+			                if ($inventory["pipes"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Pipes</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Pipes</p>';
+			                }
+
+			                $quant = 1;
+			                if ($inventory["fertilizers"]>=$quant) {
+			                    echo '<p style="color:#8fcb9b;">- ' . $quant . ' Fertilizer</p>';
+			                }else{
+			                    echo '<p style="color:#ef3e36;">- ' . $quant . ' Fertilizer</p>';
+			                }
+
+
+
+			                echo '<form id="buildform" action="build.php" method="post" style="margin:0;">
+							<input type="hidden" name="game" value=' . $game["id"] . '>
+							<input type="hidden" name="user" value=' . $user["id"] . '>
+							<input type="hidden" name="build" value="Farm">';
+
+							echo '<button type="submit" class="btn btn-block border" style="color:#f1f0ea;">Biuld</button>';
+
+							echo '</form>';
+
+			            echo'
+					      </div>
+					    </div>
+					  </div>';
+
+
+
+
+					echo'
+					</div> ';
+
 
 				}else{
-					echo "<br><p>All build spaces used, destroy something to build</p>";
+					echo "<div class='row justify-content-center'>
+						<center><p>Shelter is full, destroy something to build</p></center>
+					</div>";
 				}
 
 
