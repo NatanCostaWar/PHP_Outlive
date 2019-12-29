@@ -195,20 +195,27 @@ include('login_veryfy.php')
 
 
 				for ($i = 1; $i <= $house["spots"]; $i++) {
-					echo "<p><div class='row'>Build Space:  ------</div></p>";
+					echo "<div class='row border rounded justify-content-center' style='background-color:#11121a;'>
+						<p style='color:#f1f0ea;'>Empty</p>
+					</div>";
 
 				}
 
 					#SHOW BUILDS:
 				while ($build_row = mysqli_fetch_assoc($builds_result)) {
-					echo "<div class='row'>
-					Build Space : " . $build_row["name"] . "</div>";
+					echo "
+					<div class='row border rounded justify-content-center' style='background-color:#11121a;'>
+					<div class='col-12'>
+						<p style='color:#f1f0ea;'>". $build_row["name"] ."</p>
+					</div>";
 
-					echo '<div class="row">
+					echo '
+					<div class="col-12">
 					<form action="destroy.php" method="post">
 					<input type="hidden" name="game" value=' . $game["id"] . '>
 					<input type="hidden" name="user" value=' . $user["id"] . '>
-					<input type="hidden" name="build" value=' . $build_row["id"] . '>';
+					<input type="hidden" name="build" value=' . $build_row["id"] . '>
+					</div>';
 
 					echo '<button type="submit" class="btn border" style="color:#f1f0ea;padding:1px;margin-left:4px;">
 					Destroy
@@ -270,7 +277,7 @@ include('login_veryfy.php')
 						</button></p>';
 
 						echo '<div class="modal fade" id="work" tabindex="-1" role="dialog" aria-labelledby="Worklabel" aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 80%;width:auto;">
+						<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 95%;width:auto;">
 						<div class="modal-content" style="color: #11121a;background-color: #f1f0ea;">
 						<div class="modal-header">
 						<h5 class="modal-title" id="Worklabel">
@@ -743,9 +750,6 @@ include('login_veryfy.php')
 				</div>
 				</div>';
 				?>	
-			</div>
-			<div class='col-lg-12 col-md-12'>
-			<!--HOUSE BUILDS-->
 			</div>
 		</div>
 		<div class='row'>
@@ -1260,7 +1264,7 @@ include('login_veryfy.php')
 				<?php
 
 				echo '
-				<button type="button" class="btn border btn-block" data-toggle="modal" data-target="#exampleModal" style="color:#f1f0ea;margin-top:5px;">
+				<button type="button" class="btn border btn-block" data-toggle="modal" data-target="#exampleModal" style="color:#f1f0ea;">
 				<p>Build</p>
 				<img src="icons/build.png" style="width:6vh;">
 				</button>';
