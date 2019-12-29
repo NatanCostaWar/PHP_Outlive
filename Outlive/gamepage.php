@@ -119,37 +119,36 @@ include('login_veryfy.php')
 
 
 				echo '
-				<div style="background-color: #26272e;">
+				<div style="background-color: #13151e;">
 				  <center><p>Player:</p></center>
 				</div>';
 
 				echo '
-				<div class="progress" style="background-color: #26272e;">
+				<div class="progress" style="background-color: #13151e;">
 				  <div class="progress-bar progress-bar-striped" style="width: '. $player["life"] .'%; background-color: #645258;" aria-valuemin="0" aria-valuemax="100">
 				  	<div style="position:absolute;">Life - '. $player["life"].'</div>
 				  </div>
 				</div>
 
-				<div class="progress" style="background-color: #26272e;">
+				<div class="progress" style="background-color: #13151e;">
 				  <div class="progress-bar progress-bar-striped" style="width: '. $player["hunger"] .'%; background-color: #4d5d54;" aria-valuemin="0" aria-valuemax="100">
 				  	<div style="position:absolute;">Hunger - '. $player["hunger"] .'</div>
 				  </div>
 				</div>
 
-				<div class="progress" style="background-color: #26272e;">
+				<div class="progress" style="background-color: #13151e;">
 				  <div class="progress-bar progress-bar-striped" style="width: '. $player["thirst"] .'%; background-color: #4d4e5f;" aria-valuemin="0" aria-valuemax="100">
 				  	<div style="position:absolute;">Thirst - '. $player["thirst"] .'</div>
 				  </div>
 				</div>
 
-				<div class="progress" style="background-color: #26272e;">
+				<div class="progress" style="background-color: #13151e;">
 				  <div class="progress-bar progress-bar-striped" style="width: '. $player["rest"] .'%; background-color: #737a53;" aria-valuemin="0" aria-valuemax="100">
 				  	<div style="position:absolute;">Energy - '. $player["rest"] .'</div>
 				  </div>
 				</div>
 				';
 				?>
-
 			</div>
 		</div>
 		<div class='row'>								
@@ -743,51 +742,10 @@ include('login_veryfy.php')
 				</div>
 				</div>
 				</div>';
-				?>
-				
+				?>	
 			</div>
 			<div class='col-lg-12 col-md-12'>
 			<!--HOUSE BUILDS-->
-				
-			</div>
-			<div class='col-lg-12 col-md-12'>
-			<!--TRADER-->
-				<?php
-				if (!is_float($game["day"]/10) and $game["day"] != 0){
-					#echo "Trader Day";
-
-					echo '<div class="row">
-					<p>Someone is at the door  
-					</p>
-					</div>';
-				}
-				?>
-			<!--GAME MSG -->
-				<?php
-				if(isset($_SESSION['rain'])) {
-					echo $_SESSION['rain'];
-				}
-				if(isset($_SESSION['msg'])) {
-					echo $_SESSION['msg'];
-					#$_SESSION['msg'] = "";
-				}
-				if(isset($_SESSION["build_error"])) {
-					echo $_SESSION["build_error"];
-					#$_SESSION['build_error'] = "";
-				}
-				if(isset($_GET["terminal"])) {
-					echo '<form action="terminal.php" method="post" style="margin:0;margin-top:5px;">
-						<input type="hidden" name="game" value=' . $game["id"] . '>
-						<input type="hidden" name="user" value=' . $user["id"] . '>
-						<center><p>Terminal</p></center>
-						<input type="text" name="code">';
-
-
-						echo '<button type="submit" style="float:right;margin-top:5px;">Execute</button>';
-
-						echo '</form>';
-				}
-				?>
 			</div>
 		</div>
 		<div class='row'>
@@ -804,7 +762,7 @@ include('login_veryfy.php')
 
 
 				<div class="modal fade" id="inventory" tabindex="-1" role="dialog" aria-labelledby="inventorylabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 80%;width: auto;">
+				<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 95%;width: auto;">
 				<div class="modal-content" style="color: #11121a;background-color: #f1f0ea;">
 				<div class="modal-header">
 				<h5 class="modal-title" id="inventorylabel">Inventory</h5>
@@ -1309,7 +1267,7 @@ include('login_veryfy.php')
 
 
 				echo '<div class="modal left fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document" style="min-width: 90%;width: auto;">
+				<div class="modal-dialog" role="document" style="min-width: 95%;width: auto;">
 				<div class="modal-content">
 				<div class="modal-header" style="color:#11121a;background-color:#f1f0ea;">
 				<h5 class="modal-title" id="inventorylabel">Building Prices:</h5>
@@ -1384,13 +1342,14 @@ include('login_veryfy.php')
 				<?php
 				echo '
 				<button type="button" class="btn border btn-block" data-toggle="modal" data-target="#enddaymodal" style="color:#f1f0ea;">
-				End Day
+				<p>End Day</p>
+				<img src="icons/end_day.png" style="width:6vh;">
 				</button>
 				';
 
 
 				echo '<div class="modal left fade" id="enddaymodal" tabindex="-1" role="dialog" aria-labelledby="enddaymodalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document" style="min-width: 80%;width: auto;">
+				<div class="modal-dialog" role="document" style="min-width: 95%;width: auto;">
 				<div class="modal-content">
 				<div class="modal-header" style="color:#11121a;background-color:#f1f0ea;">
 				<h5 class="modal-title" id="inventorylabel">
@@ -1436,6 +1395,45 @@ include('login_veryfy.php')
 				</div>
 				</div>
 				</div>';
+				?>
+			</div>
+			<div class='col-lg-12 col-md-12 overflow-auto' style="max-height:25vh;background-color:#13151e">
+			<!--TRADER-->
+				<?php
+				if (!is_float($game["day"]/10) and $game["day"] != 0){
+					#echo "Trader Day";
+
+					echo '<div class="row">
+					<p>Someone is at the door  
+					</p>
+					</div>';
+				}
+				?>
+			<!--GAME MSG -->
+				<?php
+				if(isset($_SESSION['rain'])) {
+					echo $_SESSION['rain'];
+				}
+				if(isset($_SESSION['msg'])) {
+					echo $_SESSION['msg'];
+					#$_SESSION['msg'] = "";
+				}
+				if(isset($_SESSION["build_error"])) {
+					echo $_SESSION["build_error"];
+					#$_SESSION['build_error'] = "";
+				}
+				if(isset($_GET["terminal"])) {
+					echo '<form action="terminal.php" method="post" style="margin:0;margin-top:5px;">
+						<input type="hidden" name="game" value=' . $game["id"] . '>
+						<input type="hidden" name="user" value=' . $user["id"] . '>
+						<center><p>Terminal</p></center>
+						<input type="text" name="code">';
+
+
+						echo '<button type="submit" style="float:right;margin-top:5px;">Execute</button>';
+
+						echo '</form>';
+				}
 				?>
 			</div>
 		</div>
