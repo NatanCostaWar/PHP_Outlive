@@ -228,7 +228,7 @@ include('login_veryfy.php')
 							</button></p>';
 
 							echo '<div class="modal fade" id="grow" tabindex="-1" role="dialog" aria-labelledby="Growlabel" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 80%;width:auto;">
+							<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 95%;width:auto;">
 							<div class="modal-content" style="color: #11121a;background-color: #f1f0ea;">
 							<div class="modal-header">
 							<h5 class="modal-title" id="Growlabel">Choose a Seed</h5>
@@ -236,25 +236,93 @@ include('login_veryfy.php')
 							<span aria-hidden="true">X</span>
 							</button>
 							</div>
-							<div class="modal-body">
-							<form id="growform" action="grow.php" method="post">';
-							echo '<input type="hidden" name="game" value=' . $game["id"] . '>
-							<input type="hidden" name="user" value=' . $user["id"] . '>
+							<div class="modal-body">';
+							
 
-							<input type="hidden" name="farm" value=' . $build_row["id"] . '>';
+							echo ' 
+							<div id="growAccordion">
+							  <div class="card">
+							    <div class="card-header" style="background-color: #13151e;color:#f1f0ea;">
+							      <p data-toggle="collapse" href="#collapsevegetable_seeds">
+							        Vegetable Seed
+							      </p>
+							    </div>
+							    <div id="collapsevegetable_seeds" class="collapse" data-parent="#growAccordion">
+							      <div class="card-body" style="background-color:#11121a;color:#f1f0ea;">';
+
+									if($inventory["vegetable_seeds"] > 0){
+										echo'
+										<form id="growform" action="grow.php" method="post">
+											<input type="hidden" name="game" value=' . $game["id"] . '>
+											<input type="hidden" name="user" value=' . $user["id"] . '>
+											<input type="hidden" name="farm" value=' . $build_row["id"] . '>
+											<input type="hidden" name="seed" value="vegetable_seeds">';
+
+											echo '<button type="submit" class="btn btn-block border" style="color:#f1f0ea;">Grow</button>
+										</form>';
+									}
+
+					            echo'
+							      </div>
+							    </div>
+							  </div>
 
 
-							if($inventory["herbal_seeds"] > 0){
-								echo '<p><input type="radio" NAME="seed" value="herbal_seeds" style="min-height:3.5vh;min-width:3.5vh;"> Herbal Seed</p>';
-							}
-							if($inventory["vegetable_seeds"] > 0){
-								echo '<p><input type="radio" NAME="seed" value="vegetable_seeds" style="min-height:3.5vh;min-width:3.5vh;"> Vegetable Seed</p>';
-							}
-							if($inventory["cereal_seeds"] > 0){
-								echo '<p><input type="radio" NAME="seed" value="cereal_seeds" style="min-height:3.5vh;min-width:3.5vh;"> Cereal Seed</p>';
-							}
-							echo '<button type="submit" class="btn btn-secondary" style="margin:2px;float:right;">Grow</button>
-							</form>
+							  <div class="card">
+							    <div class="card-header" style="background-color: #13151e;color:#f1f0ea;">
+							      <p data-toggle="collapse" href="#collapseherbal_seeds">
+							        Herbal Seed
+							      </p>
+							    </div>
+							    <div id="collapseherbal_seeds" class="collapse" data-parent="#growAccordion">
+							      <div class="card-body" style="background-color:#11121a;color:#f1f0ea;">';
+
+									if($inventory["herbal_seeds"] > 0){
+										echo'
+										<form id="growform" action="grow.php" method="post">
+											<input type="hidden" name="game" value=' . $game["id"] . '>
+											<input type="hidden" name="user" value=' . $user["id"] . '>
+											<input type="hidden" name="farm" value=' . $build_row["id"] . '>
+											<input type="hidden" name="seed" value="herbal_seeds">';
+											
+											echo '<button type="submit" class="btn btn-block border" style="color:#f1f0ea;">Grow</button>
+										</form>';
+									}
+
+					            echo'
+							      </div>
+							    </div>
+							  </div>
+
+							  <div class="card">
+							    <div class="card-header" style="background-color: #13151e;color:#f1f0ea;">
+							      <p data-toggle="collapse" href="#collapsecereal_seeds">
+							        Cereal Seed
+							      </p>
+							    </div>
+							    <div id="collapsecereal_seeds" class="collapse" data-parent="#growAccordion">
+							      <div class="card-body" style="background-color:#11121a;color:#f1f0ea;">';
+
+									if($inventory["cereal_seeds"] > 0){
+										echo'
+										<form id="growform" action="grow.php" method="post">
+											<input type="hidden" name="game" value=' . $game["id"] . '>
+											<input type="hidden" name="user" value=' . $user["id"] . '>
+											<input type="hidden" name="farm" value=' . $build_row["id"] . '>
+											<input type="hidden" name="seed" value="cereal_seeds">';
+											
+											echo '<button type="submit" class="btn btn-block border" style="color:#f1f0ea;">Grow</button>
+										</form>';
+									}
+
+					            echo'
+							      </div>
+							    </div>
+							  </div>';
+
+							echo'
+							</div>';
+							echo'
 							</div>
 							</div>
 							</div>
