@@ -355,93 +355,68 @@ include('login_veryfy.php')
 						<span aria-hidden="true">X</span>
 						</button>
 						</div>
-
 						<div class="modal-body">';
-						echo '<center><h2>Builds</h2></center>';
-						echo '<h2>Beer Kit</h2>';
-						echo '<div class="row">';
-						$possible = True;
-						echo'<div class="col-2">';
-						$quant = 1;
-						if ($inventory["tools"]>=$quant) {
-							echo '<p style="color:#8fcb9b;"> ' . $quant . '
-							<img src="icons/tools.png" style="width:4vh;">
-							</p>';
-						}else{
-							echo '<p style="color:#ef3e36;"> ' . $quant . '
-							<img src="icons/tools.png" style="width:4vh;">
-							</p>';
-							$possible = False;
-						}
-						echo '</div>';
 
-						echo'<div class="col-2">';
-						$quant = 30;
-						if ($inventory["woods"]>=$quant) {
-							echo '<p style="color:#8fcb9b;"> ' . $quant . '
-							<img src="icons/woods.png" style="width:4vh;">
-							</p>';
-						}else{
-							echo '<p style="color:#ef3e36;"> ' . $quant . '
-							<img src="icons/woods.png" style="width:4vh;">
-							</p>';
-							$possible = False;
-						}
-						echo '</div>';
+						echo '<center><h2>Builds:</h2></center>';
 
-						echo'<div class="col-2">';
-						$quant = 20;
-						if ($inventory["pipes"]>=$quant) {
-							echo '<p style="color:#8fcb9b;"> ' . $quant . '
-							<img src="icons/pipes.png" style="width:4vh;">
-							</p>';
-						}else{
-							echo '<p style="color:#ef3e36;"> ' . $quant . '
-							<img src="icons/pipes.png" style="width:4vh;">
-							</p>';
-							$possible = False;
-						}
-						echo '</div>';
+						echo ' 
+							<div id="beerAccordion">
+							  <div class="card">
+							    <div class="card-header" style="background-color: #13151e;color:#f1f0ea;">
+							      <p data-toggle="collapse" href="#collapsevegetable_seeds">
+							        Beer Kit
+							      </p>
+							    </div>
+							    <div id="collapsevegetable_seeds" class="collapse" data-parent="#beerAccordion">
+							      <div class="card-body" style="background-color:#11121a;color:#f1f0ea;">';
 
-						echo'<div class="col-2">';
-						$quant = 25;
-						if ($inventory["scraps"]>=$quant) {
-							echo '<p style="color:#8fcb9b;"> ' . $quant . '
-							<img src="icons/scraps.png" style="width:4vh;">
-							</p>';
-						}else{
-							echo '<p style="color:#ef3e36;"> ' . $quant . '
-							<img src="icons/scraps.png" style="width:4vh;">
-							</p>';
-							$possible = False;
-						}
-						echo '</div>';
 
-						echo'<div class="col-2">';
-						echo '</div>';
+									$quant = 1;
+									if ($inventory["tools"]>=$quant) {
+										echo '<p style="color:#8fcb9b;">- ' . $quant . ' Tool</p>';
+									}else{
+										echo '<p style="color:#ef3e36;">- ' . $quant . ' Tool</p>';
+									}
 
-						echo'<div class="col-2" align="center">';
-						if($possible){
+									$quant = 30;
+									if ($inventory["woods"]>=$quant) {
+										echo '<p style="color:#8fcb9b;">- ' . $quant . ' Woods</p>';
+									}else{
+										echo '<p style="color:#ef3e36;">- ' . $quant . ' Woods</p>';
+									}
+
+									$quant = 20;
+									if ($inventory["pipes"]>=$quant) {
+										echo '<p style="color:#8fcb9b;">- ' . $quant . ' Pipes</p>';
+									}else{
+										echo '<p style="color:#ef3e36;">- ' . $quant . ' Pipes</p>';
+									}
+
+									$quant = 25;
+									if ($inventory["scraps"]>=$quant) {
+										echo '<p style="color:#8fcb9b;">- ' . $quant . ' Scraps</p>';
+									}else{
+										echo '<p style="color:#ef3e36;">- ' . $quant . ' Scraps</p>';
+									}
+									echo'
+									<form id="cookform" action="build.php" method="post">
+									<input type="hidden" name="game" value=' . $game["id"] . '>
+									<input type="hidden" name="user" value=' . $user["id"] . '>
+									<input type="hidden" name="build" value="Beer Kit">
+									<button type="submit" class="btn border btn-block" style="margin:2px;color:#f1f0ea;background-color:#11121a">Build</button>
+									</form>';
+
+									
+
+					            echo'
+							      </div>
+							    </div>
+							  </div>';
+
 							echo'
-							<form id="cookform" action="build.php" method="post">
-							<input type="hidden" name="game" value=' . $game["id"] . '>
-							<input type="hidden" name="user" value=' . $user["id"] . '>';
-							echo'<input type="hidden" name="build" value="Beer Kit">';
-							echo'<button type="submit" class="btn" style="margin:2px;color:#f1f0ea;background-color:#11121a">Build</button></form>';
-						}
-						echo '</div>';
-
-						echo '</div>';
-
-
-
-
-						echo "<hr class='my-4' />";
+							</div>';
 
 						echo '
-						<button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin:2px;float:right;">
-						Close
-						</button>
 						</div>
 						</div>
 						</div>
